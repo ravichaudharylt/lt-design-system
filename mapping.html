@@ -46,11 +46,11 @@
 <div class="meta">Phase 1 complete — 100% design system coverage in tokens.css. Showing migration roadmap for remaining legacy/orphan tokens.</div>
 <div class="stats">
   <span class="stat mapped"><span class="num">97/97</span> design coverage (100%)</span>
-  <span class="stat total"><span class="num">823</span> orphans remaining</span>
+  <span class="stat total"><span class="num">825</span> orphans remaining</span>
   <span class="stat mapped"><span class="num">0</span> Phase 1 (Δ ≤ 5) — done</span>
-  <span class="stat orphan"><span class="num">325</span> Phase 2 (Δ 6–25) · 3,175 consumers</span>
-  <span class="stat unmappable"><span class="num">498</span> Phase 3 (Δ &gt; 25) · 3,458 consumers</span>
-  <span class="stat unmappable"><span class="num">3</span> manual (non-hex)</span>
+  <span class="stat orphan"><span class="num">326</span> Phase 2 (Δ 6–25) · 3,176 consumers</span>
+  <span class="stat unmappable"><span class="num">499</span> Phase 3 (Δ &gt; 25) · 3,471 consumers</span>
+  <span class="stat unmappable"><span class="num">1</span> manual (non-hex)</span>
 </div>
 <div class="legend">
   Color delta: <span class="delta delta-good">≤ 5 near-identical</span>
@@ -58,9 +58,9 @@
   <span class="delta delta-poor">&gt; 25 visible drift</span>
 </div>
 <div class="nav-tabs">
-  <button class="active" data-tab="recommendations">Migration roadmap (823 orphans)</button>
+  <button class="active" data-tab="recommendations">Migration roadmap (825 orphans)</button>
   <button data-tab="exact">Design system tokens (97)</button>
-  <button data-tab="unmappable">Manual review (3)</button>
+  <button data-tab="unmappable">Manual review (1)</button>
 </div>
 <div class="controls">
   <input type="text" id="filter" placeholder="Filter by token name, hex, or target...">
@@ -965,8 +965,14 @@
 <td style='text-align:right'>1</td>
 <td><span class='arrow'>→</span><span class='design-name'>color/bg/primary-disabled</span></td></tr></tbody></table></div><div class="group" data-target="color/bg/secondary">
 <h3><span class='swatch' style='background:#6e7781'></span><span class='design-name'>color/bg/secondary</span> <span class='swatch' style='background:#30363d'></span><span class='hex'>#6e7781 / #30363d</span>
-<span class='group-count'>12 orphans · 26 total usages</span></h3>
-<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-c-70bd43 #70bd43 color/bg/secondary" data-delta="delta-poor">
+<span class='group-count'>13 orphans · 39 total usages</span></h3>
+<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-bg-neutral-alt #555 color/bg/secondary" data-delta="delta-poor">
+<td><span class='current-name'>--lt-bg-neutral-alt</span></td>
+<td><span class='swatch' style='background:#555'></span><span class='hex'>#555</span></td>
+<td><span class='swatch' style='background:#3d444d'></span><span class='hex'>#3d444d</span></td>
+<td><span class='delta delta-poor'>61.0</span></td>
+<td style='text-align:right'>13</td>
+<td><span class='arrow'>→</span><span class='design-name'>color/bg/secondary</span></td></tr><tr data-search="--lt-c-70bd43 #70bd43 color/bg/secondary" data-delta="delta-poor">
 <td><span class='current-name'>--lt-c-70bd43</span></td>
 <td><span class='swatch' style='background:#70bd43'></span><span class='hex'>#70bd43</span></td>
 <td><span class='swatch' style='background:#70bd43'></span><span class='hex'>#70bd43</span></td>
@@ -3659,13 +3665,19 @@
 <td style='text-align:right'>1</td>
 <td><span class='arrow'>→</span><span class='design-name'>color/icon/primary</span></td></tr></tbody></table></div><div class="group" data-target="color/icon/inverse">
 <h3><span class='swatch' style='background:#24292f'></span><span class='design-name'>color/icon/inverse</span> <span class='swatch' style='background:#f0f6fc'></span><span class='hex'>#24292f / #f0f6fc</span>
-<span class='group-count'>1 orphans · 8 total usages</span></h3>
+<span class='group-count'>2 orphans · 9 total usages</span></h3>
 <table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-c-231f20 #231f20 color/icon/inverse" data-delta="delta-ok">
 <td><span class='current-name'>--lt-c-231f20</span></td>
 <td><span class='swatch' style='background:#231f20'></span><span class='hex'>#231f20</span></td>
 <td><span class='swatch' style='background:#231f20'></span><span class='hex'>#231f20</span></td>
 <td><span class='delta delta-ok'>18.1</span></td>
 <td style='text-align:right'>8</td>
+<td><span class='arrow'>→</span><span class='design-name'>color/icon/inverse</span></td></tr><tr data-search="--lt-tooltip-arrow #333 color/icon/inverse" data-delta="delta-ok">
+<td><span class='current-name'>--lt-tooltip-arrow</span></td>
+<td><span class='swatch' style='background:#333'></span><span class='hex'>#333</span></td>
+<td><span class='swatch' style='background:#3d444d'></span><span class='hex'>#3d444d</span></td>
+<td><span class='delta delta-ok'>18.5</span></td>
+<td style='text-align:right'>1</td>
 <td><span class='arrow'>→</span><span class='design-name'>color/icon/inverse</span></td></tr></tbody></table></div><div class="group" data-target="color/icon/dark">
 <h3><span class='swatch' style='background:#636c76'></span><span class='design-name'>color/icon/dark</span> <span class='swatch' style='background:#a1a9b3'></span><span class='hex'>#636c76 / #a1a9b3</span>
 <span class='group-count'>1 orphans · 1 total usages</span></h3>
@@ -5599,16 +5611,10 @@
 <td><span class='design-name'>color/shadow/floating/xl-l-m-s-1</span></td>
 <td><span class='swatch' style='background:#d0d7de80'></span><span class='hex'>#d0d7de80</span></td>
 <td><span class='swatch' style='background:#3d444d'></span><span class='hex'>#3d444d</span></td>
-<td><span class='current-name'>--lt-shadow-floating-xl-l-m-s-1</span></td></tr></tbody></table></div><div id="tab-unmappable" class="tab-content"><table><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th style="text-align:right">Uses</th></tr></thead><tbody><tr data-search="--lt-bg-neutral-alt"><td><span class='current-name'>--lt-bg-neutral-alt</span></td>
-<td><span class='hex'>#555</span></td>
-<td><span class='hex'>#3d444d</span></td>
-<td style='text-align:right'>13</td></tr><tr data-search="--lt-border-dark-alpha"><td><span class='current-name'>--lt-border-dark-alpha</span></td>
+<td><span class='current-name'>--lt-shadow-floating-xl-l-m-s-1</span></td></tr></tbody></table></div><div id="tab-unmappable" class="tab-content"><table><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th style="text-align:right">Uses</th></tr></thead><tbody><tr data-search="--lt-border-dark-alpha"><td><span class='current-name'>--lt-border-dark-alpha</span></td>
 <td><span class='hex'>rgb(from var(--lt-primer-canvas-1b) r g b / 0.149)</span></td>
 <td><span class='hex'>rgb(230 237 243 / 0.149)</span></td>
-<td style='text-align:right'>2</td></tr><tr data-search="--lt-tooltip-arrow"><td><span class='current-name'>--lt-tooltip-arrow</span></td>
-<td><span class='hex'>#333</span></td>
-<td><span class='hex'>#3d444d</span></td>
-<td style='text-align:right'>1</td></tr></tbody></table></div>
+<td style='text-align:right'>2</td></tr></tbody></table></div>
 <script>
 document.querySelectorAll('.nav-tabs button').forEach(b=>{
   b.addEventListener('click',()=>{
