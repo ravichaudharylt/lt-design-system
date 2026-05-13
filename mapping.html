@@ -39,16 +39,18 @@
   .legend { font-size: 11px; color: #666; margin-bottom: 8px; }
 </style>
 </head><body>
-<h1>Token Mapping &amp; Migration Recommendations</h1>
-<div class="meta">Updated after Phase 1 migration (47 design canonicals added, 108 orphans redirected, Δ ≤ 5).</div>
+<h1 style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+  Token Mapping &amp; Migration Recommendations
+  <a href="index.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:#f6f8fa; color:#054078; text-decoration:none; border:1px solid #d0d7de;">← Back to token sheet</a>
+</h1>
+<div class="meta">Phase 1 complete — 100% design system coverage in tokens.css. Showing migration roadmap for remaining legacy/orphan tokens.</div>
 <div class="stats">
-  <span class="stat total"><span class="num">97</span> official design tokens</span>
-  <span class="stat mapped"><span class="num">97</span> exact matches</span>
-  <span class="stat mapped"><span class="num">0</span> near-matches (Δ ≤ 5)</span>
-  <span class="stat orphan"><span class="num">0</span> truly missing</span>
-  <span class="stat total"><span class="num">927</span> current tokens</span>
-  <span class="stat orphan"><span class="num">823</span> orphans</span>
-  <span class="stat unmappable"><span class="num">3</span> non-hex</span>
+  <span class="stat mapped"><span class="num">97/97</span> design coverage (100%)</span>
+  <span class="stat total"><span class="num">823</span> orphans remaining</span>
+  <span class="stat mapped"><span class="num">0</span> Phase 1 (Δ ≤ 5) — done</span>
+  <span class="stat orphan"><span class="num">325</span> Phase 2 (Δ 6–25) · 3,175 consumers</span>
+  <span class="stat unmappable"><span class="num">498</span> Phase 3 (Δ &gt; 25) · 3,458 consumers</span>
+  <span class="stat unmappable"><span class="num">3</span> manual (non-hex)</span>
 </div>
 <div class="legend">
   Color delta: <span class="delta delta-good">≤ 5 near-identical</span>
@@ -56,11 +58,9 @@
   <span class="delta delta-poor">&gt; 25 visible drift</span>
 </div>
 <div class="nav-tabs">
-  <button class="active" data-tab="recommendations">By suggested target (823)</button>
-  <button data-tab="exact">Exact matches (97)</button>
-  <button data-tab="near">Near-matches (0)</button>
-  <button data-tab="missing">Truly missing (0)</button>
-  <button data-tab="unmappable">Non-hex (3)</button>
+  <button class="active" data-tab="recommendations">Migration roadmap (823 orphans)</button>
+  <button data-tab="exact">Design system tokens (97)</button>
+  <button data-tab="unmappable">Manual review (3)</button>
 </div>
 <div class="controls">
   <input type="text" id="filter" placeholder="Filter by token name, hex, or target...">
@@ -5211,395 +5211,395 @@
 <td><span class='swatch' style='background:#babece'></span><span class='hex'>#babece</span></td>
 <td><span class='delta delta-poor'>36.9</span></td>
 <td style='text-align:right'>1</td>
-<td><span class='arrow'>→</span><span class='design-name'>color/shadow/floating/xl-l-m-s-1</span></td></tr></tbody></table></div></div><div id="tab-exact" class="tab-content"><table><thead><tr><th>Design Token</th><th>Light</th><th>Dark</th><th>Current matches</th></tr></thead><tbody><tr data-search="color/bg/base --lt-component-dialog-bg --lt-component-segmented-control-selected --lt-component-text-field-default --lt-bg-base --lt-icon-transparent --lt-text-inverse">
+<td><span class='arrow'>→</span><span class='design-name'>color/shadow/floating/xl-l-m-s-1</span></td></tr></tbody></table></div></div><div id="tab-exact" class="tab-content"><p style="color:#666">The official design system palette as currently present in tokens.css — all 97 tokens. Use this as a reference when picking colors.</p><h3>BACKGROUND (33)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/bg/base --lt-bg-base">
 <td><span class='design-name'>color/bg/base</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#0d1117'></span><span class='hex'>#0d1117</span></td>
-<td><span class='current-name'>--lt-bg-base <span class='usage'>1298 uses</span></span><br><span class='current-name'>--lt-text-inverse <span class='usage'>377 uses</span></span><br><span class='current-name'>--lt-icon-transparent <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-dialog-bg <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-segmented-control-selected <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-default <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/base-muted --lt-component-button-error --lt-component-button-secondary --lt-component-text-field-inset --lt-bg-base-muted">
+<td><span class='current-name'>--lt-bg-base</span></td></tr><tr data-search="color/bg/base-muted --lt-bg-base-muted">
 <td><span class='design-name'>color/bg/base-muted</span></td>
 <td><span class='swatch' style='background:#f6f8fa'></span><span class='hex'>#f6f8fa</span></td>
 <td><span class='swatch' style='background:#010409'></span><span class='hex'>#010409</span></td>
-<td><span class='current-name'>--lt-bg-base-muted <span class='usage'>713 uses</span></span><br><span class='current-name'>--lt-component-button-error <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-button-secondary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-inset <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/base-pressed --lt-component-button-secondary-pressed --lt-bg-base-pressed">
+<td><span class='current-name'>--lt-bg-base-muted</span></td></tr><tr data-search="color/bg/base-pressed --lt-bg-base-pressed">
 <td><span class='design-name'>color/bg/base-pressed</span></td>
 <td><span class='swatch' style='background:#e7ebef'></span><span class='hex'>#e7ebef</span></td>
 <td><span class='swatch' style='background:#161b22'></span><span class='hex'>#161b22</span></td>
-<td><span class='current-name'>--lt-bg-base-pressed <span class='usage'>35 uses</span></span><br><span class='current-name'>--lt-component-button-secondary-pressed <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/base-disabled --lt-component-button-invisible-disabled --lt-bg-base-disabled --lt-border-disabled">
+<td><span class='current-name'>--lt-bg-base-pressed</span></td></tr><tr data-search="color/bg/base-disabled --lt-bg-base-disabled">
 <td><span class='design-name'>color/bg/base-disabled</span></td>
 <td><span class='swatch' style='background:#eaeef2b2'></span><span class='hex'>#eaeef2b2</span></td>
 <td><span class='swatch' style='background:#161b2299'></span><span class='hex'>#161b2299</span></td>
-<td><span class='current-name'>--lt-bg-base-disabled <span class='usage'>41 uses</span></span><br><span class='current-name'>--lt-border-disabled <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-button-invisible-disabled <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/base-inverse --lt-icon-inverse --lt-bg-base-inverse --lt-text-primary">
+<td><span class='current-name'>--lt-bg-base-disabled</span></td></tr><tr data-search="color/bg/base-inverse --lt-bg-base-inverse">
 <td><span class='design-name'>color/bg/base-inverse</span></td>
 <td><span class='swatch' style='background:#24292f'></span><span class='hex'>#24292f</span></td>
 <td><span class='swatch' style='background:#3d444d'></span><span class='hex'>#3d444d</span></td>
-<td><span class='current-name'>--lt-text-primary <span class='usage'>1492 uses</span></span><br><span class='current-name'>--lt-bg-base-inverse <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-icon-inverse <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/primary --lt-bg-success --lt-bg-primary --lt-status-success-fg-alt2">
+<td><span class='current-name'>--lt-bg-base-inverse</span></td></tr><tr data-search="color/bg/primary --lt-bg-primary">
 <td><span class='design-name'>color/bg/primary</span></td>
 <td><span class='swatch' style='background:#1f883d'></span><span class='hex'>#1f883d</span></td>
 <td><span class='swatch' style='background:#238636'></span><span class='hex'>#238636</span></td>
-<td><span class='current-name'>--lt-bg-primary <span class='usage'>32 uses</span></span><br><span class='current-name'>--lt-status-success-fg-alt2 <span class='usage'>10 uses</span></span><br><span class='current-name'>--lt-bg-success <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/primary-hover --lt-bg-primary-hover">
+<td><span class='current-name'>--lt-bg-primary</span></td></tr><tr data-search="color/bg/primary-hover --lt-bg-primary-hover">
 <td><span class='design-name'>color/bg/primary-hover</span></td>
 <td><span class='swatch' style='background:#1c8139'></span><span class='hex'>#1c8139</span></td>
 <td><span class='swatch' style='background:#29903b'></span><span class='hex'>#29903b</span></td>
-<td><span class='current-name'>--lt-bg-primary-hover <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/primary-pressed --lt-bg-primary-pressed --lt-c-197935">
+<td><span class='current-name'>--lt-bg-primary-hover</span></td></tr><tr data-search="color/bg/primary-pressed --lt-bg-primary-pressed">
 <td><span class='design-name'>color/bg/primary-pressed</span></td>
 <td><span class='swatch' style='background:#197935'></span><span class='hex'>#197935</span></td>
 <td><span class='swatch' style='background:#2e9a40'></span><span class='hex'>#2e9a40</span></td>
-<td><span class='current-name'>--lt-c-197935 <span class='usage'>45 uses</span></span><br><span class='current-name'>--lt-bg-primary-pressed <span class='usage'>3 uses</span></span><br></td></tr><tr data-search="color/bg/primary-disabled --lt-bg-primary-disabled">
+<td><span class='current-name'>--lt-bg-primary-pressed</span></td></tr><tr data-search="color/bg/primary-disabled --lt-bg-primary-disabled">
 <td><span class='design-name'>color/bg/primary-disabled</span></td>
 <td><span class='swatch' style='background:#95d8a6'></span><span class='hex'>#95d8a6</span></td>
 <td><span class='swatch' style='background:#105823'></span><span class='hex'>#105823</span></td>
-<td><span class='current-name'>--lt-bg-primary-disabled <span class='usage'>10 uses</span></span><br></td></tr><tr data-search="color/bg/secondary --lt-border-primary --lt-icon-primary --lt-bg-secondary --lt-text-muted">
+<td><span class='current-name'>--lt-bg-primary-disabled</span></td></tr><tr data-search="color/bg/secondary --lt-bg-secondary">
 <td><span class='design-name'>color/bg/secondary</span></td>
 <td><span class='swatch' style='background:#6e7781'></span><span class='hex'>#6e7781</span></td>
 <td><span class='swatch' style='background:#30363d'></span><span class='hex'>#30363d</span></td>
-<td><span class='current-name'>--lt-text-muted <span class='usage'>442 uses</span></span><br><span class='current-name'>--lt-border-primary <span class='usage'>98 uses</span></span><br><span class='current-name'>--lt-icon-primary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-secondary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/secondary-muted --lt-bg-secondary-muted">
+<td><span class='current-name'>--lt-bg-secondary</span></td></tr><tr data-search="color/bg/secondary-muted --lt-bg-secondary-muted">
 <td><span class='design-name'>color/bg/secondary-muted</span></td>
 <td><span class='swatch' style='background:#afb8c133'></span><span class='hex'>#afb8c133</span></td>
 <td><span class='swatch' style='background:#30363d66'></span><span class='hex'>#30363d66</span></td>
-<td><span class='current-name'>--lt-bg-secondary-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/disabled --lt-bg-disabled --lt-icon-disabled --lt-text-disabled">
+<td><span class='current-name'>--lt-bg-secondary-muted</span></td></tr><tr data-search="color/bg/disabled --lt-bg-disabled">
 <td><span class='design-name'>color/bg/disabled</span></td>
 <td><span class='swatch' style='background:#8c959f'></span><span class='hex'>#8c959f</span></td>
 <td><span class='swatch' style='background:#21262d'></span><span class='hex'>#21262d</span></td>
-<td><span class='current-name'>--lt-text-disabled <span class='usage'>157 uses</span></span><br><span class='current-name'>--lt-icon-disabled <span class='usage'>2 uses</span></span><br><span class='current-name'>--lt-bg-disabled <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/brand-primary --lt-border-brand-primary --lt-bg-brand-primary --lt-accent-brand">
+<td><span class='current-name'>--lt-bg-disabled</span></td></tr><tr data-search="color/bg/brand-primary --lt-bg-brand-primary">
 <td><span class='design-name'>color/bg/brand-primary</span></td>
 <td><span class='swatch' style='background:#ed5f00'></span><span class='hex'>#ed5f00</span></td>
 <td><span class='swatch' style='background:#f7813f'></span><span class='hex'>#f7813f</span></td>
-<td><span class='current-name'>--lt-accent-brand <span class='usage'>34 uses</span></span><br><span class='current-name'>--lt-border-brand-primary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-brand-primary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/brand-secondary --lt-bg-brand-secondary --lt-accent-brand-hover">
+<td><span class='current-name'>--lt-bg-brand-primary</span></td></tr><tr data-search="color/bg/brand-secondary --lt-bg-brand-secondary">
 <td><span class='design-name'>color/bg/brand-secondary</span></td>
 <td><span class='swatch' style='background:#c24e00'></span><span class='hex'>#c24e00</span></td>
 <td><span class='swatch' style='background:#db6d28'></span><span class='hex'>#db6d28</span></td>
-<td><span class='current-name'>--lt-bg-brand-secondary <span class='usage'>26 uses</span></span><br><span class='current-name'>--lt-accent-brand-hover <span class='usage'>7 uses</span></span><br></td></tr><tr data-search="color/bg/info --lt-bg-info --lt-border-info --lt-icon-info --lt-text-info">
+<td><span class='current-name'>--lt-bg-brand-secondary</span></td></tr><tr data-search="color/bg/info --lt-bg-info">
 <td><span class='design-name'>color/bg/info</span></td>
 <td><span class='swatch' style='background:#0969da'></span><span class='hex'>#0969da</span></td>
 <td><span class='swatch' style='background:#1f6feb'></span><span class='hex'>#1f6feb</span></td>
-<td><span class='current-name'>--lt-text-info <span class='usage'>845 uses</span></span><br><span class='current-name'>--lt-border-info <span class='usage'>29 uses</span></span><br><span class='current-name'>--lt-icon-info <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-bg-info <span class='usage'>8 uses</span></span><br></td></tr><tr data-search="color/bg/info-muted --lt-bg-info-muted">
+<td><span class='current-name'>--lt-bg-info</span></td></tr><tr data-search="color/bg/info-muted --lt-bg-info-muted">
 <td><span class='design-name'>color/bg/info-muted</span></td>
 <td><span class='swatch' style='background:#ddf4ff'></span><span class='hex'>#ddf4ff</span></td>
 <td><span class='swatch' style='background:#388bfd1a'></span><span class='hex'>#388bfd1a</span></td>
-<td><span class='current-name'>--lt-bg-info-muted <span class='usage'>57 uses</span></span><br></td></tr><tr data-search="color/bg/success --lt-bg-success --lt-bg-primary --lt-status-success-fg-alt2">
+<td><span class='current-name'>--lt-bg-info-muted</span></td></tr><tr data-search="color/bg/success --lt-bg-success">
 <td><span class='design-name'>color/bg/success</span></td>
 <td><span class='swatch' style='background:#1f883d'></span><span class='hex'>#1f883d</span></td>
 <td><span class='swatch' style='background:#238636'></span><span class='hex'>#238636</span></td>
-<td><span class='current-name'>--lt-bg-primary <span class='usage'>32 uses</span></span><br><span class='current-name'>--lt-status-success-fg-alt2 <span class='usage'>10 uses</span></span><br><span class='current-name'>--lt-bg-success <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/success-muted --lt-bg-success-muted">
+<td><span class='current-name'>--lt-bg-success</span></td></tr><tr data-search="color/bg/success-muted --lt-bg-success-muted">
 <td><span class='design-name'>color/bg/success-muted</span></td>
 <td><span class='swatch' style='background:#dafbe1'></span><span class='hex'>#dafbe1</span></td>
 <td><span class='swatch' style='background:#2ea04326'></span><span class='hex'>#2ea04326</span></td>
-<td><span class='current-name'>--lt-bg-success-muted <span class='usage'>18 uses</span></span><br></td></tr><tr data-search="color/bg/warning --lt-border-warning --lt-icon-warning --lt-bg-warning --lt-text-warning">
+<td><span class='current-name'>--lt-bg-success-muted</span></td></tr><tr data-search="color/bg/warning --lt-bg-warning">
 <td><span class='design-name'>color/bg/warning</span></td>
 <td><span class='swatch' style='background:#9a6700'></span><span class='hex'>#9a6700</span></td>
 <td><span class='swatch' style='background:#9e6a03'></span><span class='hex'>#9e6a03</span></td>
-<td><span class='current-name'>--lt-text-warning <span class='usage'>119 uses</span></span><br><span class='current-name'>--lt-border-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-warning <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/warning-muted --lt-bg-warning-muted">
+<td><span class='current-name'>--lt-bg-warning</span></td></tr><tr data-search="color/bg/warning-muted --lt-bg-warning-muted">
 <td><span class='design-name'>color/bg/warning-muted</span></td>
 <td><span class='swatch' style='background:#fff8c5'></span><span class='hex'>#fff8c5</span></td>
 <td><span class='swatch' style='background:#bb800926'></span><span class='hex'>#bb800926</span></td>
-<td><span class='current-name'>--lt-bg-warning-muted <span class='usage'>28 uses</span></span><br></td></tr><tr data-search="color/bg/error --lt-bg-error --lt-border-error">
+<td><span class='current-name'>--lt-bg-warning-muted</span></td></tr><tr data-search="color/bg/error --lt-bg-error">
 <td><span class='design-name'>color/bg/error</span></td>
 <td><span class='swatch' style='background:#cf222e'></span><span class='hex'>#cf222e</span></td>
 <td><span class='swatch' style='background:#da3633'></span><span class='hex'>#da3633</span></td>
-<td><span class='current-name'>--lt-border-error <span class='usage'>5 uses</span></span><br><span class='current-name'>--lt-bg-error <span class='usage'>4 uses</span></span><br></td></tr><tr data-search="color/bg/error-muted --lt-bg-error-muted">
+<td><span class='current-name'>--lt-bg-error</span></td></tr><tr data-search="color/bg/error-muted --lt-bg-error-muted">
 <td><span class='design-name'>color/bg/error-muted</span></td>
 <td><span class='swatch' style='background:#ffebe9'></span><span class='hex'>#ffebe9</span></td>
 <td><span class='swatch' style='background:#f851491a'></span><span class='hex'>#f851491a</span></td>
-<td><span class='current-name'>--lt-bg-error-muted <span class='usage'>55 uses</span></span><br></td></tr><tr data-search="color/bg/error-hover --lt-bg-error-hover">
+<td><span class='current-name'>--lt-bg-error-muted</span></td></tr><tr data-search="color/bg/error-hover --lt-bg-error-hover">
 <td><span class='design-name'>color/bg/error-hover</span></td>
 <td><span class='swatch' style='background:#a40e26'></span><span class='hex'>#a40e26</span></td>
 <td><span class='swatch' style='background:#b62324'></span><span class='hex'>#b62324</span></td>
-<td><span class='current-name'>--lt-bg-error-hover <span class='usage'>16 uses</span></span><br></td></tr><tr data-search="color/bg/error-pressed --lt-bg-error-pressed">
+<td><span class='current-name'>--lt-bg-error-hover</span></td></tr><tr data-search="color/bg/error-pressed --lt-bg-error-pressed">
 <td><span class='design-name'>color/bg/error-pressed</span></td>
 <td><span class='swatch' style='background:#8b0820'></span><span class='hex'>#8b0820</span></td>
 <td><span class='swatch' style='background:#d03533'></span><span class='hex'>#d03533</span></td>
-<td><span class='current-name'>--lt-bg-error-pressed <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/orange --lt-bg-orange --lt-border-orange --lt-text-orange">
+<td><span class='current-name'>--lt-bg-error-pressed</span></td></tr><tr data-search="color/bg/orange --lt-bg-orange">
 <td><span class='design-name'>color/bg/orange</span></td>
 <td><span class='swatch' style='background:#bc4c00'></span><span class='hex'>#bc4c00</span></td>
 <td><span class='swatch' style='background:#bd561d'></span><span class='hex'>#bd561d</span></td>
-<td><span class='current-name'>--lt-text-orange <span class='usage'>27 uses</span></span><br><span class='current-name'>--lt-bg-orange <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-orange <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/orange-muted --lt-bg-orange-muted">
+<td><span class='current-name'>--lt-bg-orange</span></td></tr><tr data-search="color/bg/orange-muted --lt-bg-orange-muted">
 <td><span class='design-name'>color/bg/orange-muted</span></td>
 <td><span class='swatch' style='background:#fff1e5'></span><span class='hex'>#fff1e5</span></td>
 <td><span class='swatch' style='background:#db6d281a'></span><span class='hex'>#db6d281a</span></td>
-<td><span class='current-name'>--lt-bg-orange-muted <span class='usage'>12 uses</span></span><br></td></tr><tr data-search="color/bg/purple --lt-bg-purple --lt-icon-purple --lt-border-purple --lt-text-purple">
+<td><span class='current-name'>--lt-bg-orange-muted</span></td></tr><tr data-search="color/bg/purple --lt-bg-purple">
 <td><span class='design-name'>color/bg/purple</span></td>
 <td><span class='swatch' style='background:#8250df'></span><span class='hex'>#8250df</span></td>
 <td><span class='swatch' style='background:#8957e5'></span><span class='hex'>#8957e5</span></td>
-<td><span class='current-name'>--lt-text-purple <span class='usage'>122 uses</span></span><br><span class='current-name'>--lt-bg-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-purple <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/purple-muted --lt-bg-purple-muted">
+<td><span class='current-name'>--lt-bg-purple</span></td></tr><tr data-search="color/bg/purple-muted --lt-bg-purple-muted">
 <td><span class='design-name'>color/bg/purple-muted</span></td>
 <td><span class='swatch' style='background:#fbefff'></span><span class='hex'>#fbefff</span></td>
 <td><span class='swatch' style='background:#ab7df826'></span><span class='hex'>#ab7df826</span></td>
-<td><span class='current-name'>--lt-bg-purple-muted <span class='usage'>9 uses</span></span><br></td></tr><tr data-search="color/bg/magenta --lt-border-magenta --lt-bg-magenta --lt-text-magenta">
+<td><span class='current-name'>--lt-bg-purple-muted</span></td></tr><tr data-search="color/bg/magenta --lt-bg-magenta">
 <td><span class='design-name'>color/bg/magenta</span></td>
 <td><span class='swatch' style='background:#bf3989'></span><span class='hex'>#bf3989</span></td>
 <td><span class='swatch' style='background:#bf4b8a'></span><span class='hex'>#bf4b8a</span></td>
-<td><span class='current-name'>--lt-text-magenta <span class='usage'>10 uses</span></span><br><span class='current-name'>--lt-border-magenta <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-magenta <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/magenta-muted --lt-bg-magenta-muted">
+<td><span class='current-name'>--lt-bg-magenta</span></td></tr><tr data-search="color/bg/magenta-muted --lt-bg-magenta-muted">
 <td><span class='design-name'>color/bg/magenta-muted</span></td>
 <td><span class='swatch' style='background:#ffeff7'></span><span class='hex'>#ffeff7</span></td>
 <td><span class='swatch' style='background:#db61a21a'></span><span class='hex'>#db61a21a</span></td>
-<td><span class='current-name'>--lt-bg-magenta-muted <span class='usage'>6 uses</span></span><br></td></tr><tr data-search="color/bg/invisible-hover --lt-bg-invisible-hover">
+<td><span class='current-name'>--lt-bg-magenta-muted</span></td></tr><tr data-search="color/bg/invisible-hover --lt-bg-invisible-hover">
 <td><span class='design-name'>color/bg/invisible-hover</span></td>
 <td><span class='swatch' style='background:#d0d7de33'></span><span class='hex'>#d0d7de33</span></td>
 <td><span class='swatch' style='background:#656c7633'></span><span class='hex'>#656c7633</span></td>
-<td><span class='current-name'>--lt-bg-invisible-hover <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/bg/invisible-pressed --lt-bg-invisible-pressed">
+<td><span class='current-name'>--lt-bg-invisible-hover</span></td></tr><tr data-search="color/bg/invisible-pressed --lt-bg-invisible-pressed">
 <td><span class='design-name'>color/bg/invisible-pressed</span></td>
 <td><span class='swatch' style='background:#d0d7de66'></span><span class='hex'>#d0d7de66</span></td>
 <td><span class='swatch' style='background:#656c7640'></span><span class='hex'>#656c7640</span></td>
-<td><span class='current-name'>--lt-bg-invisible-pressed <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/overlay/primary --lt-overlay-primary">
+<td><span class='current-name'>--lt-bg-invisible-pressed</span></td></tr><tr data-search="color/overlay/primary --lt-overlay-primary">
 <td><span class='design-name'>color/overlay/primary</span></td>
 <td><span class='swatch' style='background:#8c959f33'></span><span class='hex'>#8c959f33</span></td>
 <td><span class='swatch' style='background:#01040966'></span><span class='hex'>#01040966</span></td>
-<td><span class='current-name'>--lt-overlay-primary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/primary --lt-icon-inverse --lt-bg-base-inverse --lt-text-primary">
+<td><span class='current-name'>--lt-overlay-primary</span></td></tr></tbody></table><h3>TEXT (14)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/text/primary --lt-text-primary">
 <td><span class='design-name'>color/text/primary</span></td>
 <td><span class='swatch' style='background:#24292f'></span><span class='hex'>#24292f</span></td>
 <td><span class='swatch' style='background:#f0f6fc'></span><span class='hex'>#f0f6fc</span></td>
-<td><span class='current-name'>--lt-text-primary <span class='usage'>1492 uses</span></span><br><span class='current-name'>--lt-bg-base-inverse <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-icon-inverse <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/secondary --lt-icon-dark --lt-text-secondary">
+<td><span class='current-name'>--lt-text-primary</span></td></tr><tr data-search="color/text/secondary --lt-text-secondary">
 <td><span class='design-name'>color/text/secondary</span></td>
 <td><span class='swatch' style='background:#636c76'></span><span class='hex'>#636c76</span></td>
 <td><span class='swatch' style='background:#9198a1'></span><span class='hex'>#9198a1</span></td>
-<td><span class='current-name'>--lt-text-secondary <span class='usage'>1746 uses</span></span><br><span class='current-name'>--lt-icon-dark <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/muted --lt-border-primary --lt-icon-primary --lt-bg-secondary --lt-text-muted">
+<td><span class='current-name'>--lt-text-secondary</span></td></tr><tr data-search="color/text/muted --lt-text-muted">
 <td><span class='design-name'>color/text/muted</span></td>
 <td><span class='swatch' style='background:#6e7781'></span><span class='hex'>#6e7781</span></td>
 <td><span class='swatch' style='background:#7d8590'></span><span class='hex'>#7d8590</span></td>
-<td><span class='current-name'>--lt-text-muted <span class='usage'>442 uses</span></span><br><span class='current-name'>--lt-border-primary <span class='usage'>98 uses</span></span><br><span class='current-name'>--lt-icon-primary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-secondary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/disabled --lt-bg-disabled --lt-icon-disabled --lt-text-disabled">
+<td><span class='current-name'>--lt-text-muted</span></td></tr><tr data-search="color/text/disabled --lt-text-disabled">
 <td><span class='design-name'>color/text/disabled</span></td>
 <td><span class='swatch' style='background:#8c959f'></span><span class='hex'>#8c959f</span></td>
 <td><span class='swatch' style='background:#7d859080'></span><span class='hex'>#7d859080</span></td>
-<td><span class='current-name'>--lt-text-disabled <span class='usage'>157 uses</span></span><br><span class='current-name'>--lt-icon-disabled <span class='usage'>2 uses</span></span><br><span class='current-name'>--lt-bg-disabled <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/inverse --lt-component-dialog-bg --lt-component-segmented-control-selected --lt-component-text-field-default --lt-bg-base --lt-icon-transparent --lt-text-inverse">
+<td><span class='current-name'>--lt-text-disabled</span></td></tr><tr data-search="color/text/inverse --lt-text-inverse">
 <td><span class='design-name'>color/text/inverse</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#f0f6fc'></span><span class='hex'>#f0f6fc</span></td>
-<td><span class='current-name'>--lt-bg-base <span class='usage'>1298 uses</span></span><br><span class='current-name'>--lt-text-inverse <span class='usage'>377 uses</span></span><br><span class='current-name'>--lt-icon-transparent <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-dialog-bg <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-segmented-control-selected <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-default <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/inverse-muted --lt-icon-transparent-muted --lt-text-inverse-muted">
+<td><span class='current-name'>--lt-text-inverse</span></td></tr><tr data-search="color/text/inverse-muted --lt-text-inverse-muted">
 <td><span class='design-name'>color/text/inverse-muted</span></td>
 <td><span class='swatch' style='background:#ffffffcc'></span><span class='hex'>#ffffffcc</span></td>
 <td><span class='swatch' style='background:#1f2328cc'></span><span class='hex'>#1f2328cc</span></td>
-<td><span class='current-name'>--lt-icon-transparent-muted <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-text-inverse-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/info --lt-bg-info --lt-border-info --lt-icon-info --lt-text-info">
+<td><span class='current-name'>--lt-text-inverse-muted</span></td></tr><tr data-search="color/text/info --lt-text-info">
 <td><span class='design-name'>color/text/info</span></td>
 <td><span class='swatch' style='background:#0969da'></span><span class='hex'>#0969da</span></td>
 <td><span class='swatch' style='background:#4493f8'></span><span class='hex'>#4493f8</span></td>
-<td><span class='current-name'>--lt-text-info <span class='usage'>845 uses</span></span><br><span class='current-name'>--lt-border-info <span class='usage'>29 uses</span></span><br><span class='current-name'>--lt-icon-info <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-bg-info <span class='usage'>8 uses</span></span><br></td></tr><tr data-search="color/text/success --lt-icon-success --lt-border-success --lt-text-success">
+<td><span class='current-name'>--lt-text-info</span></td></tr><tr data-search="color/text/success --lt-text-success">
 <td><span class='design-name'>color/text/success</span></td>
 <td><span class='swatch' style='background:#1a7f37'></span><span class='hex'>#1a7f37</span></td>
 <td><span class='swatch' style='background:#3fb950'></span><span class='hex'>#3fb950</span></td>
-<td><span class='current-name'>--lt-text-success <span class='usage'>143 uses</span></span><br><span class='current-name'>--lt-icon-success <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-success <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/warning --lt-border-warning --lt-icon-warning --lt-bg-warning --lt-text-warning">
+<td><span class='current-name'>--lt-text-success</span></td></tr><tr data-search="color/text/warning --lt-text-warning">
 <td><span class='design-name'>color/text/warning</span></td>
 <td><span class='swatch' style='background:#9a6700'></span><span class='hex'>#9a6700</span></td>
 <td><span class='swatch' style='background:#d29922'></span><span class='hex'>#d29922</span></td>
-<td><span class='current-name'>--lt-text-warning <span class='usage'>119 uses</span></span><br><span class='current-name'>--lt-border-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-warning <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/error --lt-icon-error --lt-text-error">
+<td><span class='current-name'>--lt-text-warning</span></td></tr><tr data-search="color/text/error --lt-text-error">
 <td><span class='design-name'>color/text/error</span></td>
 <td><span class='swatch' style='background:#d1242f'></span><span class='hex'>#d1242f</span></td>
 <td><span class='swatch' style='background:#f85149'></span><span class='hex'>#f85149</span></td>
-<td><span class='current-name'>--lt-text-error <span class='usage'>458 uses</span></span><br><span class='current-name'>--lt-icon-error <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/error-muted --lt-icon-error-muted --lt-text-error-muted">
+<td><span class='current-name'>--lt-text-error</span></td></tr><tr data-search="color/text/error-muted --lt-text-error-muted">
 <td><span class='design-name'>color/text/error-muted</span></td>
 <td><span class='swatch' style='background:#d1242f80'></span><span class='hex'>#d1242f80</span></td>
 <td><span class='swatch' style='background:#f85149a6'></span><span class='hex'>#f85149a6</span></td>
-<td><span class='current-name'>--lt-icon-error-muted <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-text-error-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/orange --lt-bg-orange --lt-border-orange --lt-text-orange">
+<td><span class='current-name'>--lt-text-error-muted</span></td></tr><tr data-search="color/text/orange --lt-text-orange">
 <td><span class='design-name'>color/text/orange</span></td>
 <td><span class='swatch' style='background:#bc4c00'></span><span class='hex'>#bc4c00</span></td>
 <td><span class='swatch' style='background:#db6d28'></span><span class='hex'>#db6d28</span></td>
-<td><span class='current-name'>--lt-text-orange <span class='usage'>27 uses</span></span><br><span class='current-name'>--lt-bg-orange <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-orange <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/purple --lt-bg-purple --lt-icon-purple --lt-border-purple --lt-text-purple">
+<td><span class='current-name'>--lt-text-orange</span></td></tr><tr data-search="color/text/purple --lt-text-purple">
 <td><span class='design-name'>color/text/purple</span></td>
 <td><span class='swatch' style='background:#8250df'></span><span class='hex'>#8250df</span></td>
 <td><span class='swatch' style='background:#ab7df8'></span><span class='hex'>#ab7df8</span></td>
-<td><span class='current-name'>--lt-text-purple <span class='usage'>122 uses</span></span><br><span class='current-name'>--lt-bg-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-purple <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/text/magenta --lt-border-magenta --lt-bg-magenta --lt-text-magenta">
+<td><span class='current-name'>--lt-text-purple</span></td></tr><tr data-search="color/text/magenta --lt-text-magenta">
 <td><span class='design-name'>color/text/magenta</span></td>
 <td><span class='swatch' style='background:#bf3989'></span><span class='hex'>#bf3989</span></td>
 <td><span class='swatch' style='background:#db61a2'></span><span class='hex'>#db61a2</span></td>
-<td><span class='current-name'>--lt-text-magenta <span class='usage'>10 uses</span></span><br><span class='current-name'>--lt-border-magenta <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-magenta <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/primary --lt-border-primary --lt-icon-primary --lt-bg-secondary --lt-text-muted">
+<td><span class='current-name'>--lt-text-magenta</span></td></tr></tbody></table><h3>ICON (12)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/icon/primary --lt-icon-primary">
 <td><span class='design-name'>color/icon/primary</span></td>
 <td><span class='swatch' style='background:#6e7781'></span><span class='hex'>#6e7781</span></td>
 <td><span class='swatch' style='background:#8b949e'></span><span class='hex'>#8b949e</span></td>
-<td><span class='current-name'>--lt-text-muted <span class='usage'>442 uses</span></span><br><span class='current-name'>--lt-border-primary <span class='usage'>98 uses</span></span><br><span class='current-name'>--lt-icon-primary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-secondary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/inverse --lt-icon-inverse --lt-bg-base-inverse --lt-text-primary">
+<td><span class='current-name'>--lt-icon-primary</span></td></tr><tr data-search="color/icon/inverse --lt-icon-inverse">
 <td><span class='design-name'>color/icon/inverse</span></td>
 <td><span class='swatch' style='background:#24292f'></span><span class='hex'>#24292f</span></td>
 <td><span class='swatch' style='background:#f0f6fc'></span><span class='hex'>#f0f6fc</span></td>
-<td><span class='current-name'>--lt-text-primary <span class='usage'>1492 uses</span></span><br><span class='current-name'>--lt-bg-base-inverse <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-icon-inverse <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/dark --lt-icon-dark --lt-text-secondary">
+<td><span class='current-name'>--lt-icon-inverse</span></td></tr><tr data-search="color/icon/dark --lt-icon-dark">
 <td><span class='design-name'>color/icon/dark</span></td>
 <td><span class='swatch' style='background:#636c76'></span><span class='hex'>#636c76</span></td>
 <td><span class='swatch' style='background:#a1a9b3'></span><span class='hex'>#a1a9b3</span></td>
-<td><span class='current-name'>--lt-text-secondary <span class='usage'>1746 uses</span></span><br><span class='current-name'>--lt-icon-dark <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/disabled --lt-bg-disabled --lt-icon-disabled --lt-text-disabled">
+<td><span class='current-name'>--lt-icon-dark</span></td></tr><tr data-search="color/icon/disabled --lt-icon-disabled">
 <td><span class='design-name'>color/icon/disabled</span></td>
 <td><span class='swatch' style='background:#8c959f'></span><span class='hex'>#8c959f</span></td>
 <td><span class='swatch' style='background:#6e7681'></span><span class='hex'>#6e7681</span></td>
-<td><span class='current-name'>--lt-text-disabled <span class='usage'>157 uses</span></span><br><span class='current-name'>--lt-icon-disabled <span class='usage'>2 uses</span></span><br><span class='current-name'>--lt-bg-disabled <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/transparent --lt-component-dialog-bg --lt-component-segmented-control-selected --lt-component-text-field-default --lt-bg-base --lt-icon-transparent --lt-text-inverse">
+<td><span class='current-name'>--lt-icon-disabled</span></td></tr><tr data-search="color/icon/transparent --lt-icon-transparent">
 <td><span class='design-name'>color/icon/transparent</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#f0f6fc'></span><span class='hex'>#f0f6fc</span></td>
-<td><span class='current-name'>--lt-bg-base <span class='usage'>1298 uses</span></span><br><span class='current-name'>--lt-text-inverse <span class='usage'>377 uses</span></span><br><span class='current-name'>--lt-icon-transparent <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-dialog-bg <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-segmented-control-selected <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-default <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/transparent-muted --lt-icon-transparent-muted --lt-text-inverse-muted">
+<td><span class='current-name'>--lt-icon-transparent</span></td></tr><tr data-search="color/icon/transparent-muted --lt-icon-transparent-muted">
 <td><span class='design-name'>color/icon/transparent-muted</span></td>
 <td><span class='swatch' style='background:#ffffffcc'></span><span class='hex'>#ffffffcc</span></td>
 <td><span class='swatch' style='background:#0d1117cc'></span><span class='hex'>#0d1117cc</span></td>
-<td><span class='current-name'>--lt-icon-transparent-muted <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-text-inverse-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/info --lt-bg-info --lt-border-info --lt-icon-info --lt-text-info">
+<td><span class='current-name'>--lt-icon-transparent-muted</span></td></tr><tr data-search="color/icon/info --lt-icon-info">
 <td><span class='design-name'>color/icon/info</span></td>
 <td><span class='swatch' style='background:#0969da'></span><span class='hex'>#0969da</span></td>
 <td><span class='swatch' style='background:#1f6feb'></span><span class='hex'>#1f6feb</span></td>
-<td><span class='current-name'>--lt-text-info <span class='usage'>845 uses</span></span><br><span class='current-name'>--lt-border-info <span class='usage'>29 uses</span></span><br><span class='current-name'>--lt-icon-info <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-bg-info <span class='usage'>8 uses</span></span><br></td></tr><tr data-search="color/icon/success --lt-icon-success --lt-border-success --lt-text-success">
+<td><span class='current-name'>--lt-icon-info</span></td></tr><tr data-search="color/icon/success --lt-icon-success">
 <td><span class='design-name'>color/icon/success</span></td>
 <td><span class='swatch' style='background:#1a7f37'></span><span class='hex'>#1a7f37</span></td>
 <td><span class='swatch' style='background:#238636'></span><span class='hex'>#238636</span></td>
-<td><span class='current-name'>--lt-text-success <span class='usage'>143 uses</span></span><br><span class='current-name'>--lt-icon-success <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-success <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/warning --lt-border-warning --lt-icon-warning --lt-bg-warning --lt-text-warning">
+<td><span class='current-name'>--lt-icon-success</span></td></tr><tr data-search="color/icon/warning --lt-icon-warning">
 <td><span class='design-name'>color/icon/warning</span></td>
 <td><span class='swatch' style='background:#9a6700'></span><span class='hex'>#9a6700</span></td>
 <td><span class='swatch' style='background:#9e6a03'></span><span class='hex'>#9e6a03</span></td>
-<td><span class='current-name'>--lt-text-warning <span class='usage'>119 uses</span></span><br><span class='current-name'>--lt-border-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-warning <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/error --lt-icon-error --lt-text-error">
+<td><span class='current-name'>--lt-icon-warning</span></td></tr><tr data-search="color/icon/error --lt-icon-error">
 <td><span class='design-name'>color/icon/error</span></td>
 <td><span class='swatch' style='background:#d1242f'></span><span class='hex'>#d1242f</span></td>
 <td><span class='swatch' style='background:#f85149'></span><span class='hex'>#f85149</span></td>
-<td><span class='current-name'>--lt-text-error <span class='usage'>458 uses</span></span><br><span class='current-name'>--lt-icon-error <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/error-muted --lt-icon-error-muted --lt-text-error-muted">
+<td><span class='current-name'>--lt-icon-error</span></td></tr><tr data-search="color/icon/error-muted --lt-icon-error-muted">
 <td><span class='design-name'>color/icon/error-muted</span></td>
 <td><span class='swatch' style='background:#d1242f80'></span><span class='hex'>#d1242f80</span></td>
 <td><span class='swatch' style='background:#a13a3a'></span><span class='hex'>#a13a3a</span></td>
-<td><span class='current-name'>--lt-icon-error-muted <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-text-error-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/icon/purple --lt-bg-purple --lt-icon-purple --lt-border-purple --lt-text-purple">
+<td><span class='current-name'>--lt-icon-error-muted</span></td></tr><tr data-search="color/icon/purple --lt-icon-purple">
 <td><span class='design-name'>color/icon/purple</span></td>
 <td><span class='swatch' style='background:#8250df'></span><span class='hex'>#8250df</span></td>
 <td><span class='swatch' style='background:#8957e5'></span><span class='hex'>#8957e5</span></td>
-<td><span class='current-name'>--lt-text-purple <span class='usage'>122 uses</span></span><br><span class='current-name'>--lt-bg-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-purple <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/primary --lt-border-primary --lt-icon-primary --lt-bg-secondary --lt-text-muted">
+<td><span class='current-name'>--lt-icon-purple</span></td></tr></tbody></table><h3>BORDER (18)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/border/primary --lt-border-primary">
 <td><span class='design-name'>color/border/primary</span></td>
 <td><span class='swatch' style='background:#6e7781'></span><span class='hex'>#6e7781</span></td>
 <td><span class='swatch' style='background:#8b949e'></span><span class='hex'>#8b949e</span></td>
-<td><span class='current-name'>--lt-text-muted <span class='usage'>442 uses</span></span><br><span class='current-name'>--lt-border-primary <span class='usage'>98 uses</span></span><br><span class='current-name'>--lt-icon-primary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-secondary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/secondary --lt-border-secondary">
+<td><span class='current-name'>--lt-border-primary</span></td></tr><tr data-search="color/border/secondary --lt-border-secondary">
 <td><span class='design-name'>color/border/secondary</span></td>
 <td><span class='swatch' style='background:#d0d7de'></span><span class='hex'>#d0d7de</span></td>
 <td><span class='swatch' style='background:#3d444d'></span><span class='hex'>#3d444d</span></td>
-<td><span class='current-name'>--lt-border-secondary <span class='usage'>666 uses</span></span><br></td></tr><tr data-search="color/border/secondary-muted --lt-border-secondary-muted">
+<td><span class='current-name'>--lt-border-secondary</span></td></tr><tr data-search="color/border/secondary-muted --lt-border-secondary-muted">
 <td><span class='design-name'>color/border/secondary-muted</span></td>
 <td><span class='swatch' style='background:#d0d7deb2'></span><span class='hex'>#d0d7deb2</span></td>
 <td><span class='swatch' style='background:#3d444db2'></span><span class='hex'>#3d444db2</span></td>
-<td><span class='current-name'>--lt-border-secondary-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/disabled --lt-component-button-invisible-disabled --lt-bg-base-disabled --lt-border-disabled">
+<td><span class='current-name'>--lt-border-secondary-muted</span></td></tr><tr data-search="color/border/disabled --lt-border-disabled">
 <td><span class='design-name'>color/border/disabled</span></td>
 <td><span class='swatch' style='background:#eaeef2b2'></span><span class='hex'>#eaeef2b2</span></td>
 <td><span class='swatch' style='background:#3d444d66'></span><span class='hex'>#3d444d66</span></td>
-<td><span class='current-name'>--lt-bg-base-disabled <span class='usage'>41 uses</span></span><br><span class='current-name'>--lt-border-disabled <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-button-invisible-disabled <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/transparent --lt-border-transparent">
+<td><span class='current-name'>--lt-border-disabled</span></td></tr><tr data-search="color/border/transparent --lt-border-transparent">
 <td><span class='design-name'>color/border/transparent</span></td>
 <td><span class='swatch' style='background:#1f232826'></span><span class='hex'>#1f232826</span></td>
 <td><span class='swatch' style='background:#f0f6fc1f'></span><span class='hex'>#f0f6fc1f</span></td>
-<td><span class='current-name'>--lt-border-transparent <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/brand-primary --lt-border-brand-primary --lt-bg-brand-primary --lt-accent-brand">
+<td><span class='current-name'>--lt-border-transparent</span></td></tr><tr data-search="color/border/brand-primary --lt-border-brand-primary">
 <td><span class='design-name'>color/border/brand-primary</span></td>
 <td><span class='swatch' style='background:#ed5f00'></span><span class='hex'>#ed5f00</span></td>
 <td><span class='swatch' style='background:#f7813f'></span><span class='hex'>#f7813f</span></td>
-<td><span class='current-name'>--lt-accent-brand <span class='usage'>34 uses</span></span><br><span class='current-name'>--lt-border-brand-primary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-brand-primary <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/info --lt-bg-info --lt-border-info --lt-icon-info --lt-text-info">
+<td><span class='current-name'>--lt-border-brand-primary</span></td></tr><tr data-search="color/border/info --lt-border-info">
 <td><span class='design-name'>color/border/info</span></td>
 <td><span class='swatch' style='background:#0969da'></span><span class='hex'>#0969da</span></td>
 <td><span class='swatch' style='background:#1f6feb'></span><span class='hex'>#1f6feb</span></td>
-<td><span class='current-name'>--lt-text-info <span class='usage'>845 uses</span></span><br><span class='current-name'>--lt-border-info <span class='usage'>29 uses</span></span><br><span class='current-name'>--lt-icon-info <span class='usage'>18 uses</span></span><br><span class='current-name'>--lt-bg-info <span class='usage'>8 uses</span></span><br></td></tr><tr data-search="color/border/info-muted --lt-border-info-muted">
+<td><span class='current-name'>--lt-border-info</span></td></tr><tr data-search="color/border/info-muted --lt-border-info-muted">
 <td><span class='design-name'>color/border/info-muted</span></td>
 <td><span class='swatch' style='background:#54aeff66'></span><span class='hex'>#54aeff66</span></td>
 <td><span class='swatch' style='background:#388bfd66'></span><span class='hex'>#388bfd66</span></td>
-<td><span class='current-name'>--lt-border-info-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/success --lt-icon-success --lt-border-success --lt-text-success">
+<td><span class='current-name'>--lt-border-info-muted</span></td></tr><tr data-search="color/border/success --lt-border-success">
 <td><span class='design-name'>color/border/success</span></td>
 <td><span class='swatch' style='background:#1a7f37'></span><span class='hex'>#1a7f37</span></td>
 <td><span class='swatch' style='background:#238636'></span><span class='hex'>#238636</span></td>
-<td><span class='current-name'>--lt-text-success <span class='usage'>143 uses</span></span><br><span class='current-name'>--lt-icon-success <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-success <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/success-muted --lt-border-success-muted">
+<td><span class='current-name'>--lt-border-success</span></td></tr><tr data-search="color/border/success-muted --lt-border-success-muted">
 <td><span class='design-name'>color/border/success-muted</span></td>
 <td><span class='swatch' style='background:#4ac26b66'></span><span class='hex'>#4ac26b66</span></td>
 <td><span class='swatch' style='background:#2ea04366'></span><span class='hex'>#2ea04366</span></td>
-<td><span class='current-name'>--lt-border-success-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/warning --lt-border-warning --lt-icon-warning --lt-bg-warning --lt-text-warning">
+<td><span class='current-name'>--lt-border-success-muted</span></td></tr><tr data-search="color/border/warning --lt-border-warning">
 <td><span class='design-name'>color/border/warning</span></td>
 <td><span class='swatch' style='background:#9a6700'></span><span class='hex'>#9a6700</span></td>
 <td><span class='swatch' style='background:#9e6a03'></span><span class='hex'>#9e6a03</span></td>
-<td><span class='current-name'>--lt-text-warning <span class='usage'>119 uses</span></span><br><span class='current-name'>--lt-border-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-warning <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-warning <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/warning-muted --lt-border-warning-muted">
+<td><span class='current-name'>--lt-border-warning</span></td></tr><tr data-search="color/border/warning-muted --lt-border-warning-muted">
 <td><span class='design-name'>color/border/warning-muted</span></td>
 <td><span class='swatch' style='background:#d4a72c66'></span><span class='hex'>#d4a72c66</span></td>
 <td><span class='swatch' style='background:#bb800966'></span><span class='hex'>#bb800966</span></td>
-<td><span class='current-name'>--lt-border-warning-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/error --lt-bg-error --lt-border-error">
+<td><span class='current-name'>--lt-border-warning-muted</span></td></tr><tr data-search="color/border/error --lt-border-error">
 <td><span class='design-name'>color/border/error</span></td>
 <td><span class='swatch' style='background:#cf222e'></span><span class='hex'>#cf222e</span></td>
 <td><span class='swatch' style='background:#da3633'></span><span class='hex'>#da3633</span></td>
-<td><span class='current-name'>--lt-border-error <span class='usage'>5 uses</span></span><br><span class='current-name'>--lt-bg-error <span class='usage'>4 uses</span></span><br></td></tr><tr data-search="color/border/error-muted --lt-border-error-muted">
+<td><span class='current-name'>--lt-border-error</span></td></tr><tr data-search="color/border/error-muted --lt-border-error-muted">
 <td><span class='design-name'>color/border/error-muted</span></td>
 <td><span class='swatch' style='background:#ff818266'></span><span class='hex'>#ff818266</span></td>
 <td><span class='swatch' style='background:#f8514966'></span><span class='hex'>#f8514966</span></td>
-<td><span class='current-name'>--lt-border-error-muted <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/orange --lt-bg-orange --lt-border-orange --lt-text-orange">
+<td><span class='current-name'>--lt-border-error-muted</span></td></tr><tr data-search="color/border/orange --lt-border-orange">
 <td><span class='design-name'>color/border/orange</span></td>
 <td><span class='swatch' style='background:#bc4c00'></span><span class='hex'>#bc4c00</span></td>
 <td><span class='swatch' style='background:#bd561d'></span><span class='hex'>#bd561d</span></td>
-<td><span class='current-name'>--lt-text-orange <span class='usage'>27 uses</span></span><br><span class='current-name'>--lt-bg-orange <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-orange <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/purple --lt-bg-purple --lt-icon-purple --lt-border-purple --lt-text-purple">
+<td><span class='current-name'>--lt-border-orange</span></td></tr><tr data-search="color/border/purple --lt-border-purple">
 <td><span class='design-name'>color/border/purple</span></td>
 <td><span class='swatch' style='background:#8250df'></span><span class='hex'>#8250df</span></td>
 <td><span class='swatch' style='background:#8957e5'></span><span class='hex'>#8957e5</span></td>
-<td><span class='current-name'>--lt-text-purple <span class='usage'>122 uses</span></span><br><span class='current-name'>--lt-bg-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-icon-purple <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-border-purple <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/border/purple-muted --lt-border-purple-muted">
+<td><span class='current-name'>--lt-border-purple</span></td></tr><tr data-search="color/border/purple-muted --lt-border-purple-muted">
 <td><span class='design-name'>color/border/purple-muted</span></td>
 <td><span class='swatch' style='background:#c297ff66'></span><span class='hex'>#c297ff66</span></td>
 <td><span class='swatch' style='background:#ab7df866'></span><span class='hex'>#ab7df866</span></td>
-<td><span class='current-name'>--lt-border-purple-muted <span class='usage'>1 uses</span></span><br></td></tr><tr data-search="color/border/magenta --lt-border-magenta --lt-bg-magenta --lt-text-magenta">
+<td><span class='current-name'>--lt-border-purple-muted</span></td></tr><tr data-search="color/border/magenta --lt-border-magenta">
 <td><span class='design-name'>color/border/magenta</span></td>
 <td><span class='swatch' style='background:#bf3989'></span><span class='hex'>#bf3989</span></td>
 <td><span class='swatch' style='background:#bf4b8a'></span><span class='hex'>#bf4b8a</span></td>
-<td><span class='current-name'>--lt-text-magenta <span class='usage'>10 uses</span></span><br><span class='current-name'>--lt-border-magenta <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-bg-magenta <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/dialog/bg --lt-component-dialog-bg --lt-component-segmented-control-selected --lt-component-text-field-default --lt-bg-base --lt-icon-transparent --lt-text-inverse">
+<td><span class='current-name'>--lt-border-magenta</span></td></tr></tbody></table><h3>COMPONENT SPECIFIC (8)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/component/dialog/bg --lt-component-dialog-bg">
 <td><span class='design-name'>color/component/dialog/bg</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#161b22'></span><span class='hex'>#161b22</span></td>
-<td><span class='current-name'>--lt-bg-base <span class='usage'>1298 uses</span></span><br><span class='current-name'>--lt-text-inverse <span class='usage'>377 uses</span></span><br><span class='current-name'>--lt-icon-transparent <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-dialog-bg <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-segmented-control-selected <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-default <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/text-field/default --lt-component-dialog-bg --lt-component-segmented-control-selected --lt-component-text-field-default --lt-bg-base --lt-icon-transparent --lt-text-inverse">
+<td><span class='current-name'>--lt-component-dialog-bg</span></td></tr><tr data-search="color/component/text-field/default --lt-component-text-field-default">
 <td><span class='design-name'>color/component/text-field/default</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#161b22'></span><span class='hex'>#161b22</span></td>
-<td><span class='current-name'>--lt-bg-base <span class='usage'>1298 uses</span></span><br><span class='current-name'>--lt-text-inverse <span class='usage'>377 uses</span></span><br><span class='current-name'>--lt-icon-transparent <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-dialog-bg <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-segmented-control-selected <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-default <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/text-field/inset --lt-component-button-error --lt-component-button-secondary --lt-component-text-field-inset --lt-bg-base-muted">
+<td><span class='current-name'>--lt-component-text-field-default</span></td></tr><tr data-search="color/component/text-field/inset --lt-component-text-field-inset">
 <td><span class='design-name'>color/component/text-field/inset</span></td>
 <td><span class='swatch' style='background:#f6f8fa'></span><span class='hex'>#f6f8fa</span></td>
 <td><span class='swatch' style='background:#0d1117'></span><span class='hex'>#0d1117</span></td>
-<td><span class='current-name'>--lt-bg-base-muted <span class='usage'>713 uses</span></span><br><span class='current-name'>--lt-component-button-error <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-button-secondary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-inset <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/segmented-control/selected --lt-component-dialog-bg --lt-component-segmented-control-selected --lt-component-text-field-default --lt-bg-base --lt-icon-transparent --lt-text-inverse">
+<td><span class='current-name'>--lt-component-text-field-inset</span></td></tr><tr data-search="color/component/segmented-control/selected --lt-component-segmented-control-selected">
 <td><span class='design-name'>color/component/segmented-control/selected</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#272c35'></span><span class='hex'>#272c35</span></td>
-<td><span class='current-name'>--lt-bg-base <span class='usage'>1298 uses</span></span><br><span class='current-name'>--lt-text-inverse <span class='usage'>377 uses</span></span><br><span class='current-name'>--lt-icon-transparent <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-dialog-bg <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-segmented-control-selected <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-default <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/button/secondary --lt-component-button-error --lt-component-button-secondary --lt-component-text-field-inset --lt-bg-base-muted">
+<td><span class='current-name'>--lt-component-segmented-control-selected</span></td></tr><tr data-search="color/component/button/secondary --lt-component-button-secondary">
 <td><span class='design-name'>color/component/button/secondary</span></td>
 <td><span class='swatch' style='background:#f6f8fa'></span><span class='hex'>#f6f8fa</span></td>
 <td><span class='swatch' style='background:#212830'></span><span class='hex'>#212830</span></td>
-<td><span class='current-name'>--lt-bg-base-muted <span class='usage'>713 uses</span></span><br><span class='current-name'>--lt-component-button-error <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-button-secondary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-inset <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/button/secondary-pressed --lt-component-button-secondary-pressed --lt-bg-base-pressed">
+<td><span class='current-name'>--lt-component-button-secondary</span></td></tr><tr data-search="color/component/button/secondary-pressed --lt-component-button-secondary-pressed">
 <td><span class='design-name'>color/component/button/secondary-pressed</span></td>
 <td><span class='swatch' style='background:#e7ebef'></span><span class='hex'>#e7ebef</span></td>
 <td><span class='swatch' style='background:#2a313c'></span><span class='hex'>#2a313c</span></td>
-<td><span class='current-name'>--lt-bg-base-pressed <span class='usage'>35 uses</span></span><br><span class='current-name'>--lt-component-button-secondary-pressed <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/button/error --lt-component-button-error --lt-component-button-secondary --lt-component-text-field-inset --lt-bg-base-muted">
+<td><span class='current-name'>--lt-component-button-secondary-pressed</span></td></tr><tr data-search="color/component/button/error --lt-component-button-error">
 <td><span class='design-name'>color/component/button/error</span></td>
 <td><span class='swatch' style='background:#f6f8fa'></span><span class='hex'>#f6f8fa</span></td>
 <td><span class='swatch' style='background:#212830'></span><span class='hex'>#212830</span></td>
-<td><span class='current-name'>--lt-bg-base-muted <span class='usage'>713 uses</span></span><br><span class='current-name'>--lt-component-button-error <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-button-secondary <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-component-text-field-inset <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/component/button/invisible-disabled --lt-component-button-invisible-disabled --lt-bg-base-disabled --lt-border-disabled">
+<td><span class='current-name'>--lt-component-button-error</span></td></tr><tr data-search="color/component/button/invisible-disabled --lt-component-button-invisible-disabled">
 <td><span class='design-name'>color/component/button/invisible-disabled</span></td>
 <td><span class='swatch' style='background:#eaeef2b2'></span><span class='hex'>#eaeef2b2</span></td>
 <td><span class='swatch' style='background:#00000000'></span><span class='hex'>#00000000</span></td>
-<td><span class='current-name'>--lt-bg-base-disabled <span class='usage'>41 uses</span></span><br><span class='current-name'>--lt-border-disabled <span class='usage'>3 uses</span></span><br><span class='current-name'>--lt-component-button-invisible-disabled <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/resting/xsmall --lt-shadow-resting-xsmall">
+<td><span class='current-name'>--lt-component-button-invisible-disabled</span></td></tr></tbody></table><h3>SHADOW (12)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/shadow/resting/xsmall --lt-shadow-resting-xsmall">
 <td><span class='design-name'>color/shadow/resting/xsmall</span></td>
 <td><span class='swatch' style='background:#1f23281a'></span><span class='hex'>#1f23281a</span></td>
 <td><span class='swatch' style='background:#010409cc'></span><span class='hex'>#010409cc</span></td>
-<td><span class='current-name'>--lt-shadow-resting-xsmall <span class='usage'>7 uses</span></span><br></td></tr><tr data-search="color/shadow/resting/small-1 --lt-shadow-resting-small-1">
+<td><span class='current-name'>--lt-shadow-resting-xsmall</span></td></tr><tr data-search="color/shadow/resting/small-1 --lt-shadow-resting-small-1">
 <td><span class='design-name'>color/shadow/resting/small-1</span></td>
 <td><span class='swatch' style='background:#1f23280f'></span><span class='hex'>#1f23280f</span></td>
 <td><span class='swatch' style='background:#01040966'></span><span class='hex'>#01040966</span></td>
-<td><span class='current-name'>--lt-shadow-resting-small-1 <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/resting/small-2 --lt-shadow-resting-small-2">
+<td><span class='current-name'>--lt-shadow-resting-small-1</span></td></tr><tr data-search="color/shadow/resting/small-2 --lt-shadow-resting-small-2">
 <td><span class='design-name'>color/shadow/resting/small-2</span></td>
 <td><span class='swatch' style='background:#1f232814'></span><span class='hex'>#1f232814</span></td>
 <td><span class='swatch' style='background:#01040966'></span><span class='hex'>#01040966</span></td>
-<td><span class='current-name'>--lt-shadow-resting-small-2 <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/resting/medium --lt-shadow-resting-medium">
+<td><span class='current-name'>--lt-shadow-resting-small-2</span></td></tr><tr data-search="color/shadow/resting/medium --lt-shadow-resting-medium">
 <td><span class='design-name'>color/shadow/resting/medium</span></td>
 <td><span class='swatch' style='background:#25292e1f'></span><span class='hex'>#25292e1f</span></td>
 <td><span class='swatch' style='background:#010409cc'></span><span class='hex'>#010409cc</span></td>
-<td><span class='current-name'>--lt-shadow-resting-medium <span class='usage'>3 uses</span></span><br></td></tr><tr data-search="color/shadow/component/rest --lt-shadow-component-light-pressed --lt-shadow-component-rest">
+<td><span class='current-name'>--lt-shadow-resting-medium</span></td></tr><tr data-search="color/shadow/component/rest --lt-shadow-component-rest">
 <td><span class='design-name'>color/shadow/component/rest</span></td>
 <td><span class='swatch' style='background:#1f23280a'></span><span class='hex'>#1f23280a</span></td>
 <td><span class='swatch' style='background:#0104093d'></span><span class='hex'>#0104093d</span></td>
-<td><span class='current-name'>--lt-shadow-component-light-pressed <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-shadow-component-rest <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/component/light-pressed --lt-shadow-component-light-pressed --lt-shadow-component-rest">
+<td><span class='current-name'>--lt-shadow-component-rest</span></td></tr><tr data-search="color/shadow/component/light-pressed --lt-shadow-component-light-pressed">
 <td><span class='design-name'>color/shadow/component/light-pressed</span></td>
 <td><span class='swatch' style='background:#1f23280a'></span><span class='hex'>#1f23280a</span></td>
 <td><span class='swatch' style='background:#00000000'></span><span class='hex'>#00000000</span></td>
-<td><span class='current-name'>--lt-shadow-component-light-pressed <span class='usage'>0 uses</span></span><br><span class='current-name'>--lt-shadow-component-rest <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/component/error-pressed --lt-shadow-component-error-pressed">
+<td><span class='current-name'>--lt-shadow-component-light-pressed</span></td></tr><tr data-search="color/shadow/component/error-pressed --lt-shadow-component-error-pressed">
 <td><span class='design-name'>color/shadow/component/error-pressed</span></td>
 <td><span class='swatch' style='background:#4c001433'></span><span class='hex'>#4c001433</span></td>
 <td><span class='swatch' style='background:#00000000'></span><span class='hex'>#00000000</span></td>
-<td><span class='current-name'>--lt-shadow-component-error-pressed <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/component/knob --lt-shadow-component-knob">
+<td><span class='current-name'>--lt-shadow-component-error-pressed</span></td></tr><tr data-search="color/shadow/component/knob --lt-shadow-component-knob">
 <td><span class='design-name'>color/shadow/component/knob</span></td>
 <td><span class='swatch' style='background:#8c959f26'></span><span class='hex'>#8c959f26</span></td>
 <td><span class='hex'></span></td>
-<td><span class='current-name'>--lt-shadow-component-knob <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/floating/small-2 --lt-shadow-floating-small-2">
+<td><span class='current-name'>--lt-shadow-component-knob</span></td></tr><tr data-search="color/shadow/floating/small-2 --lt-shadow-floating-small-2">
 <td><span class='design-name'>color/shadow/floating/small-2</span></td>
 <td><span class='swatch' style='background:#424a530a'></span><span class='hex'>#424a530a</span></td>
 <td><span class='swatch' style='background:#01040966'></span><span class='hex'>#01040966</span></td>
-<td><span class='current-name'>--lt-shadow-floating-small-2 <span class='usage'>76 uses</span></span><br></td></tr><tr data-search="color/shadow/floating/small-3 --lt-shadow-floating-small-3">
+<td><span class='current-name'>--lt-shadow-floating-small-2</span></td></tr><tr data-search="color/shadow/floating/small-3 --lt-shadow-floating-small-3">
 <td><span class='design-name'>color/shadow/floating/small-3</span></td>
 <td><span class='swatch' style='background:#424a531f'></span><span class='hex'>#424a531f</span></td>
 <td><span class='swatch' style='background:#01040966'></span><span class='hex'>#01040966</span></td>
-<td><span class='current-name'>--lt-shadow-floating-small-3 <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/floating/medium-2-5 --lt-shadow-floating-medium-2-5">
+<td><span class='current-name'>--lt-shadow-floating-small-3</span></td></tr><tr data-search="color/shadow/floating/medium-2-5 --lt-shadow-floating-medium-2-5">
 <td><span class='design-name'>color/shadow/floating/medium-2-5</span></td>
 <td><span class='swatch' style='background:#424a5314'></span><span class='hex'>#424a5314</span></td>
 <td><span class='swatch' style='background:#01040966'></span><span class='hex'>#01040966</span></td>
-<td><span class='current-name'>--lt-shadow-floating-medium-2-5 <span class='usage'>0 uses</span></span><br></td></tr><tr data-search="color/shadow/floating/xl-l-m-s-1 --lt-shadow-floating-xl-l-m-s-1">
+<td><span class='current-name'>--lt-shadow-floating-medium-2-5</span></td></tr><tr data-search="color/shadow/floating/xl-l-m-s-1 --lt-shadow-floating-xl-l-m-s-1">
 <td><span class='design-name'>color/shadow/floating/xl-l-m-s-1</span></td>
 <td><span class='swatch' style='background:#d0d7de80'></span><span class='hex'>#d0d7de80</span></td>
 <td><span class='swatch' style='background:#3d444d'></span><span class='hex'>#3d444d</span></td>
-<td><span class='current-name'>--lt-shadow-floating-xl-l-m-s-1 <span class='usage'>0 uses</span></span><br></td></tr></tbody></table></div><div id="tab-near" class="tab-content"><p style="color:#666">Design tokens without an exact match but covered by near-identical orphans (Δ ≤ 5). Already redirected in Phase 1.</p><table><thead><tr><th>Design Token</th><th>Light</th><th>Dark</th><th>Near-match orphans</th></tr></thead><tbody></tbody></table></div><div id="tab-missing" class="tab-content"><p style="color:#666">Design tokens with neither exact nor near-match. Need NEW tokens added to tokens.css.</p><table><thead><tr><th>Design Token</th><th>Section</th><th>Light</th><th>Dark</th></tr></thead><tbody></tbody></table></div><div id="tab-unmappable" class="tab-content"><table><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th style="text-align:right">Uses</th></tr></thead><tbody><tr data-search="--lt-bg-neutral-alt"><td><span class='current-name'>--lt-bg-neutral-alt</span></td>
+<td><span class='current-name'>--lt-shadow-floating-xl-l-m-s-1</span></td></tr></tbody></table></div><div id="tab-unmappable" class="tab-content"><table><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th style="text-align:right">Uses</th></tr></thead><tbody><tr data-search="--lt-bg-neutral-alt"><td><span class='current-name'>--lt-bg-neutral-alt</span></td>
 <td><span class='hex'>#555</span></td>
 <td><span class='hex'>#3d444d</span></td>
 <td style='text-align:right'>13</td></tr><tr data-search="--lt-border-dark-alpha"><td><span class='current-name'>--lt-border-dark-alpha</span></td>
