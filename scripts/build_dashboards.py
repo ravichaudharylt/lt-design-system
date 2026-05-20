@@ -98,6 +98,52 @@ def property_of(line, pos, name):
     if name.startswith('--lt-shadow-'): return 'shadow'
     return 'other'
 
+# Build utility-class -> token maps from each app's tailwind.config.js so the
+# mapping report counts class-based usage (lt-bg-base, bg-base, bg-ds-primary, ...) too.
+import subprocess, json as _json
+_APP_CONFIGS = {'kaneai': (f'{WP}/apps/kaneai-test-management-client', ''), 'hyperexecute': (f'{WP}/apps/hyperexecute', 'ltw-')}
+_PREFIX_FOR_KEY = {'textColor': ['text'], 'backgroundColor': ['bg'],
+    'borderColor': ['border', 'border-t', 'border-r', 'border-b', 'border-l', 'border-x', 'border-y'],
+    'gradientColorStops': ['from', 'via', 'to'], 'outlineColor': ['outline'], 'textDecorationColor': ['decoration'],
+    'divideColor': ['divide'], 'ringColor': ['ring'], 'fill': ['fill'], 'stroke': ['stroke'],
+    'caretColor': ['caret'], 'accentColor': ['accent'], 'placeholderColor': ['placeholder']}
+_GENERAL_PREFIXES = ['text', 'bg', 'border', 'fill', 'stroke', 'from', 'via', 'to', 'outline', 'decoration', 'divide', 'ring', 'caret', 'accent', 'placeholder']
+_CLASS_TO_TOKEN = {}
+_APP_DS = {}; _APP_PREFIX = {}
+def _flat(v):
+    if isinstance(v, str): return v
+    if isinstance(v, dict): return v.get('DEFAULT')
+    return None
+for _prod, (_cd, _pf) in _APP_CONFIGS.items():
+    _APP_PREFIX[_prod] = _pf; _dm = {}
+    try:
+        _o = subprocess.run(['node', '-e',
+            "const rc=require('tailwindcss/resolveConfig');const t=rc(require('./tailwind.config.js')).theme;"
+            "const ks=['textColor','backgroundColor','borderColor','gradientColorStops','outlineColor','textDecorationColor','divideColor','ringColor','fill','stroke','caretColor','accentColor','placeholderColor','colors'];"
+            "const o={};for(const k of ks)o[k]=t[k]||{};console.log(JSON.stringify(o))"],
+            capture_output=True, text=True, cwd=_cd).stdout
+        _th = _json.loads(_o or '{}')
+    except Exception:
+        _th = {}
+    for _k, _m in _th.items():
+        _prefs = _PREFIX_FOR_KEY.get(_k, _GENERAL_PREFIXES if _k == 'colors' else [])
+        for _n, _v in (_m or {}).items():
+            _sv = _flat(_v)
+            if not _sv: continue
+            _vm = re.search(r'var\((--lt-[a-zA-Z0-9-]+)\)', _sv)
+            if not _vm: continue
+            for _p in _prefs: _dm[(_p, _n)] = _vm.group(1)
+    _APP_DS[_prod] = _dm
+    try: _cs = open(f'{_cd}/tailwind.config.js').read()
+    except Exception: _cs = ''
+    for _m in re.finditer(r"'\.([a-zA-Z0-9-]+)(?: > \* \+ \*)?':\s*\{\s*'[a-z-]+':\s*'var\((--lt-[a-zA-Z0-9-]+)\)'", _cs):
+        _CLASS_TO_TOKEN[_m.group(1)] = _m.group(2)
+_DS_ALT = 'border-t|border-r|border-b|border-l|border-x|border-y|text|bg|border|from|via|to|outline|decoration|divide|ring|fill|stroke|caret|accent|placeholder'
+def _app_of(path):
+    if '/kaneai-test-management-client/' in path: return 'kaneai'
+    if '/hyperexecute/' in path: return 'hyperexecute'
+    return None
+
 usage = collections.Counter()
 prop_breakdown = collections.defaultdict(collections.Counter)
 for root in [f"{WP}/apps", f"{WP}/packages", f"{LTC}/src"]:
@@ -123,6 +169,16 @@ for root in [f"{WP}/apps", f"{WP}/packages", f"{LTC}/src"]:
                 p = property_of(line, pos_in_line, name)
                 usage[name] += 1
                 prop_breakdown[name][p] += 1
+            # lt-* plugin classes + DS Tailwind utilities -> usage (post-migration consumption)
+            for m in re.finditer(r'(?<![-a-zA-Z])(lt-[a-zA-Z0-9-]+)(?![a-z0-9-])', content):
+                _tk = _CLASS_TO_TOKEN.get(m.group(1))
+                if _tk: usage[_tk] += 1; prop_breakdown[_tk]['tw-class'] += 1
+            _app = _app_of(path)
+            if _app and _app in _APP_DS:
+                _pf = _APP_PREFIX[_app]; _dm = _APP_DS[_app]
+                for m in re.finditer(r'(?<![-a-zA-Z])' + re.escape(_pf) + r'(' + _DS_ALT + r')-([a-z0-9-]+?)(?:/[0-9]+)?(?![a-z0-9-])', content):
+                    _tk = _dm.get((m.group(1), m.group(2)))
+                    if _tk: usage[_tk] += 1; prop_breakdown[_tk]['tw-class'] += 1
 
 # 4. Build mapping: per design token, find current tokens within Δ ≤ 5 in matching section
 def section_of(name):
