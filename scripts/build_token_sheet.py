@@ -229,8 +229,10 @@ html = f"""<!DOCTYPE html>
   <button data-product="packages">packages</button>
   <button data-product="internal">internal (tokens.css)</button>
 </div>
-<div class="stats" id="filter-result-stats" style="margin-top:4px;margin-bottom:10px">
-  <span class="stat-pill filtered hidden" id="filtered-pill"><span class="num" id="filtered-count">--</span><span>tokens match filter</span><span class="num-small" id="filtered-pct"></span><span class="num-small" id="filtered-refs"></span></span>
+<div id="filter-result-stats" style="display:none;align-items:center;gap:10px;margin:6px 0 14px;padding:10px 14px;background:#fff8c5;border:1px solid #f1d878;border-radius:8px;flex-wrap:wrap">
+  <span style="font-size:11px;font-weight:700;color:#693e00;text-transform:uppercase;letter-spacing:0.5px">Filtered results</span>
+  <span class="stat-pill" style="background:#fff;border:1px solid #d0d7de"><span class="num" id="filtered-count">--</span><span>tokens</span><span class="num-small" id="filtered-pct"></span></span>
+  <span class="stat-pill" style="background:#fff;border:1px solid #d0d7de"><span class="num" id="filtered-refs">--</span><span>uses</span></span>
 </div>
 <table id="tbl">
 <thead><tr>
@@ -280,7 +282,7 @@ html += """</tbody></table>
 <script>
 const rows = document.querySelectorAll('#tbl tbody tr');
 const state = { q: '', prop: 'all', product: 'all', source: 'all', ctype: 'all' };
-const filteredPill = document.getElementById('filtered-pill');
+const filterResultStats = document.getElementById('filter-result-stats');
 const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
 const filteredRefsEl = document.getElementById('filtered-refs');
@@ -312,12 +314,12 @@ function applyFilters() {
   });
   const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all' || state.ctype !== 'all';
   if (isFiltered) {
-    filteredPill.classList.remove('hidden');
+    filterResultStats.style.display = 'flex';
     filteredCountEl.textContent = visible.toLocaleString();
     const pct = rows.length > 0 ? Math.round((visible / rows.length) * 100) : 0;
     filteredPctEl.textContent = `(${pct}% of total)`;
-    filteredRefsEl.textContent = `· ${visibleRefs.toLocaleString()} refs`;
-  } else { filteredPill.classList.add('hidden'); }
+    filteredRefsEl.textContent = visibleRefs.toLocaleString();
+  } else { filterResultStats.style.display = 'none'; }
 }
 
 document.getElementById('filter').addEventListener('input', e => { state.q = e.target.value.toLowerCase(); applyFilters(); });
