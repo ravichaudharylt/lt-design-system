@@ -106,6 +106,60 @@ def property_of(line, pos, name):
     if name.startswith('--lt-shadow-'): return 'shadow'
     return 'other'
 
+# 1b. Build utility-class -> token maps from each app's tailwind.config.js
+#     (after the migration, tokens are consumed via Tailwind utilities, not just var())
+import subprocess, json as _json
+APP_CONFIGS = {
+    'kaneai': (f'{WP}/apps/kaneai-test-management-client', ''),
+    'hyperexecute': (f'{WP}/apps/hyperexecute', 'ltw-'),
+}
+PREFIX_FOR_KEY = {
+    'textColor': ['text'], 'backgroundColor': ['bg'],
+    'borderColor': ['border', 'border-t', 'border-r', 'border-b', 'border-l', 'border-x', 'border-y'],
+    'gradientColorStops': ['from', 'via', 'to'], 'outlineColor': ['outline'],
+    'textDecorationColor': ['decoration'], 'divideColor': ['divide'], 'ringColor': ['ring'],
+    'fill': ['fill'], 'stroke': ['stroke'], 'caretColor': ['caret'],
+    'accentColor': ['accent'], 'placeholderColor': ['placeholder'],
+}
+GENERAL_PREFIXES = ['text', 'bg', 'border', 'fill', 'stroke', 'from', 'via', 'to', 'outline', 'decoration', 'divide', 'ring', 'caret', 'accent', 'placeholder']
+APP_DS = {}      # product -> {(prefix, name): token}
+APP_PREFIX = {}  # product -> tailwind prefix
+def _flatten(v):
+    if isinstance(v, str): return v
+    if isinstance(v, dict): return v.get('DEFAULT')
+    return None
+for _prod, (_cfgdir, _pfx) in APP_CONFIGS.items():
+    APP_PREFIX[_prod] = _pfx
+    dsmap = {}
+    try:
+        _out = subprocess.run(['node', '-e',
+            "const rc=require('tailwindcss/resolveConfig');const t=rc(require('./tailwind.config.js')).theme;"
+            "const ks=['textColor','backgroundColor','borderColor','gradientColorStops','outlineColor','textDecorationColor','divideColor','ringColor','fill','stroke','caretColor','accentColor','placeholderColor','colors'];"
+            "const o={};for(const k of ks)o[k]=t[k]||{};console.log(JSON.stringify(o))"],
+            capture_output=True, text=True, cwd=_cfgdir).stdout
+        _theme = _json.loads(_out or '{}')
+    except Exception:
+        _theme = {}
+    for _key, _m in _theme.items():
+        _prefixes = PREFIX_FOR_KEY.get(_key, GENERAL_PREFIXES if _key == 'colors' else [])
+        for _name, _val in (_m or {}).items():
+            _sval = _flatten(_val)
+            if not _sval: continue
+            _vm = re.search(r'var\((--lt-[a-zA-Z0-9-]+)\)', _sval)
+            if not _vm: continue
+            for _pre in _prefixes:
+                dsmap[(_pre, _name)] = _vm.group(1)
+    APP_DS[_prod] = dsmap
+    # plugin lt-* classes (addUtilities) -> CLASS_TO_TOKEN (respectPrefix:false → literal names)
+    try:
+        _cfgsrc = open(f'{_cfgdir}/tailwind.config.js').read()
+    except Exception:
+        _cfgsrc = ''
+    for _m in re.finditer(r"'\.([a-zA-Z0-9-]+)(?: > \* \+ \*)?':\s*\{\s*'[a-z-]+':\s*'var\((--lt-[a-zA-Z0-9-]+)\)'", _cfgsrc):
+        CLASS_TO_TOKEN[_m.group(1)] = _m.group(2)
+
+_DS_PREFIX_ALT = 'border-t|border-r|border-b|border-l|border-x|border-y|text|bg|border|from|via|to|outline|decoration|divide|ring|fill|stroke|caret|accent|placeholder'
+
 # 2. Scan source files for var(--X) and class usage
 USAGE = collections.defaultdict(lambda: {'total': 0, 'products': collections.Counter(), 'props': collections.Counter()})
 sources = []
@@ -140,6 +194,17 @@ for path in sources:
             USAGE[tk]['total'] += 1
             USAGE[tk]['products'][product_of(path)] += 1
             USAGE[tk]['props']['class'] += 1
+        # DS Tailwind utilities (bg-base, text-info, bg-ds-primary, ltw-..., incl /opacity)
+        _prod = product_of(path)
+        _dsmap = APP_DS.get(_prod)
+        if _dsmap:
+            _pfx = APP_PREFIX.get(_prod, '')
+            for m in re.finditer(r'(?<![-a-zA-Z])' + re.escape(_pfx) + r'(' + _DS_PREFIX_ALT + r')-([a-z0-9-]+?)(?:/[0-9]+)?(?![a-z0-9-])', line):
+                tk = _dsmap.get((m.group(1), m.group(2)))
+                if not tk: continue
+                USAGE[tk]['total'] += 1
+                USAGE[tk]['products'][_prod] += 1
+                USAGE[tk]['props']['tw-class'] += 1
 
 # 3. Render
 import datetime
