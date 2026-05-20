@@ -191,7 +191,6 @@ html = f"""<!DOCTYPE html>
 <div class="meta">Generated {now} &middot; <strong>Post-Phase-1 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
 <div class="stats">
   <span class="stat-pill total"><span class="num" id="total-count">{TOTAL}</span><span>total tokens</span></span>
-  <span class="stat-pill filtered hidden" id="filtered-pill"><span class="num" id="filtered-count">--</span><span>matching filter</span><span class="num-small" id="filtered-pct"></span></span>
   <span class="stat-pill total" style="background:#f5fbff;color:#054078;border:1px solid #b6e3ff"><span class="num">{DESIGN_COUNT}</span><span>★ official design tokens</span></span>
   <span class="stat-pill total" style="background:#dafbe1;color:#1a7f37"><span class="num">{TOTAL_REFS:,}</span><span>total references</span></span>
 </div>
@@ -229,6 +228,9 @@ html = f"""<!DOCTYPE html>
   <button data-product="magic-leap-dashboard">magic-leap-dashboard</button>
   <button data-product="packages">packages</button>
   <button data-product="internal">internal (tokens.css)</button>
+</div>
+<div class="stats" id="filter-result-stats" style="margin-top:4px;margin-bottom:10px">
+  <span class="stat-pill filtered hidden" id="filtered-pill"><span class="num" id="filtered-count">--</span><span>tokens match filter</span><span class="num-small" id="filtered-pct"></span><span class="num-small" id="filtered-refs"></span></span>
 </div>
 <table id="tbl">
 <thead><tr>
@@ -281,9 +283,11 @@ const state = { q: '', prop: 'all', product: 'all', source: 'all', ctype: 'all' 
 const filteredPill = document.getElementById('filtered-pill');
 const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
+const filteredRefsEl = document.getElementById('filtered-refs');
 
 function applyFilters() {
   let visible = 0;
+  let visibleRefs = 0;
   rows.forEach(r => {
     let show = true;
     if (state.q && !r.textContent.toLowerCase().includes(state.q)) show = false;
@@ -304,7 +308,7 @@ function applyFilters() {
       if (state.ctype === 'named' && isC) show = false;
     }
     r.style.display = show ? '' : 'none';
-    if (show) visible++;
+    if (show) { visible++; visibleRefs += parseInt(r.dataset.count || '0', 10); }
   });
   const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all' || state.ctype !== 'all';
   if (isFiltered) {
@@ -312,6 +316,7 @@ function applyFilters() {
     filteredCountEl.textContent = visible.toLocaleString();
     const pct = rows.length > 0 ? Math.round((visible / rows.length) * 100) : 0;
     filteredPctEl.textContent = `(${pct}% of total)`;
+    filteredRefsEl.textContent = `· ${visibleRefs.toLocaleString()} refs`;
   } else { filteredPill.classList.add('hidden'); }
 }
 
