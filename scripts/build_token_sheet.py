@@ -159,6 +159,22 @@ for _prod, (_cfgdir, _pfx) in APP_CONFIGS.items():
         CLASS_TO_TOKEN[_m.group(1)] = _m.group(2)
 
 _DS_PREFIX_ALT = 'border-t|border-r|border-b|border-l|border-x|border-y|text|bg|border|from|via|to|outline|decoration|divide|ring|fill|stroke|caret|accent|placeholder'
+# What property does a Tailwind utility actually set? (so usage is categorized text/bg/border/…, not "class")
+PREFIX_PROP = {
+    'text': 'text', 'bg': 'bg', 'border': 'border', 'border-t': 'border', 'border-r': 'border',
+    'border-b': 'border', 'border-l': 'border', 'border-x': 'border', 'border-y': 'border',
+    'from': 'bg', 'via': 'bg', 'to': 'bg', 'outline': 'border', 'decoration': 'text',
+    'divide': 'border', 'ring': 'border', 'fill': 'fill', 'stroke': 'stroke',
+    'caret': 'text', 'accent': 'text', 'placeholder': 'text',
+}
+def _lt_prop(cls):
+    if cls.startswith('lt-bg-'): return 'bg'
+    if cls.startswith('lt-text-'): return 'text'
+    if cls.startswith('lt-border-'): return 'border'
+    if cls.startswith('lt-divide-'): return 'border'
+    if cls.startswith('lt-fill-'): return 'fill'
+    if cls.startswith('lt-stroke-'): return 'stroke'
+    return 'other'
 
 # 2. Scan source files for var(--X) and class usage
 USAGE = collections.defaultdict(lambda: {'total': 0, 'products': collections.Counter(), 'props': collections.Counter()})
@@ -193,7 +209,7 @@ for path in sources:
             if before.endswith('--') or before.endswith('var('): continue
             USAGE[tk]['total'] += 1
             USAGE[tk]['products'][product_of(path)] += 1
-            USAGE[tk]['props']['class'] += 1
+            USAGE[tk]['props'][_lt_prop(cls)] += 1
         # DS Tailwind utilities (bg-base, text-info, bg-ds-primary, ltw-..., incl /opacity)
         _prod = product_of(path)
         _dsmap = APP_DS.get(_prod)
@@ -204,7 +220,7 @@ for path in sources:
                 if not tk: continue
                 USAGE[tk]['total'] += 1
                 USAGE[tk]['products'][_prod] += 1
-                USAGE[tk]['props']['tw-class'] += 1
+                USAGE[tk]['props'][PREFIX_PROP.get(m.group(1), 'other')] += 1
 
 # 3. Render
 import datetime

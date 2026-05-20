@@ -143,6 +143,22 @@ def _app_of(path):
     if '/kaneai-test-management-client/' in path: return 'kaneai'
     if '/hyperexecute/' in path: return 'hyperexecute'
     return None
+# What property does a Tailwind utility actually set? (categorize usage text/bg/border/… not "class")
+_PREFIX_PROP = {
+    'text': 'text', 'bg': 'bg', 'border': 'border', 'border-t': 'border', 'border-r': 'border',
+    'border-b': 'border', 'border-l': 'border', 'border-x': 'border', 'border-y': 'border',
+    'from': 'bg', 'via': 'bg', 'to': 'bg', 'outline': 'border', 'decoration': 'text',
+    'divide': 'border', 'ring': 'border', 'fill': 'fill', 'stroke': 'stroke',
+    'caret': 'text', 'accent': 'text', 'placeholder': 'text',
+}
+def _lt_prop(cls):
+    if cls.startswith('lt-bg-'): return 'bg'
+    if cls.startswith('lt-text-'): return 'text'
+    if cls.startswith('lt-border-'): return 'border'
+    if cls.startswith('lt-divide-'): return 'border'
+    if cls.startswith('lt-fill-'): return 'fill'
+    if cls.startswith('lt-stroke-'): return 'stroke'
+    return 'other'
 
 usage = collections.Counter()
 prop_breakdown = collections.defaultdict(collections.Counter)
@@ -171,14 +187,15 @@ for root in [f"{WP}/apps", f"{WP}/packages", f"{LTC}/src"]:
                 prop_breakdown[name][p] += 1
             # lt-* plugin classes + DS Tailwind utilities -> usage (post-migration consumption)
             for m in re.finditer(r'(?<![-a-zA-Z])(lt-[a-zA-Z0-9-]+)(?![a-z0-9-])', content):
-                _tk = _CLASS_TO_TOKEN.get(m.group(1))
-                if _tk: usage[_tk] += 1; prop_breakdown[_tk]['tw-class'] += 1
+                _cls = m.group(1)
+                _tk = _CLASS_TO_TOKEN.get(_cls)
+                if _tk: usage[_tk] += 1; prop_breakdown[_tk][_lt_prop(_cls)] += 1
             _app = _app_of(path)
             if _app and _app in _APP_DS:
                 _pf = _APP_PREFIX[_app]; _dm = _APP_DS[_app]
                 for m in re.finditer(r'(?<![-a-zA-Z])' + re.escape(_pf) + r'(' + _DS_ALT + r')-([a-z0-9-]+?)(?:/[0-9]+)?(?![a-z0-9-])', content):
                     _tk = _dm.get((m.group(1), m.group(2)))
-                    if _tk: usage[_tk] += 1; prop_breakdown[_tk]['tw-class'] += 1
+                    if _tk: usage[_tk] += 1; prop_breakdown[_tk][_PREFIX_PROP.get(m.group(1), 'other')] += 1
 
 # 4. Build mapping: per design token, find current tokens within Δ ≤ 5 in matching section
 def section_of(name):
