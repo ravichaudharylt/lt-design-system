@@ -213,6 +213,12 @@ html = f"""<!DOCTYPE html>
   <button data-source="design">★ Official design system</button>
   <button data-source="non-design">Legacy / orphan</button>
 </div>
+<div class="filter-row filter-buttons" data-group="ctype">
+  <span class="filter-label">Token type</span>
+  <button data-ctype="all" class="active">All</button>
+  <button data-ctype="c">--lt-c-* (value-encoded)</button>
+  <button data-ctype="named">Named (semantic)</button>
+</div>
 <div class="filter-row filter-buttons" data-group="product">
   <span class="filter-label">Product</span>
   <button data-product="all" class="active">All</button>
@@ -271,7 +277,7 @@ for name in sorted_tokens:
 html += """</tbody></table>
 <script>
 const rows = document.querySelectorAll('#tbl tbody tr');
-const state = { q: '', prop: 'all', product: 'all', source: 'all' };
+const state = { q: '', prop: 'all', product: 'all', source: 'all', ctype: 'all' };
 const filteredPill = document.getElementById('filtered-pill');
 const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
@@ -292,10 +298,15 @@ function applyFilters() {
     if (show && state.source !== 'all') {
       if (r.dataset.source !== state.source) show = false;
     }
+    if (show && state.ctype !== 'all') {
+      const isC = r.dataset.name.startsWith('--lt-c-');
+      if (state.ctype === 'c' && !isC) show = false;
+      if (state.ctype === 'named' && isC) show = false;
+    }
     r.style.display = show ? '' : 'none';
     if (show) visible++;
   });
-  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all';
+  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all' || state.ctype !== 'all';
   if (isFiltered) {
     filteredPill.classList.remove('hidden');
     filteredCountEl.textContent = visible.toLocaleString();
@@ -321,6 +332,12 @@ document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach
   b.addEventListener('click', () => {
     document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); state.source = b.dataset.source; applyFilters();
+  });
+});
+document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); state.ctype = b.dataset.ctype; applyFilters();
   });
 });
 document.querySelectorAll('th[data-sort]').forEach(th => {

@@ -46,7 +46,7 @@
   LambdaTest Design Token Sheet
   <a href="mapping.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#0969da,#054078); color:white; text-decoration:none; letter-spacing:0.3px;">Migration roadmap &amp; mapping →</a>
 </h1>
-<div class="meta">Generated 2026-05-19 16:11 &middot; <strong>Post-Phase-1 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
+<div class="meta">Generated 2026-05-20 14:21 &middot; <strong>Post-Phase-1 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
 <div class="stats">
   <span class="stat-pill total"><span class="num" id="total-count">682</span><span>total tokens</span></span>
   <span class="stat-pill filtered hidden" id="filtered-pill"><span class="num" id="filtered-count">--</span><span>matching filter</span><span class="num-small" id="filtered-pct"></span></span>
@@ -70,6 +70,12 @@
   <button data-source="all" class="active">All</button>
   <button data-source="design">★ Official design system</button>
   <button data-source="non-design">Legacy / orphan</button>
+</div>
+<div class="filter-row filter-buttons" data-group="ctype">
+  <span class="filter-label">Token type</span>
+  <button data-ctype="all" class="active">All</button>
+  <button data-ctype="c">--lt-c-* (value-encoded)</button>
+  <button data-ctype="named">Named (semantic)</button>
 </div>
 <div class="filter-row filter-buttons" data-group="product">
   <span class="filter-label">Product</span>
@@ -4868,7 +4874,7 @@
 </tbody></table>
 <script>
 const rows = document.querySelectorAll('#tbl tbody tr');
-const state = { q: '', prop: 'all', product: 'all', source: 'all' };
+const state = { q: '', prop: 'all', product: 'all', source: 'all', ctype: 'all' };
 const filteredPill = document.getElementById('filtered-pill');
 const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
@@ -4889,10 +4895,15 @@ function applyFilters() {
     if (show && state.source !== 'all') {
       if (r.dataset.source !== state.source) show = false;
     }
+    if (show && state.ctype !== 'all') {
+      const isC = r.dataset.name.startsWith('--lt-c-');
+      if (state.ctype === 'c' && !isC) show = false;
+      if (state.ctype === 'named' && isC) show = false;
+    }
     r.style.display = show ? '' : 'none';
     if (show) visible++;
   });
-  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all';
+  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all' || state.ctype !== 'all';
   if (isFiltered) {
     filteredPill.classList.remove('hidden');
     filteredCountEl.textContent = visible.toLocaleString();
@@ -4918,6 +4929,12 @@ document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach
   b.addEventListener('click', () => {
     document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); state.source = b.dataset.source; applyFilters();
+  });
+});
+document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); state.ctype = b.dataset.ctype; applyFilters();
   });
 });
 document.querySelectorAll('th[data-sort]').forEach(th => {
