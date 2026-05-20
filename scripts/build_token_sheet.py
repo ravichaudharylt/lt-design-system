@@ -64,31 +64,42 @@ def product_of(f):
 
 def property_of(line, pos, name):
     before = line[:pos]
-    if re.search(r'\b(color|background-color|background|border-color|border-(?:top|right|bottom|left)(?:-color)?|border|outline|box-shadow|fill|stroke)\s*:\s*[^;]*$', before, re.I):
-        m = re.search(r'\b(color|background[a-z-]*|border[a-z-]*|outline|box-shadow|fill|stroke)\s*:\s*[^;]*$', before, re.I)
+    # 0. Tailwind arbitrary value: `<util>-[...]` e.g. border-t-[color:var(--x)],
+    #    bg-[rgb(from var(--x) ...)], divide-[var(--x)]. MUST run before the CSS rule:
+    #    a `[color:` inside the bracket would otherwise falsely match the `color:` property.
+    tw = re.search(r'([a-z][a-z0-9]*(?:-[a-z0-9]+)*)-\[[^\]]*$', before)
+    if tw:
+        keys = set(tw.group(1).split('-'))
+        if keys & {'bg', 'from', 'via', 'to'}: return 'bg'
+        if keys & {'border', 'divide', 'ring', 'outline'}: return 'border'
+        if 'fill' in keys: return 'fill'
+        if 'stroke' in keys: return 'stroke'
+        if 'shadow' in keys: return 'shadow'
+        if keys & {'text', 'caret', 'decoration', 'placeholder', 'accent'}: return 'text'
+        # unknown utility — skip CSS/JSX checks (avoid `[color:` trap), use name default
+    else:
+        # 1. CSS property:  prop: value
+        if re.search(r'\b(color|background-color|background|border-color|border-(?:top|right|bottom|left)(?:-color)?|border|outline|box-shadow|fill|stroke)\s*:\s*[^;]*$', before, re.I):
+            m = re.search(r'\b(color|background[a-z-]*|border[a-z-]*|outline|box-shadow|fill|stroke)\s*:\s*[^;]*$', before, re.I)
+            if m:
+                p = m.group(1).lower()
+                if p == 'color': return 'text'
+                if 'background' in p: return 'bg'
+                if 'border' in p or 'outline' in p: return 'border'
+                if 'shadow' in p: return 'shadow'
+                if p == 'fill': return 'fill'
+                if p == 'stroke': return 'stroke'
+        # 2. JSX inline-style / attribute
+        m = re.search(r'\b(color|backgroundColor|background|borderColor|border[A-Z][a-z]*|outlineColor|boxShadow|fill|stroke|iconColor|tintColor|placeholderColor|hoverColor|fillColor|strokeColor|bgColor|textColor)\s*[:=]\s*[\'"`{][^\'"`}]*$', before)
         if m:
             p = m.group(1).lower()
-            if p == 'color': return 'text'
-            if 'background' in p: return 'bg'
-            if 'border' in p or 'outline' in p: return 'border'
+            if 'fill' in p: return 'fill'
+            if 'stroke' in p: return 'stroke'
             if 'shadow' in p: return 'shadow'
-            if p == 'fill': return 'fill'
-            if p == 'stroke': return 'stroke'
-    m = re.search(r'\b(color|backgroundColor|background|borderColor|border[A-Z][a-z]*|outlineColor|boxShadow|fill|stroke|iconColor|tintColor|placeholderColor|hoverColor|fillColor|strokeColor|bgColor|textColor)\s*[:=]\s*[\'"`{][^\'"`}]*$', before)
-    if m:
-        p = m.group(1).lower()
-        if 'fill' in p: return 'fill'
-        if 'stroke' in p: return 'stroke'
-        if 'shadow' in p: return 'shadow'
-        if 'border' in p or 'outline' in p: return 'border'
-        if 'background' in p or p == 'bg' or p == 'bgcolor': return 'bg'
-        return 'text'
-    m = re.search(r'\b(bg|text|border|fill|stroke|shadow)-\[color:[^\]]*$', before)
-    if m:
-        p = m.group(1)
-        if p == 'bg': return 'bg'
-        if p == 'text': return 'text'
-        if p in ('border','fill','stroke','shadow'): return p
+            if 'border' in p or 'outline' in p: return 'border'
+            if 'background' in p or p == 'bg' or p == 'bgcolor': return 'bg'
+            return 'text'
+    # 3. name-based default
     if name.startswith('--lt-text-'): return 'text'
     if name.startswith('--lt-bg-'): return 'bg'
     if name.startswith('--lt-border-'): return 'border'
