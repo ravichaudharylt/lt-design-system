@@ -164,39 +164,29 @@ def swatch(hex_or_value):
     safe = html.escape(str(h))
     return f'<span class="sw" style="background:{safe}"></span>'
 
-# render
-total = len(MAPPINGS)
-total_uses = sum(usage.get(s, 0) for s in MAPPINGS)
-n_remove = sum(1 for v in MAPPINGS.values() if v[0] == 'REMOVE')
-n_replace = sum(1 for v in MAPPINGS.values() if v[0] == 'REPLACE')
-n_pending = sum(1 for v in MAPPINGS.values() if v[0] == 'PENDING')
+# render — only show confirmed REPLACE mappings (REMOVE has no target, PENDING isn't mapped yet)
+mapped_tokens = [s for s, v in MAPPINGS.items() if v[0] == 'REPLACE']
+total = len(mapped_tokens)
+total_uses = sum(usage.get(s, 0) for s in mapped_tokens)
 
 rows = []
-order = {'REMOVE': 0, 'REPLACE': 1, 'PENDING': 2}
-items = sorted(MAPPINGS.items(), key=lambda kv: (order[kv[1][0]], -usage.get(kv[0], 0)))
+# Only show confirmed mappings (REPLACE). REMOVE → raw hex (no target) and PENDING (not yet
+# mapped) are excluded — this sheet is the audit log of "colors mapped to a new token".
+items = sorted(
+    ((s, v) for s, v in MAPPINGS.items() if v[0] == 'REPLACE'),
+    key=lambda kv: -usage.get(kv[0], 0)
+)
 for src, (action, target, note) in items:
     n = usage.get(src, 0)
     if src.startswith('--lt-c-'):
         src_l, src_d = f'#{src[7:]}', '(same)'
     else:
         src_l, src_d = LIGHT.get(src, '?'), DARK.get(src, '?')
-    if action == 'REMOVE':
-        tgt_cell  = f'<span class="hex-literal">{html.escape(target)}</span>'
-        tgt_l = tgt_d = ''
-        action_pill = '<span class="pill remove">REMOVE</span>'
-    elif action == 'REPLACE':
-        tgt_l, tgt_d = LIGHT.get(target, '?'), DARK.get(target, '?')
-        tgt_cell = f'<span class="name">{html.escape(target)}</span>'
-        action_pill = '<span class="pill replace">REPLACE</span>'
-    else:
-        tgt_cell = '—'
-        tgt_l = tgt_d = ''
-        action_pill = '<span class="pill pending">PENDING</span>'
+    tgt_l, tgt_d = LIGHT.get(target, '?'), DARK.get(target, '?')
+    tgt_cell = f'<span class="name">{html.escape(target)}</span>'
     rows.append({
         'src': src, 'src_l': src_l, 'src_d': src_d,
-        'action': action, 'action_pill': action_pill,
-        'target': target if action == 'REPLACE' else '',
-        'tgt_cell': tgt_cell, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
+        'target': target, 'tgt_cell': tgt_cell, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
         'note': note, 'uses': n,
     })
 
@@ -231,11 +221,7 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   .hex-literal {{ font-family: ui-monospace, monospace; font-size: 12px; color: #1f2328; font-weight: 600; }}
   .num {{ text-align: right; font-variant-numeric: tabular-nums; }}
   .pill {{ display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; }}
-  .pill.remove {{ background: #ffebe9; color: #6a0e1e; }}
   .pill.replace {{ background: #ddf4ff; color: #054078; }}
-  .pill.pending {{ background: #fff8c5; color: #693e00; }}
-  tr.action-REMOVE td {{ background: #fff8f7; }}
-  tr.action-PENDING td {{ background: #fffbe6; }}
   td.note {{ color: #656d76; font-size: 11px; max-width: 280px; }}
   .hex-cell {{ display: inline-flex; align-items: center; gap: 4px; }}
 </style></head><body>
@@ -251,35 +237,26 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
 <div class="stats">
   <div class="stat"><span class="num">{total}</span> total tokens</div>
   <div class="stat"><span class="num">{total_uses:,}</span> total usages in worktree</div>
-  <div class="stat remove"><span class="num">{n_remove}</span> REMOVE → raw hex</div>
-  <div class="stat replace"><span class="num">{n_replace}</span> REPLACE → canonical DS token</div>
-  <div class="stat pending"><span class="num">{n_pending}</span> PENDING</div>
+  <div class="stat replace"><span class="num">{total}</span> orphan → canonical mappings</div>
   <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">{len(HISTORICAL_DELTA_SWAPS)}</span> Δ≤5 historical mappings (already done)</div>
 </div>
 
 <div class="controls">
   <input id="f" placeholder="Filter token…" oninput="flt()">
-  <select id="a" onchange="flt()">
-    <option value="">All actions</option>
-    <option value="REMOVE">REMOVE only</option>
-    <option value="REPLACE">REPLACE only</option>
-    <option value="PENDING">PENDING only</option>
-  </select>
-  <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Note: hover on swatch shows hex.</span>
+  <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Hover swatch for hex.</span>
 </div>
 
 <table id="t">
 <thead><tr>
-  <th onclick="sort(0)">Action</th>
-  <th onclick="sort(1)">Source token</th>
-  <th onclick="sort(2)">Light</th>
-  <th onclick="sort(3)">Dark</th>
+  <th onclick="sort(0)">Source token</th>
+  <th onclick="sort(1)">Light</th>
+  <th onclick="sort(2)">Dark</th>
   <th></th>
-  <th onclick="sort(5)">Target</th>
-  <th onclick="sort(6)">Light</th>
-  <th onclick="sort(7)">Dark</th>
-  <th onclick="sort(8)">Notes</th>
-  <th onclick="sort(9)" class="num">Uses</th>
+  <th onclick="sort(4)">Target</th>
+  <th onclick="sort(5)">Light</th>
+  <th onclick="sort(6)">Dark</th>
+  <th onclick="sort(7)">Notes</th>
+  <th onclick="sort(8)" class="num">Uses</th>
 </tr></thead>
 <tbody>
 """
@@ -295,8 +272,7 @@ for r in rows:
     tgt_d_sw = swatch(r['tgt_d']) if r['tgt_d'] else ''
     note = html.escape(r['note'])
     src_safe = html.escape(r['src'])
-    html_out += f"""<tr class="action-{r['action']}" data-action="{r['action']}" data-tok="{src_safe}">
-  <td>{r['action_pill']}</td>
+    html_out += f"""<tr data-tok="{src_safe}">
   <td><span class="name">{src_safe}</span></td>
   <td><span class="hex-cell">{src_sw}<span class="hex">{src_l_display}</span></span></td>
   <td><span class="hex-cell">{src_d_sw}<span class="hex">{src_d_display}</span></span></td>
@@ -349,13 +325,10 @@ html_out += """</tbody></table>
 <script>
 function flt() {
   var f = document.getElementById('f').value.toLowerCase();
-  var a = document.getElementById('a').value;
   var rows = document.querySelectorAll('#t tbody tr');
   rows.forEach(function(r) {
     var tok = r.getAttribute('data-tok').toLowerCase();
-    var act = r.getAttribute('data-action');
-    var show = (!f || tok.indexOf(f) >= 0) && (!a || act === a);
-    r.style.display = show ? '' : 'none';
+    r.style.display = (!f || tok.indexOf(f) >= 0) ? '' : 'none';
   });
 }
 function sort(col) {
