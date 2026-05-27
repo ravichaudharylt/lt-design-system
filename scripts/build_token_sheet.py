@@ -383,7 +383,8 @@ const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
 const filteredRefsEl = document.getElementById('filtered-refs');
 const filteredRefsPctEl = document.getElementById('filtered-refs-pct');
-const TOTAL_REFS = {TOTAL_REFS};
+
+const TOTAL_REFS_ALL = rows.reduce((s, r) => s + parseInt(r.dataset.count || '0', 10), 0);
 
 function applyFilters() {
   let visible = 0;
@@ -417,7 +418,7 @@ function applyFilters() {
     const pct = rows.length > 0 ? Math.round((visible / rows.length) * 100) : 0;
     filteredPctEl.textContent = `(${pct}% of total)`;
     filteredRefsEl.textContent = visibleRefs.toLocaleString();
-    const refsPct = TOTAL_REFS > 0 ? Math.round((visibleRefs / TOTAL_REFS) * 100) : 0;
+    const refsPct = TOTAL_REFS_ALL > 0 ? Math.round((visibleRefs / TOTAL_REFS_ALL) * 100) : 0;
     filteredRefsPctEl.textContent = `(${refsPct}% of total)`;
   } else { filterResultStats.style.display = 'none'; }
 }
