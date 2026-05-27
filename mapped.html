@@ -1,0 +1,878 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>Orphan token replacements — DS migration audit</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 16px 24px; color: #1f2328; font-size: 13px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .meta { color: #656d76; font-size: 12px; margin-bottom: 12px; }
+  .nav { margin-bottom: 14px; }
+  .nav a { font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 6px; text-decoration: none; margin-right: 8px; }
+  .nav a.back { background: #f6f8fa; color: #054078; border: 1px solid #d0d7de; }
+  .nav a.fwd  { background: linear-gradient(135deg, #0969da, #054078); color: white; letter-spacing: 0.3px; }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 16px; }
+  .stat { display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-radius: 8px; font-size: 12px; color: #656d76; background: #f6f8fa; border: 1px solid #d0d7de; }
+  .stat .num { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: #1f2328; }
+  .stat.remove { background: #ffebe9; border-color: #ffcecb; color: #6a0e1e; }
+  .stat.replace { background: #ddf4ff; border-color: #b6e3ff; color: #054078; }
+  .stat.pending { background: #fff8c5; border-color: #f1d878; color: #693e00; }
+  .controls { margin-bottom: 12px; }
+  .controls input { padding: 6px 10px; font-size: 13px; width: 280px; border: 1px solid #d0d7de; border-radius: 6px; }
+  .controls select { padding: 6px 10px; font-size: 13px; border: 1px solid #d0d7de; border-radius: 6px; margin-left: 8px; }
+  table { border-collapse: collapse; width: 100%; }
+  th { background: #f6f8fa; text-align: left; padding: 8px 10px; border-bottom: 2px solid #d0d7de; font-weight: 600; position: sticky; top: 0; cursor: pointer; user-select: none; font-size: 12px; }
+  th:hover { background: #eaeef2; }
+  td { padding: 6px 10px; border-bottom: 1px solid #eef0f3; vertical-align: middle; }
+  .sw { display: inline-block; width: 28px; height: 18px; border-radius: 3px; border: 1px solid rgba(0,0,0,.2); vertical-align: middle; margin-right: 6px; }
+  .name { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .hex { font-family: ui-monospace, monospace; font-size: 11px; color: #656d76; }
+  .hex-literal { font-family: ui-monospace, monospace; font-size: 12px; color: #1f2328; font-weight: 600; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; }
+  .pill.remove { background: #ffebe9; color: #6a0e1e; }
+  .pill.replace { background: #ddf4ff; color: #054078; }
+  .pill.pending { background: #fff8c5; color: #693e00; }
+  tr.action-REMOVE td { background: #fff8f7; }
+  tr.action-PENDING td { background: #fffbe6; }
+  td.note { color: #656d76; font-size: 11px; max-width: 280px; }
+  .hex-cell { display: inline-flex; align-items: center; gap: 4px; }
+</style></head><body>
+<div class="nav">
+  <a class="back" href="index.html">← Token sheet</a>
+  <a class="back" href="mapping.html">Mapping report</a>
+  <a class="back" href="c-token-review.html">--lt-c-* review</a>
+</div>
+
+<h1>Orphan token replacements</h1>
+<div class="meta">DS migration audit · canonical-only targets · last generated 2026-05-27</div>
+
+<div class="stats">
+  <div class="stat"><span class="num">64</span> total tokens</div>
+  <div class="stat"><span class="num">2,570</span> total usages in worktree</div>
+  <div class="stat remove"><span class="num">9</span> REMOVE → raw hex</div>
+  <div class="stat replace"><span class="num">54</span> REPLACE → canonical DS token</div>
+  <div class="stat pending"><span class="num">1</span> PENDING</div>
+</div>
+
+<div class="controls">
+  <input id="f" placeholder="Filter token…" oninput="flt()">
+  <select id="a" onchange="flt()">
+    <option value="">All actions</option>
+    <option value="REMOVE">REMOVE only</option>
+    <option value="REPLACE">REPLACE only</option>
+    <option value="PENDING">PENDING only</option>
+  </select>
+  <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Note: hover on swatch shows hex.</span>
+</div>
+
+<table id="t">
+<thead><tr>
+  <th onclick="sort(0)">Action</th>
+  <th onclick="sort(1)">Source token</th>
+  <th onclick="sort(2)">Light</th>
+  <th onclick="sort(3)">Dark</th>
+  <th></th>
+  <th onclick="sort(5)">Target</th>
+  <th onclick="sort(6)">Light</th>
+  <th onclick="sort(7)">Dark</th>
+  <th onclick="sort(8)">Notes</th>
+  <th onclick="sort(9)" class="num">Uses</th>
+</tr></thead>
+<tbody>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-05e7e6">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-05e7e6</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#05e7e6"></span><span class="hex">#05e7e6</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#05e7e6"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#05e7e6</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">4</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-e5e6e9">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-e5e6e9</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e5e6e9"></span><span class="hex">#e5e6e9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e5e6e9"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#e5e6e9</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-dfe0e4">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-dfe0e4</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dfe0e4"></span><span class="hex">#dfe0e4</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dfe0e4"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#dfe0e4</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-d0d1d5">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-d0d1d5</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d1d5"></span><span class="hex">#d0d1d5</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d1d5"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#d0d1d5</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-108404">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-108404</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#108404"></span><span class="hex">#108404</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#108404"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#108404</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-fffafa">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-fffafa</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fffafa"></span><span class="hex">#fffafa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fffafa"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#fffafa</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-faebe7">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-faebe7</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#faebe7"></span><span class="hex">#faebe7</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#faebe7"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#faebe7</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-f3feff">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-f3feff</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3feff"></span><span class="hex">#f3feff</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3feff"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#f3feff</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REMOVE" data-action="REMOVE" data-tok="--lt-c-e06c6b">
+  <td><span class="pill remove">REMOVE</span></td>
+  <td><span class="name">--lt-c-e06c6b</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e06c6b"></span><span class="hex">#e06c6b</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e06c6b"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="hex-literal">#e06c6b</span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note"></td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-border-muted">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-border-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only; leave bg-* as-is</td>
+  <td class="num">750</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-black">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-black</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e6edf3"></span><span class="hex">#e6edf3</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">465</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-tertiary">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-tertiary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#4a4a4a"></span><span class="hex">#4a4a4a</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#b1bac4"></span><span class="hex">#b1bac4</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">226</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-bg-progress">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-bg-progress</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d4d4d4"></span><span class="hex">#d4d4d4</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only</td>
+  <td class="num">175</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-bg-active">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-bg-active</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f0f0"></span><span class="hex">#f0f0f0</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:rgb(from var(--lt-primer-accent-dark) r g b / 0.149)"></span><span class="hex">rgb(from var(--lt-primer</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg-only</td>
+  <td class="num">98</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-gray-999">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-gray-999</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#999999"></span><span class="hex">#999999</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">66</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-border-eee">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-border-eee</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eeeeee"></span><span class="hex">#eeeeee</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg-only (despite name)</td>
+  <td class="num">65</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-red-ff6">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-red-ff6</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff6565"></span><span class="hex">#ff6565</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">65</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-dark-1f">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-dark-1f</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1f2328"></span><span class="hex">#1f2328</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e6edf3"></span><span class="hex">#e6edf3</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">62</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-bg-eaeaea">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-bg-eaeaea</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eaeaea"></span><span class="hex">#eaeaea</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only (despite name)</td>
+  <td class="num">54</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-border-ccc">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-border-ccc</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cccccc"></span><span class="hex">#cccccc</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only</td>
+  <td class="num">46</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-0366d6">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-0366d6</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0366d6"></span><span class="hex">#0366d6</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0366d6"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
+  <td class="note">blue — per context</td>
+  <td class="num">37</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-primer-accent-muted">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-primer-accent-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#54aeff"></span><span class="hex">#54aeff</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#54aeff"></span><span class="hex">#54aeff</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-info-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#54aeff66"></span><span class="hex">#54aeff66</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#388bfd66"></span><span class="hex">#388bfd66</span></span></td>
+  <td class="note">border-only; target has α66</td>
+  <td class="num">34</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-bg-success-btn">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-bg-success-btn</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#2da44e"></span><span class="hex">#2da44e</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#238636"></span><span class="hex">#238636</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1f883d"></span><span class="hex">#1f883d</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#238636"></span><span class="hex">#238636</span></span></td>
+  <td class="note">bg-only</td>
+  <td class="num">32</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-gray-576">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-gray-576</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#57606a"></span><span class="hex">#57606a</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">29</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-gray-9b">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-gray-9b</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9b9b9b"></span><span class="hex">#9b9b9b</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">29</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-border-e0">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-border-e0</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e0e0e0"></span><span class="hex">#e0e0e0</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only</td>
+  <td class="num">28</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-error-red">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-error-red</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff0000"></span><span class="hex">#ff0000</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">25</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-status-severe-fg">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-status-severe-fg</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf370e"></span><span class="hex">#cf370e</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#db6d28"></span><span class="hex">#db6d28</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">24</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-bg-tag">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-bg-tag</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3f3f3"></span><span class="hex">#f3f3f3</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg-only</td>
+  <td class="num">23</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-bg-gray-100">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-bg-gray-100</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3f4f6"></span><span class="hex">#f3f4f6</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg-only</td>
+  <td class="num">21</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-border-e1e">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-border-e1e</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e1e4e8"></span><span class="hex">#e1e4e8</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only</td>
+  <td class="num">20</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-light-gray">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-light-gray</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#999999"></span><span class="hex">#999999</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7681"></span><span class="hex">#6e7681</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">20</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-primer-danger-muted">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-primer-danger-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff8182"></span><span class="hex">#ff8182</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff8182"></span><span class="hex">#ff8182</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-error-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff818266"></span><span class="hex">#ff818266</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f8514966"></span><span class="hex">#f8514966</span></span></td>
+  <td class="note">target has α66</td>
+  <td class="num">19</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-border-dada">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-border-dada</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dadada"></span><span class="hex">#dadada</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only</td>
+  <td class="num">19</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-accent-brand">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-accent-brand</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ed5f00"></span><span class="hex">#ed5f00</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff8534"></span><span class="hex">#ff8534</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-brand-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ed5f00"></span><span class="hex">#ed5f00</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f7813f"></span><span class="hex">#f7813f</span></span></td>
+  <td class="note">bg-only</td>
+  <td class="num">16</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-488c31">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-488c31</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#488c31"></span><span class="hex">#488c31</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#488c31"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
+  <td class="note"></td>
+  <td class="num">12</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-text-gray-6a7">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-text-gray-6a7</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6a737d"></span><span class="hex">#6a737d</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text-only</td>
+  <td class="num">11</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-e9e9e9">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-e9e9e9</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e9e9e9"></span><span class="hex">#e9e9e9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e9e9e9"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border-only</td>
+  <td class="num">9</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-747474">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-747474</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#747474"></span><span class="hex">#747474</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#747474"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td class="note"></td>
+  <td class="num">9</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-409ff6">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-409ff6</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#409ff6"></span><span class="hex">#409ff6</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#409ff6"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
+  <td class="note"></td>
+  <td class="num">8</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-101001">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-101001</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#101001"></span><span class="hex">#101001</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#101001"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note"></td>
+  <td class="num">7</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-ff6600">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-ff6600</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff6600"></span><span class="hex">#ff6600</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff6600"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">severe → error (canonical)</td>
+  <td class="num">4</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-ff5757">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-ff5757</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff5757"></span><span class="hex">#ff5757</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ff5757"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">severe → error (canonical)</td>
+  <td class="num">4</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-de2d2d">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-de2d2d</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#de2d2d"></span><span class="hex">#de2d2d</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#de2d2d"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">red — per context</td>
+  <td class="num">4</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-eb5757">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-eb5757</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eb5757"></span><span class="hex">#eb5757</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eb5757"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">confirm w/ Rajat</td>
+  <td class="num">3</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-252525">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-252525</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#252525"></span><span class="hex">#252525</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#252525"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note"></td>
+  <td class="num">3</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-ffbeb8">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-ffbeb8</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffbeb8"></span><span class="hex">#ffbeb8</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffbeb8"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-error-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f851491a"></span><span class="hex">#f851491a</span></span></td>
+  <td class="note">Flash danger (no flash token)</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-fcf5da">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-fcf5da</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fcf5da"></span><span class="hex">#fcf5da</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fcf5da"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-warning-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fff8c5"></span><span class="hex">#fff8c5</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bb800926"></span><span class="hex">#bb800926</span></span></td>
+  <td class="note">tag-yellow → warning-muted (hex match)</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-fbdada">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-fbdada</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fbdada"></span><span class="hex">#fbdada</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fbdada"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-error-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f851491a"></span><span class="hex">#f851491a</span></span></td>
+  <td class="note">tag-pink → error-muted (hex match)</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-ee6d51">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-ee6d51</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ee6d51"></span><span class="hex">#ee6d51</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ee6d51"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-brand-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ed5f00"></span><span class="hex">#ed5f00</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f7813f"></span><span class="hex">#f7813f</span></span></td>
+  <td class="note">invisible-btn orange → brand orange</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-e2e2ee">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-e2e2ee</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e2e2ee"></span><span class="hex">#e2e2ee</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e2e2ee"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-e1e9ec">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-e1e9ec</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e1e9ec"></span><span class="hex">#e1e9ec</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e1e9ec"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-c1c1c1">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-c1c1c1</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#c1c1c1"></span><span class="hex">#c1c1c1</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#c1c1c1"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-bfbfbf">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-bfbfbf</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bfbfbf"></span><span class="hex">#bfbfbf</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bfbfbf"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">verify</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-bae6ff">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-bae6ff</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bae6ff"></span><span class="hex">#bae6ff</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bae6ff"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-info-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#388bfd1a"></span><span class="hex">#388bfd1a</span></span></td>
+  <td class="note">tag-blueAccent → info-muted</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-a10707">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-a10707</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#a10707"></span><span class="hex">#a10707</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#a10707"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">red — per context</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-463c3c">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-463c3c</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#463c3c"></span><span class="hex">#463c3c</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#463c3c"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note"></td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-3fb950">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-3fb950</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
+  <td class="note">also audit --lt-c-d29922 in LogLevels</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-3498db">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-3498db</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3498db"></span><span class="hex">#3498db</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3498db"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
+  <td class="note">blue — per context</td>
+  <td class="num">2</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-e12826">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-e12826</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e12826"></span><span class="hex">#e12826</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e12826"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">red — per context</td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-353535">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-353535</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#353535"></span><span class="hex">#353535</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#353535"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note"></td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-1d1a1a">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-1d1a1a</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1d1a1a"></span><span class="hex">#1d1a1a</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1d1a1a"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note"></td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-REPLACE" data-action="REPLACE" data-tok="--lt-c-0249b3">
+  <td><span class="pill replace">REPLACE</span></td>
+  <td><span class="name">--lt-c-0249b3</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0249b3"></span><span class="hex">#0249b3</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0249b3"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
+  <td class="note">blue — per context</td>
+  <td class="num">1</td>
+</tr>
+<tr class="action-PENDING" data-action="PENDING" data-tok="--lt-c-e7f0f9">
+  <td><span class="pill pending">PENDING</span></td>
+  <td><span class="name">--lt-c-e7f0f9</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e7f0f9"></span><span class="hex">#e7f0f9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e7f0f9"></span><span class="hex">(same)</span></span></td>
+  <td>→</td>
+  <td>—</td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td><span class="hex-cell"><span class="hex"></span></span></td>
+  <td class="note">awaiting Komal confirmation</td>
+  <td class="num">2</td>
+</tr>
+</tbody></table>
+
+<script>
+function flt() {
+  var f = document.getElementById('f').value.toLowerCase();
+  var a = document.getElementById('a').value;
+  var rows = document.querySelectorAll('#t tbody tr');
+  rows.forEach(function(r) {
+    var tok = r.getAttribute('data-tok').toLowerCase();
+    var act = r.getAttribute('data-action');
+    var show = (!f || tok.indexOf(f) >= 0) && (!a || act === a);
+    r.style.display = show ? '' : 'none';
+  });
+}
+function sort(col) {
+  var tbody = document.querySelector('#t tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  var dir = tbody.getAttribute('data-sort-col') == col && tbody.getAttribute('data-sort-dir') == 'asc' ? 'desc' : 'asc';
+  rows.sort(function(a, b) {
+    var av = a.cells[col].innerText.trim();
+    var bv = b.cells[col].innerText.trim();
+    var an = parseFloat(av), bn = parseFloat(bv);
+    if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+    return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+  });
+  rows.forEach(function(r) { tbody.appendChild(r); });
+  tbody.setAttribute('data-sort-col', col);
+  tbody.setAttribute('data-sort-dir', dir);
+}
+</script>
+</body></html>
