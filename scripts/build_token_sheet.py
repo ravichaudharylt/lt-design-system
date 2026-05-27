@@ -100,10 +100,8 @@ def property_of(line, pos, name):
             if 'background' in p or p == 'bg' or p == 'bgcolor': return 'bg'
             return 'text'
     # 3. name-based default
-    if name.startswith('--lt-text-'): return 'text'
-    if name.startswith('--lt-bg-'): return 'bg'
-    if name.startswith('--lt-border-'): return 'border'
-    if name.startswith('--lt-shadow-'): return 'shadow'
+    # No name-based fallback — a token named --lt-border-* can be used as bg/shadow/etc.
+    # Classifying by namespace over-counts the dominant property and hides cross-context usage.
     return 'other'
 
 # 1b. Build utility-class -> token maps from each app's tailwind.config.js

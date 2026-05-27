@@ -91,11 +91,9 @@ def property_of(line, pos, name):
         if p == 'bg': return 'bg'
         if p == 'text': return 'text'
         if p in ('border','fill','stroke','shadow'): return p
-    # Fallback to token name prefix
-    if name.startswith('--lt-text-'): return 'text'
-    if name.startswith('--lt-bg-'): return 'bg'
-    if name.startswith('--lt-border-'): return 'border'
-    if name.startswith('--lt-shadow-'): return 'shadow'
+    # No name-based fallback — token namespace ≠ usage context. A token named
+    # --lt-border-* can be used as bg/shadow/etc.; classifying unclassifiable hits
+    # by the token's name over-counts the dominant prop and hides cross-context use.
     return 'other'
 
 # Build utility-class -> token maps from each app's tailwind.config.js so the
