@@ -28,8 +28,12 @@
   .hex-literal { font-family: ui-monospace, monospace; font-size: 12px; color: #1f2328; font-weight: 600; }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
   .pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; white-space: nowrap; }
-  .pill.design { background: #ddf4ff; color: #054078; }
   .pill.phase1 { background: #fff4ec; color: #7a3300; }
+  .pill.phase2 { background: #ddf4ff; color: #054078; }
+  .phase-notes { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; font-size: 12px; color: #1f2328; }
+  .phase-notes p { margin: 0 0 6px; }
+  .phase-notes p:last-child { margin-bottom: 0; }
+  .phase-notes .pill { margin-right: 6px; }
   td.note { color: #656d76; font-size: 11px; max-width: 280px; }
   .hex-cell { display: inline-flex; align-items: center; gap: 4px; }
 </style></head><body>
@@ -39,28 +43,39 @@
   <a class="back" href="c-token-review.html">--lt-c-* review</a>
 </div>
 
-<h1>Tokens migration with Δ≤5</h1>
-<div class="meta">Audit log of every non-canonical token mapped to a canonical DS equivalent (light delta ≤ 5, Rule 1 compliant) · last generated 2026-05-27</div>
+<h1>Non-canonical → canonical token migration</h1>
+<div class="meta">Audit log of every legacy/non-canonical token redirected to its canonical DS equivalent · last generated 2026-05-27</div>
+
+<div class="phase-notes">
+  <p><span class="pill phase1">Phase 1 Δ≤5</span> Automated migration in commit
+    <a href="https://github.com/LambdatestIncPrivate/lt-web-platform/commit/22e01ae4c" style="color:#0969da; font-family:ui-monospace,monospace;">22e01ae4c</a>:
+    legacy tokens were redirected whenever the canonical target's <strong>light hex matched within Δ ≤ 5</strong>
+    (Rule 1 — no perceptible light-mode shift). Every source has been deleted from <code>tokens.css</code>.
+    Source L/D recovered from pre-migration snapshot (lt-components commit <code>01006cc</code>).</p>
+  <p><span class="pill phase2">Phase 2</span> Design-team curated mappings from <code>OrphanTokens.txt</code>:
+    explicit semantic decisions (not always Δ≤5 — some consolidate a semantic family).
+    Source tokens still in <code>tokens.css</code> today; the <em>Uses</em> column shows current worktree references.</p>
+</div>
 
 <div class="stats">
-  <div class="stat replace"><span class="num">54</span> orphan → canonical mappings <span class="num-small">(2,552 refs)</span></div>
-  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">87</span> Phase 1 migrations <span class="num-small">(4,182 swaps)</span></div>
-  <div class="stat"><span class="num">141</span> total tokens <span class="num-small">(6,734 refs)</span></div>
+  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">87</span> Phase 1 tokens <span class="num-small">(4,182 refs)</span></div>
+  <div class="stat replace"><span class="num">54</span> Phase 2 tokens <span class="num-small">(2,552 refs)</span></div>
+  <div class="stat" style="background:#dafbe1; border-color:#aceebb; color:#0a3622;"><span class="num">141</span> total tokens migrated <span class="num-small">(6,734 refs)</span></div>
 </div>
 
 <div class="controls">
   <input id="f" placeholder="Filter token…" oninput="flt()">
   <select id="o" onchange="flt()">
-    <option value="">All origins</option>
-    <option value="design">Design team only</option>
+    <option value="">All phases</option>
     <option value="phase1">Phase 1 Δ≤5 only</option>
+    <option value="phase2">Phase 2 only</option>
   </select>
   <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Hover swatch for hex.</span>
 </div>
 
 <table id="t">
 <thead><tr>
-  <th onclick="sort(0)">Origin</th>
+  <th onclick="sort(0)">Phase</th>
   <th onclick="sort(1)">Source token</th>
   <th onclick="sort(2)">Light</th>
   <th onclick="sort(3)">Dark</th>
@@ -72,8 +87,8 @@
   <th onclick="sort(9)" class="num">Uses</th>
 </tr></thead>
 <tbody>
-<tr data-tok="--lt-border-muted" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-border-muted" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
@@ -84,8 +99,8 @@
   <td class="note">border-only; leave bg-* as-is</td>
   <td class="num">750</td>
 </tr>
-<tr data-tok="--lt-text-black" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-black" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-black</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#000000"></span><span class="hex">#000000</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e6edf3"></span><span class="hex">#e6edf3</span></span></td>
@@ -96,7 +111,7 @@
   <td class="note">text-only</td>
   <td class="num">465</td>
 </tr>
-<tr data-tok="--lt-text-gray-636" data-origin="phase1">
+<tr data-tok="--lt-text-gray-636" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-gray-636</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
@@ -108,7 +123,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">454</td>
 </tr>
-<tr data-tok="--lt-text-link" data-origin="phase1">
+<tr data-tok="--lt-text-link" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-link</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
@@ -120,7 +135,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">432</td>
 </tr>
-<tr data-tok="--lt-text-on-emphasis" data-origin="phase1">
+<tr data-tok="--lt-text-on-emphasis" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-on-emphasis</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
@@ -132,7 +147,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">358</td>
 </tr>
-<tr data-tok="--lt-status-danger-fg" data-origin="phase1">
+<tr data-tok="--lt-status-danger-fg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-danger-fg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
@@ -144,7 +159,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">355</td>
 </tr>
-<tr data-tok="--lt-text-dark-24" data-origin="phase1">
+<tr data-tok="--lt-text-dark-24" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-dark-24</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
@@ -156,7 +171,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">330</td>
 </tr>
-<tr data-tok="--lt-text-subtle" data-origin="phase1">
+<tr data-tok="--lt-text-subtle" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-subtle</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
@@ -168,7 +183,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">303</td>
 </tr>
-<tr data-tok="--lt-accent-primary" data-origin="phase1">
+<tr data-tok="--lt-accent-primary" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-accent-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
@@ -180,7 +195,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">284</td>
 </tr>
-<tr data-tok="--lt-border-neutral-light" data-origin="phase1">
+<tr data-tok="--lt-border-neutral-light" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-border-neutral-light</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
@@ -192,7 +207,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">269</td>
 </tr>
-<tr data-tok="--lt-bg-hover" data-origin="phase1">
+<tr data-tok="--lt-bg-hover" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-hover</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7f7f7"></span><span class="hex">#f7f7f7</span></span></td>
@@ -204,7 +219,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">257</td>
 </tr>
-<tr data-tok="--lt-bg-muted" data-origin="phase1">
+<tr data-tok="--lt-bg-muted" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
@@ -216,8 +231,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">254</td>
 </tr>
-<tr data-tok="--lt-text-tertiary" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-tertiary" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-tertiary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#4a4a4a"></span><span class="hex">#4a4a4a</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#b1bac4"></span><span class="hex">#b1bac4</span></span></td>
@@ -228,8 +243,8 @@
   <td class="note">text-only</td>
   <td class="num">226</td>
 </tr>
-<tr data-tok="--lt-bg-progress" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-bg-progress" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-bg-progress</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d4d4d4"></span><span class="hex">#d4d4d4</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
@@ -240,7 +255,7 @@
   <td class="note">border-only</td>
   <td class="num">175</td>
 </tr>
-<tr data-tok="--lt-status-success-fg-alt" data-origin="phase1">
+<tr data-tok="--lt-status-success-fg-alt" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-success-fg-alt</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
@@ -252,8 +267,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">107</td>
 </tr>
-<tr data-tok="--lt-bg-active" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-bg-active" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-bg-active</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f0f0"></span><span class="hex">#f0f0f0</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:rgb(from var(--lt-primer-accent-dark) r g b / 0.149)"></span><span class="hex">rgb(from var(--lt-primer</span></span></td>
@@ -264,7 +279,7 @@
   <td class="note">bg-only</td>
   <td class="num">98</td>
 </tr>
-<tr data-tok="--lt-accent-purple-fg" data-origin="phase1">
+<tr data-tok="--lt-accent-purple-fg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-accent-purple-fg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
@@ -276,7 +291,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">94</td>
 </tr>
-<tr data-tok="--lt-status-warning-fg" data-origin="phase1">
+<tr data-tok="--lt-status-warning-fg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-warning-fg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#9a6700"></span><span class="hex">#9a6700</span></span></td>
@@ -288,8 +303,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">77</td>
 </tr>
-<tr data-tok="--lt-text-gray-999" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-gray-999" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-gray-999</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#999999"></span><span class="hex">#999999</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
@@ -300,8 +315,8 @@
   <td class="note">text-only</td>
   <td class="num">66</td>
 </tr>
-<tr data-tok="--lt-border-eee" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-border-eee" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-eee</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eeeeee"></span><span class="hex">#eeeeee</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
@@ -312,8 +327,8 @@
   <td class="note">bg-only (despite name)</td>
   <td class="num">65</td>
 </tr>
-<tr data-tok="--lt-text-red-ff6" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-red-ff6" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-red-ff6</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff6565"></span><span class="hex">#ff6565</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
@@ -324,8 +339,8 @@
   <td class="note">text-only</td>
   <td class="num">65</td>
 </tr>
-<tr data-tok="--lt-text-dark-1f" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-dark-1f" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-dark-1f</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1f2328"></span><span class="hex">#1f2328</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e6edf3"></span><span class="hex">#e6edf3</span></span></td>
@@ -336,8 +351,8 @@
   <td class="note">text-only</td>
   <td class="num">62</td>
 </tr>
-<tr data-tok="--lt-bg-eaeaea" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-bg-eaeaea" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-bg-eaeaea</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeaea"></span><span class="hex">#eaeaea</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
@@ -348,8 +363,8 @@
   <td class="note">border-only (despite name)</td>
   <td class="num">54</td>
 </tr>
-<tr data-tok="--lt-border-ccc" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-border-ccc" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-ccc</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#cccccc"></span><span class="hex">#cccccc</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
@@ -360,7 +375,7 @@
   <td class="note">border-only</td>
   <td class="num">46</td>
 </tr>
-<tr data-tok="--lt-shadow-tint-medium" data-origin="phase1">
+<tr data-tok="--lt-shadow-tint-medium" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-shadow-tint-medium</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#424a53"></span><span class="hex">#424a53</span></span></td>
@@ -372,7 +387,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">45</td>
 </tr>
-<tr data-tok="--lt-text-gray-8c9" data-origin="phase1">
+<tr data-tok="--lt-text-gray-8c9" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-gray-8c9</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
@@ -384,7 +399,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">45</td>
 </tr>
-<tr data-tok="--lt-status-danger-fg-alt" data-origin="phase1">
+<tr data-tok="--lt-status-danger-fg-alt" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-danger-fg-alt</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
@@ -396,7 +411,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">43</td>
 </tr>
-<tr data-tok="--lt-status-danger-bg" data-origin="phase1">
+<tr data-tok="--lt-status-danger-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-danger-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
@@ -408,7 +423,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">41</td>
 </tr>
-<tr data-tok="--lt-accent-primary-muted" data-origin="phase1">
+<tr data-tok="--lt-accent-primary-muted" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-accent-primary-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
@@ -420,8 +435,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">39</td>
 </tr>
-<tr data-tok="--lt-c-0366d6" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-0366d6" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-0366d6</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0366d6"></span><span class="hex">#0366d6</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0366d6"></span><span class="hex">(same)</span></span></td>
@@ -432,7 +447,7 @@
   <td class="note">blue — per context</td>
   <td class="num">37</td>
 </tr>
-<tr data-tok="--lt-text-gray-656" data-origin="phase1">
+<tr data-tok="--lt-text-gray-656" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-gray-656</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#656d76"></span><span class="hex">#656d76</span></span></td>
@@ -444,8 +459,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">36</td>
 </tr>
-<tr data-tok="--lt-primer-accent-muted" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-primer-accent-muted" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-primer-accent-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#54aeff"></span><span class="hex">#54aeff</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#54aeff"></span><span class="hex">#54aeff</span></span></td>
@@ -456,8 +471,8 @@
   <td class="note">border-only; target has α66</td>
   <td class="num">34</td>
 </tr>
-<tr data-tok="--lt-bg-success-btn" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-bg-success-btn" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-bg-success-btn</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#2da44e"></span><span class="hex">#2da44e</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#238636"></span><span class="hex">#238636</span></span></td>
@@ -468,8 +483,8 @@
   <td class="note">bg-only</td>
   <td class="num">32</td>
 </tr>
-<tr data-tok="--lt-text-gray-576" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-gray-576" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-gray-576</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#57606a"></span><span class="hex">#57606a</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
@@ -480,8 +495,8 @@
   <td class="note">text-only</td>
   <td class="num">29</td>
 </tr>
-<tr data-tok="--lt-text-gray-9b" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-gray-9b" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-gray-9b</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#9b9b9b"></span><span class="hex">#9b9b9b</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
@@ -492,8 +507,8 @@
   <td class="note">text-only</td>
   <td class="num">29</td>
 </tr>
-<tr data-tok="--lt-border-e0" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-border-e0" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-e0</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e0e0e0"></span><span class="hex">#e0e0e0</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
@@ -504,7 +519,7 @@
   <td class="note">border-only</td>
   <td class="num">28</td>
 </tr>
-<tr data-tok="--lt-border-accent" data-origin="phase1">
+<tr data-tok="--lt-border-accent" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-border-accent</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
@@ -516,8 +531,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">28</td>
 </tr>
-<tr data-tok="--lt-text-error-red" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-error-red" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-error-red</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff0000"></span><span class="hex">#ff0000</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
@@ -528,8 +543,8 @@
   <td class="note">text-only</td>
   <td class="num">25</td>
 </tr>
-<tr data-tok="--lt-status-severe-fg" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-status-severe-fg" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-status-severe-fg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#cf370e"></span><span class="hex">#cf370e</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#db6d28"></span><span class="hex">#db6d28</span></span></td>
@@ -540,8 +555,8 @@
   <td class="note">text-only</td>
   <td class="num">24</td>
 </tr>
-<tr data-tok="--lt-bg-tag" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-bg-tag" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-bg-tag</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f3f3f3"></span><span class="hex">#f3f3f3</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
@@ -552,7 +567,7 @@
   <td class="note">bg-only</td>
   <td class="num">23</td>
 </tr>
-<tr data-tok="--lt-bg-f6f7" data-origin="phase1">
+<tr data-tok="--lt-bg-f6f7" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f6f7</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f7f8"></span><span class="hex">#f6f7f8</span></span></td>
@@ -564,7 +579,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">23</td>
 </tr>
-<tr data-tok="--lt-orange-bg" data-origin="phase1">
+<tr data-tok="--lt-orange-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-orange-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#c24e00"></span><span class="hex">#c24e00</span></span></td>
@@ -576,7 +591,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">22</td>
 </tr>
-<tr data-tok="--lt-btn-success-bg" data-origin="phase1">
+<tr data-tok="--lt-btn-success-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-btn-success-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1f883d"></span><span class="hex">#1f883d</span></span></td>
@@ -588,8 +603,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">22</td>
 </tr>
-<tr data-tok="--lt-bg-gray-100" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-bg-gray-100" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-bg-gray-100</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f3f4f6"></span><span class="hex">#f3f4f6</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
@@ -600,8 +615,8 @@
   <td class="note">bg-only</td>
   <td class="num">21</td>
 </tr>
-<tr data-tok="--lt-border-e1e" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-border-e1e" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-e1e</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e1e4e8"></span><span class="hex">#e1e4e8</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
@@ -612,8 +627,8 @@
   <td class="note">border-only</td>
   <td class="num">20</td>
 </tr>
-<tr data-tok="--lt-text-light-gray" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-light-gray" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-light-gray</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#999999"></span><span class="hex">#999999</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7681"></span><span class="hex">#6e7681</span></span></td>
@@ -624,8 +639,8 @@
   <td class="note">text-only</td>
   <td class="num">20</td>
 </tr>
-<tr data-tok="--lt-primer-danger-muted" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-primer-danger-muted" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-primer-danger-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff8182"></span><span class="hex">#ff8182</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff8182"></span><span class="hex">#ff8182</span></span></td>
@@ -636,8 +651,8 @@
   <td class="note">target has α66</td>
   <td class="num">19</td>
 </tr>
-<tr data-tok="--lt-border-dada" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-border-dada" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-dada</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#dadada"></span><span class="hex">#dadada</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#30363d"></span><span class="hex">#30363d</span></span></td>
@@ -648,7 +663,7 @@
   <td class="note">border-only</td>
   <td class="num">19</td>
 </tr>
-<tr data-tok="--lt-text-orange-bc" data-origin="phase1">
+<tr data-tok="--lt-text-orange-bc" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-orange-bc</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bc4c00"></span><span class="hex">#bc4c00</span></span></td>
@@ -660,8 +675,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">18</td>
 </tr>
-<tr data-tok="--lt-accent-brand" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-accent-brand" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-accent-brand</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ed5f00"></span><span class="hex">#ed5f00</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff8534"></span><span class="hex">#ff8534</span></span></td>
@@ -672,7 +687,7 @@
   <td class="note">bg-only</td>
   <td class="num">16</td>
 </tr>
-<tr data-tok="--lt-c-ecf0f1" data-origin="phase1">
+<tr data-tok="--lt-c-ecf0f1" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-ecf0f1</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ecf0f1"></span><span class="hex">#ecf0f1</span></span></td>
@@ -684,7 +699,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">15</td>
 </tr>
-<tr data-tok="--lt-status-warning-bg" data-origin="phase1">
+<tr data-tok="--lt-status-warning-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-warning-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fff8c5"></span><span class="hex">#fff8c5</span></span></td>
@@ -696,7 +711,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">14</td>
 </tr>
-<tr data-tok="--lt-c-a40e26" data-origin="phase1">
+<tr data-tok="--lt-c-a40e26" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-a40e26</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#a40e26"></span><span class="hex">#a40e26</span></span></td>
@@ -708,8 +723,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">14</td>
 </tr>
-<tr data-tok="--lt-c-488c31" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-488c31" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-488c31</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#488c31"></span><span class="hex">#488c31</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#488c31"></span><span class="hex">(same)</span></span></td>
@@ -720,8 +735,8 @@
   <td class="note"></td>
   <td class="num">12</td>
 </tr>
-<tr data-tok="--lt-text-gray-6a7" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-text-gray-6a7" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-text-gray-6a7</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6a737d"></span><span class="hex">#6a737d</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
@@ -732,7 +747,7 @@
   <td class="note">text-only</td>
   <td class="num">11</td>
 </tr>
-<tr data-tok="--lt-status-success-bg" data-origin="phase1">
+<tr data-tok="--lt-status-success-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-success-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#dafbe1"></span><span class="hex">#dafbe1</span></span></td>
@@ -744,7 +759,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">11</td>
 </tr>
-<tr data-tok="--lt-bg-skeleton" data-origin="phase1">
+<tr data-tok="--lt-bg-skeleton" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-skeleton</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e8e9ed"></span><span class="hex">#e8e9ed</span></span></td>
@@ -756,7 +771,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">11</td>
 </tr>
-<tr data-tok="--lt-c-21262d" data-origin="phase1">
+<tr data-tok="--lt-c-21262d" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-21262d</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
@@ -768,8 +783,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">10</td>
 </tr>
-<tr data-tok="--lt-c-e9e9e9" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-e9e9e9" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-e9e9e9</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e9e9e9"></span><span class="hex">#e9e9e9</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e9e9e9"></span><span class="hex">(same)</span></span></td>
@@ -780,8 +795,8 @@
   <td class="note">border-only</td>
   <td class="num">9</td>
 </tr>
-<tr data-tok="--lt-c-747474" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-747474" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-747474</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#747474"></span><span class="hex">#747474</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#747474"></span><span class="hex">(same)</span></span></td>
@@ -792,8 +807,8 @@
   <td class="note"></td>
   <td class="num">9</td>
 </tr>
-<tr data-tok="--lt-c-409ff6" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-409ff6" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-409ff6</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#409ff6"></span><span class="hex">#409ff6</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#409ff6"></span><span class="hex">(same)</span></span></td>
@@ -804,7 +819,7 @@
   <td class="note"></td>
   <td class="num">8</td>
 </tr>
-<tr data-tok="--lt-bg-ebec" data-origin="phase1">
+<tr data-tok="--lt-bg-ebec" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-ebec</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ebecf0"></span><span class="hex">#ebecf0</span></span></td>
@@ -816,7 +831,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">8</td>
 </tr>
-<tr data-tok="--lt-bg-near-white-alt" data-origin="phase1">
+<tr data-tok="--lt-bg-near-white-alt" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-near-white-alt</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fefbfe"></span><span class="hex">#fefbfe</span></span></td>
@@ -828,8 +843,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">8</td>
 </tr>
-<tr data-tok="--lt-c-101001" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-101001" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-101001</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#101001"></span><span class="hex">#101001</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#101001"></span><span class="hex">(same)</span></span></td>
@@ -840,7 +855,7 @@
   <td class="note"></td>
   <td class="num">7</td>
 </tr>
-<tr data-tok="--lt-bg-success-btn-muted2" data-origin="phase1">
+<tr data-tok="--lt-bg-success-btn-muted2" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-success-btn-muted2</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#95d8a6"></span><span class="hex">#95d8a6</span></span></td>
@@ -852,7 +867,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
 </tr>
-<tr data-tok="--lt-c-e6edf3" data-origin="phase1">
+<tr data-tok="--lt-c-e6edf3" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-e6edf3</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e6edf3"></span><span class="hex">#e6edf3</span></span></td>
@@ -864,7 +879,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
 </tr>
-<tr data-tok="--lt-bg-quaternary" data-origin="phase1">
+<tr data-tok="--lt-bg-quaternary" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-quaternary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f9f9fa"></span><span class="hex">#f9f9fa</span></span></td>
@@ -876,7 +891,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
 </tr>
-<tr data-tok="--lt-c-edf0f3" data-origin="phase1">
+<tr data-tok="--lt-c-edf0f3" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-edf0f3</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#edf0f3"></span><span class="hex">#edf0f3</span></span></td>
@@ -888,7 +903,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
 </tr>
-<tr data-tok="--lt-accent-purple-muted" data-origin="phase1">
+<tr data-tok="--lt-accent-purple-muted" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-accent-purple-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fbefff"></span><span class="hex">#fbefff</span></span></td>
@@ -900,7 +915,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
 </tr>
-<tr data-tok="--lt-c-e9eff4" data-origin="phase1">
+<tr data-tok="--lt-c-e9eff4" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-e9eff4</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e9eff4"></span><span class="hex">#e9eff4</span></span></td>
@@ -912,7 +927,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
 </tr>
-<tr data-tok="--lt-status-warning-pale-bg" data-origin="phase1">
+<tr data-tok="--lt-status-warning-pale-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-warning-pale-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fff5e5"></span><span class="hex">#fff5e5</span></span></td>
@@ -924,7 +939,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
 </tr>
-<tr data-tok="--lt-primer-fg-subtle-dark" data-origin="phase1">
+<tr data-tok="--lt-primer-fg-subtle-dark" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-primer-fg-subtle-dark</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7681"></span><span class="hex">#6e7681</span></span></td>
@@ -936,7 +951,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
 </tr>
-<tr data-tok="--lt-bg-f8f8f8" data-origin="phase1">
+<tr data-tok="--lt-bg-f8f8f8" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f8f8f8</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f8f8f8"></span><span class="hex">#f8f8f8</span></span></td>
@@ -948,7 +963,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
-<tr data-tok="--lt-c-ffeff7" data-origin="phase1">
+<tr data-tok="--lt-c-ffeff7" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-ffeff7</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffeff7"></span><span class="hex">#ffeff7</span></span></td>
@@ -960,7 +975,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
-<tr data-tok="--lt-bg-muted-hover" data-origin="phase1">
+<tr data-tok="--lt-bg-muted-hover" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-muted-hover</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2"></span><span class="hex">#eaeef2</span></span></td>
@@ -972,7 +987,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
-<tr data-tok="--lt-text-pink" data-origin="phase1">
+<tr data-tok="--lt-text-pink" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-pink</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bf3989"></span><span class="hex">#bf3989</span></span></td>
@@ -984,7 +999,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
-<tr data-tok="--lt-border-danger" data-origin="phase1">
+<tr data-tok="--lt-border-danger" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-border-danger</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
@@ -996,7 +1011,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
-<tr data-tok="--lt-bg-f4f5" data-origin="phase1">
+<tr data-tok="--lt-bg-f4f5" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f4f5</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f4f5f9"></span><span class="hex">#f4f5f9</span></span></td>
@@ -1008,8 +1023,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
-<tr data-tok="--lt-c-ff6600" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-ff6600" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-ff6600</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff6600"></span><span class="hex">#ff6600</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff6600"></span><span class="hex">(same)</span></span></td>
@@ -1020,8 +1035,8 @@
   <td class="note">severe → error (canonical)</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-c-ff5757" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-ff5757" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-ff5757</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff5757"></span><span class="hex">#ff5757</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff5757"></span><span class="hex">(same)</span></span></td>
@@ -1032,8 +1047,8 @@
   <td class="note">severe → error (canonical)</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-c-de2d2d" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-de2d2d" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-de2d2d</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#de2d2d"></span><span class="hex">#de2d2d</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#de2d2d"></span><span class="hex">(same)</span></span></td>
@@ -1044,7 +1059,7 @@
   <td class="note">red — per context</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-c-6c757d" data-origin="phase1">
+<tr data-tok="--lt-c-6c757d" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-6c757d</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6c757d"></span><span class="hex">#6c757d</span></span></td>
@@ -1056,7 +1071,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-c-1c8139" data-origin="phase1">
+<tr data-tok="--lt-c-1c8139" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-1c8139</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1c8139"></span><span class="hex">#1c8139</span></span></td>
@@ -1068,7 +1083,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-bg-chip-selected" data-origin="phase1">
+<tr data-tok="--lt-bg-chip-selected" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-chip-selected</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eceff2"></span><span class="hex">#eceff2</span></span></td>
@@ -1080,7 +1095,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-border-subtle" data-origin="phase1">
+<tr data-tok="--lt-border-subtle" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-border-subtle</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1d9e0"></span><span class="hex">#d1d9e0</span></span></td>
@@ -1092,8 +1107,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
 </tr>
-<tr data-tok="--lt-c-eb5757" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-eb5757" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-eb5757</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eb5757"></span><span class="hex">#eb5757</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eb5757"></span><span class="hex">(same)</span></span></td>
@@ -1104,8 +1119,8 @@
   <td class="note">confirm w/ Rajat</td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-c-252525" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-252525" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-252525</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#252525"></span><span class="hex">#252525</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#252525"></span><span class="hex">(same)</span></span></td>
@@ -1116,7 +1131,7 @@
   <td class="note"></td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-tooltip-bg" data-origin="phase1">
+<tr data-tok="--lt-tooltip-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-tooltip-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
@@ -1128,7 +1143,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-border-d1d5" data-origin="phase1">
+<tr data-tok="--lt-border-d1d5" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-border-d1d5</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1d5db"></span><span class="hex">#d1d5db</span></span></td>
@@ -1140,7 +1155,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-bg-f8f9fa" data-origin="phase1">
+<tr data-tok="--lt-bg-f8f9fa" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f8f9fa</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f8f9fa"></span><span class="hex">#f8f9fa</span></span></td>
@@ -1152,7 +1167,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-c-fefefe" data-origin="phase1">
+<tr data-tok="--lt-c-fefefe" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-fefefe</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fefefe"></span><span class="hex">#fefefe</span></span></td>
@@ -1164,7 +1179,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-c-187733" data-origin="phase1">
+<tr data-tok="--lt-c-187733" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-187733</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#187733"></span><span class="hex">#187733</span></span></td>
@@ -1176,8 +1191,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
 </tr>
-<tr data-tok="--lt-c-ffbeb8" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-ffbeb8" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-ffbeb8</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffbeb8"></span><span class="hex">#ffbeb8</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffbeb8"></span><span class="hex">(same)</span></span></td>
@@ -1188,8 +1203,8 @@
   <td class="note">Flash danger (no flash token)</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-fcf5da" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-fcf5da" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-fcf5da</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fcf5da"></span><span class="hex">#fcf5da</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fcf5da"></span><span class="hex">(same)</span></span></td>
@@ -1200,8 +1215,8 @@
   <td class="note">tag-yellow → warning-muted (hex match)</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-fbdada" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-fbdada" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-fbdada</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fbdada"></span><span class="hex">#fbdada</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fbdada"></span><span class="hex">(same)</span></span></td>
@@ -1212,8 +1227,8 @@
   <td class="note">tag-pink → error-muted (hex match)</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-ee6d51" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-ee6d51" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-ee6d51</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ee6d51"></span><span class="hex">#ee6d51</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ee6d51"></span><span class="hex">(same)</span></span></td>
@@ -1224,8 +1239,8 @@
   <td class="note">invisible-btn orange → brand orange</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-e2e2ee" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-e2e2ee" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-e2e2ee</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e2e2ee"></span><span class="hex">#e2e2ee</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e2e2ee"></span><span class="hex">(same)</span></span></td>
@@ -1236,8 +1251,8 @@
   <td class="note"></td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-e1e9ec" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-e1e9ec" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-e1e9ec</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e1e9ec"></span><span class="hex">#e1e9ec</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e1e9ec"></span><span class="hex">(same)</span></span></td>
@@ -1248,8 +1263,8 @@
   <td class="note"></td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-c1c1c1" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-c1c1c1" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-c1c1c1</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#c1c1c1"></span><span class="hex">#c1c1c1</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#c1c1c1"></span><span class="hex">(same)</span></span></td>
@@ -1260,8 +1275,8 @@
   <td class="note"></td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-bfbfbf" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-bfbfbf" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-bfbfbf</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bfbfbf"></span><span class="hex">#bfbfbf</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bfbfbf"></span><span class="hex">(same)</span></span></td>
@@ -1272,8 +1287,8 @@
   <td class="note">verify</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-bae6ff" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-bae6ff" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-bae6ff</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bae6ff"></span><span class="hex">#bae6ff</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bae6ff"></span><span class="hex">(same)</span></span></td>
@@ -1284,8 +1299,8 @@
   <td class="note">tag-blueAccent → info-muted</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-a10707" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-a10707" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-a10707</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#a10707"></span><span class="hex">#a10707</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#a10707"></span><span class="hex">(same)</span></span></td>
@@ -1296,8 +1311,8 @@
   <td class="note">red — per context</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-463c3c" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-463c3c" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-463c3c</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#463c3c"></span><span class="hex">#463c3c</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#463c3c"></span><span class="hex">(same)</span></span></td>
@@ -1308,8 +1323,8 @@
   <td class="note"></td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-3fb950" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-3fb950" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-3fb950</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">(same)</span></span></td>
@@ -1320,8 +1335,8 @@
   <td class="note">also audit --lt-c-d29922 in LogLevels</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-3498db" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-3498db" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-3498db</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#3498db"></span><span class="hex">#3498db</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#3498db"></span><span class="hex">(same)</span></span></td>
@@ -1332,7 +1347,7 @@
   <td class="note">blue — per context</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-fdfdfd" data-origin="phase1">
+<tr data-tok="--lt-c-fdfdfd" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-fdfdfd</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fdfdfd"></span><span class="hex">#fdfdfd</span></span></td>
@@ -1344,7 +1359,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-0668d7" data-origin="phase1">
+<tr data-tok="--lt-c-0668d7" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-0668d7</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0668d7"></span><span class="hex">#0668d7</span></span></td>
@@ -1356,7 +1371,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-fbfcff" data-origin="phase1">
+<tr data-tok="--lt-c-fbfcff" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-fbfcff</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fbfcff"></span><span class="hex">#fbfcff</span></span></td>
@@ -1368,7 +1383,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-f6f8fc" data-origin="phase1">
+<tr data-tok="--lt-c-f6f8fc" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-f6f8fc</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fc"></span><span class="hex">#f6f8fc</span></span></td>
@@ -1380,7 +1395,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-e1f4fe" data-origin="phase1">
+<tr data-tok="--lt-c-e1f4fe" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-e1f4fe</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e1f4fe"></span><span class="hex">#e1f4fe</span></span></td>
@@ -1392,7 +1407,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-bg-f7f8f9" data-origin="phase1">
+<tr data-tok="--lt-bg-f7f8f9" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f7f8f9</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7f8f9"></span><span class="hex">#f7f8f9</span></span></td>
@@ -1404,7 +1419,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-primer-canvas-pale" data-origin="phase1">
+<tr data-tok="--lt-primer-canvas-pale" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-primer-canvas-pale</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2"></span><span class="hex">#eaeef2</span></span></td>
@@ -1416,7 +1431,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-bg-f9f9f9" data-origin="phase1">
+<tr data-tok="--lt-bg-f9f9f9" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f9f9f9</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f9f9f9"></span><span class="hex">#f9f9f9</span></span></td>
@@ -1428,7 +1443,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-8b949e" data-origin="phase1">
+<tr data-tok="--lt-c-8b949e" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-8b949e</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8b949e"></span><span class="hex">#8b949e</span></span></td>
@@ -1440,7 +1455,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-25292e" data-origin="phase1">
+<tr data-tok="--lt-c-25292e" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-25292e</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#25292e"></span><span class="hex">#25292e</span></span></td>
@@ -1452,7 +1467,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-faf7f9" data-origin="phase1">
+<tr data-tok="--lt-c-faf7f9" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-faf7f9</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#faf7f9"></span><span class="hex">#faf7f9</span></span></td>
@@ -1464,8 +1479,8 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
 </tr>
-<tr data-tok="--lt-c-e12826" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-e12826" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-e12826</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e12826"></span><span class="hex">#e12826</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e12826"></span><span class="hex">(same)</span></span></td>
@@ -1476,8 +1491,8 @@
   <td class="note">red — per context</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-353535" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-353535" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-353535</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#353535"></span><span class="hex">#353535</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#353535"></span><span class="hex">(same)</span></span></td>
@@ -1488,8 +1503,8 @@
   <td class="note"></td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-1d1a1a" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-1d1a1a" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-1d1a1a</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1d1a1a"></span><span class="hex">#1d1a1a</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1d1a1a"></span><span class="hex">(same)</span></span></td>
@@ -1500,8 +1515,8 @@
   <td class="note"></td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-0249b3" data-origin="design">
-  <td><span class="pill design">Design team</span></td>
+<tr data-tok="--lt-c-0249b3" data-phase="phase2">
+  <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-c-0249b3</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0249b3"></span><span class="hex">#0249b3</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0249b3"></span><span class="hex">(same)</span></span></td>
@@ -1512,7 +1527,7 @@
   <td class="note">blue — per context</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-f3f7fd" data-origin="phase1">
+<tr data-tok="--lt-c-f3f7fd" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-f3f7fd</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f3f7fd"></span><span class="hex">#f3f7fd</span></span></td>
@@ -1524,7 +1539,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-f6f6f6" data-origin="phase1">
+<tr data-tok="--lt-c-f6f6f6" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-f6f6f6</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f6f6"></span><span class="hex">#f6f6f6</span></span></td>
@@ -1536,7 +1551,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-bg-f7f8" data-origin="phase1">
+<tr data-tok="--lt-bg-f7f8" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f7f8</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7f7f8"></span><span class="hex">#f7f7f8</span></span></td>
@@ -1548,7 +1563,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-eaecf3" data-origin="phase1">
+<tr data-tok="--lt-c-eaecf3" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-eaecf3</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaecf3"></span><span class="hex">#eaecf3</span></span></td>
@@ -1560,7 +1575,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-e7e7ec" data-origin="phase1">
+<tr data-tok="--lt-c-e7e7ec" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-e7e7ec</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7e7ec"></span><span class="hex">#e7e7ec</span></span></td>
@@ -1572,7 +1587,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-f4f6f8" data-origin="phase1">
+<tr data-tok="--lt-c-f4f6f8" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-f4f6f8</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f4f6f8"></span><span class="hex">#f4f6f8</span></span></td>
@@ -1584,7 +1599,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-e5e9ee" data-origin="phase1">
+<tr data-tok="--lt-c-e5e9ee" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-e5e9ee</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e5e9ee"></span><span class="hex">#e5e9ee</span></span></td>
@@ -1596,7 +1611,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-676a75" data-origin="phase1">
+<tr data-tok="--lt-c-676a75" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-676a75</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#676a75"></span><span class="hex">#676a75</span></span></td>
@@ -1608,7 +1623,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-ffeded" data-origin="phase1">
+<tr data-tok="--lt-c-ffeded" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-ffeded</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffeded"></span><span class="hex">#ffeded</span></span></td>
@@ -1620,7 +1635,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-e7e8ef" data-origin="phase1">
+<tr data-tok="--lt-c-e7e8ef" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-e7e8ef</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7e8ef"></span><span class="hex">#e7e8ef</span></span></td>
@@ -1632,7 +1647,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-bg-f5f6f7" data-origin="phase1">
+<tr data-tok="--lt-bg-f5f6f7" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f5f6f7</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f5f6f7"></span><span class="hex">#f5f6f7</span></span></td>
@@ -1644,7 +1659,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-cf212e" data-origin="phase1">
+<tr data-tok="--lt-c-cf212e" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-cf212e</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#cf212e"></span><span class="hex">#cf212e</span></span></td>
@@ -1656,7 +1671,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-text-pink" data-origin="phase1">
+<tr data-tok="--lt-text-pink" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-pink</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bf3989"></span><span class="hex">#bf3989</span></span></td>
@@ -1668,7 +1683,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-bg-gray-50" data-origin="phase1">
+<tr data-tok="--lt-bg-gray-50" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-gray-50</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7f9fb"></span><span class="hex">#f7f9fb</span></span></td>
@@ -1680,7 +1695,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-eaecef" data-origin="phase1">
+<tr data-tok="--lt-c-eaecef" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-eaecef</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaecef"></span><span class="hex">#eaecef</span></span></td>
@@ -1692,7 +1707,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-card-bg" data-origin="phase1">
+<tr data-tok="--lt-card-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-card-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
@@ -1704,7 +1719,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-bg-f9f9" data-origin="phase1">
+<tr data-tok="--lt-bg-f9f9" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f9f9</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f9f9fa"></span><span class="hex">#f9f9fa</span></span></td>
@@ -1716,7 +1731,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-bg-eaeb" data-origin="phase1">
+<tr data-tok="--lt-bg-eaeb" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-eaeb</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaebec"></span><span class="hex">#eaebec</span></span></td>
@@ -1728,7 +1743,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-status-info-bg" data-origin="phase1">
+<tr data-tok="--lt-status-info-bg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-info-bg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
@@ -1740,7 +1755,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-status-info-fg" data-origin="phase1">
+<tr data-tok="--lt-status-info-fg" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-info-fg</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
@@ -1752,7 +1767,7 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
 </tr>
-<tr data-tok="--lt-c-f7f9fa" data-origin="phase1">
+<tr data-tok="--lt-c-f7f9fa" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-c-f7f9fa</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7f9fa"></span><span class="hex">#f7f9fa</span></span></td>
@@ -1773,8 +1788,8 @@ function flt() {
   var rows = document.querySelectorAll('#t tbody tr');
   rows.forEach(function(r) {
     var tok = r.getAttribute('data-tok').toLowerCase();
-    var origin = r.getAttribute('data-origin');
-    var show = (!f || tok.indexOf(f) >= 0) && (!o || origin === o);
+    var phase = r.getAttribute('data-phase');
+    var show = (!f || tok.indexOf(f) >= 0) && (!o || phase === o);
     r.style.display = show ? '' : 'none';
   });
 }

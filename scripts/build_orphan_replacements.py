@@ -246,9 +246,10 @@ total_uses = sum(usage.get(s, 0) for s in mapped_tokens)
 hist_total = sum(n for _, _, n in HISTORICAL_DELTA_SWAPS)
 
 rows = []
-# Two sources of mappings combined, each tagged with an origin pill:
-#   - "Design team"  — explicit decisions from OrphanTokens.txt; source still in tokens.css today
-#   - "Phase 1 Δ≤5"  — automated migration in commit 22e01ae4c; source already removed
+# Two phases of the migration combined, each tagged with a phase pill:
+#   Phase 1 — automated Δ≤5 swap (commit 22e01ae4c); source tokens already removed
+#   Phase 2 — design-team curated mapping from the dark-mode audit (OrphanTokens.txt);
+#            semantic, may have larger ΔL when a token consolidates a semantic family
 items = [(s, v) for s, v in MAPPINGS.items() if v[0] == 'REPLACE']
 for src, (action, target, note) in items:
     n = usage.get(src, 0)
@@ -260,7 +261,7 @@ for src, (action, target, note) in items:
     rows.append({
         'src': src, 'src_l': src_l, 'src_d': src_d,
         'target': target, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
-        'note': note, 'uses': n, 'origin': 'design',
+        'note': note, 'uses': n, 'phase': 'phase2',
     })
 for src, target, swaps in HISTORICAL_DELTA_SWAPS:
     src_l = PRE_LIGHT.get(src, '?'); src_d = PRE_DARK.get(src, '?')
@@ -268,7 +269,7 @@ for src, target, swaps in HISTORICAL_DELTA_SWAPS:
     rows.append({
         'src': src, 'src_l': src_l, 'src_d': src_d,
         'target': target, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
-        'note': f'commit {HIST_COMMIT[:7]}', 'uses': swaps, 'origin': 'phase1',
+        'note': f'commit {HIST_COMMIT[:7]}', 'uses': swaps, 'phase': 'phase1',
     })
 rows.sort(key=lambda r: -r['uses'])
 
@@ -304,8 +305,12 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   .hex-literal {{ font-family: ui-monospace, monospace; font-size: 12px; color: #1f2328; font-weight: 600; }}
   .num {{ text-align: right; font-variant-numeric: tabular-nums; }}
   .pill {{ display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; white-space: nowrap; }}
-  .pill.design {{ background: #ddf4ff; color: #054078; }}
   .pill.phase1 {{ background: #fff4ec; color: #7a3300; }}
+  .pill.phase2 {{ background: #ddf4ff; color: #054078; }}
+  .phase-notes {{ background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; font-size: 12px; color: #1f2328; }}
+  .phase-notes p {{ margin: 0 0 6px; }}
+  .phase-notes p:last-child {{ margin-bottom: 0; }}
+  .phase-notes .pill {{ margin-right: 6px; }}
   td.note {{ color: #656d76; font-size: 11px; max-width: 280px; }}
   .hex-cell {{ display: inline-flex; align-items: center; gap: 4px; }}
 </style></head><body>
@@ -315,28 +320,39 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   <a class="back" href="c-token-review.html">--lt-c-* review</a>
 </div>
 
-<h1>Tokens migration with Δ≤5</h1>
-<div class="meta">Audit log of every non-canonical token mapped to a canonical DS equivalent (light delta ≤ 5, Rule 1 compliant) · last generated {ts}</div>
+<h1>Non-canonical → canonical token migration</h1>
+<div class="meta">Audit log of every legacy/non-canonical token redirected to its canonical DS equivalent · last generated {ts}</div>
+
+<div class="phase-notes">
+  <p><span class="pill phase1">Phase 1 Δ≤5</span> Automated migration in commit
+    <a href="https://github.com/LambdatestIncPrivate/lt-web-platform/commit/{HIST_COMMIT}" style="color:#0969da; font-family:ui-monospace,monospace;">{HIST_COMMIT}</a>:
+    legacy tokens were redirected whenever the canonical target's <strong>light hex matched within Δ ≤ 5</strong>
+    (Rule 1 — no perceptible light-mode shift). Every source has been deleted from <code>tokens.css</code>.
+    Source L/D recovered from pre-migration snapshot (lt-components commit <code>01006cc</code>).</p>
+  <p><span class="pill phase2">Phase 2</span> Design-team curated mappings from <code>OrphanTokens.txt</code>:
+    explicit semantic decisions (not always Δ≤5 — some consolidate a semantic family).
+    Source tokens still in <code>tokens.css</code> today; the <em>Uses</em> column shows current worktree references.</p>
+</div>
 
 <div class="stats">
-  <div class="stat replace"><span class="num">{total}</span> orphan → canonical mappings <span class="num-small">({total_uses:,} refs)</span></div>
-  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">{len(HISTORICAL_DELTA_SWAPS)}</span> Phase 1 migrations <span class="num-small">({hist_total:,} swaps)</span></div>
-  <div class="stat"><span class="num">{total + len(HISTORICAL_DELTA_SWAPS)}</span> total tokens <span class="num-small">({total_uses + hist_total:,} refs)</span></div>
+  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">{len(HISTORICAL_DELTA_SWAPS)}</span> Phase 1 tokens <span class="num-small">({hist_total:,} refs)</span></div>
+  <div class="stat replace"><span class="num">{total}</span> Phase 2 tokens <span class="num-small">({total_uses:,} refs)</span></div>
+  <div class="stat" style="background:#dafbe1; border-color:#aceebb; color:#0a3622;"><span class="num">{total + len(HISTORICAL_DELTA_SWAPS)}</span> total tokens migrated <span class="num-small">({total_uses + hist_total:,} refs)</span></div>
 </div>
 
 <div class="controls">
   <input id="f" placeholder="Filter token…" oninput="flt()">
   <select id="o" onchange="flt()">
-    <option value="">All origins</option>
-    <option value="design">Design team only</option>
+    <option value="">All phases</option>
     <option value="phase1">Phase 1 Δ≤5 only</option>
+    <option value="phase2">Phase 2 only</option>
   </select>
   <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Hover swatch for hex.</span>
 </div>
 
 <table id="t">
 <thead><tr>
-  <th onclick="sort(0)">Origin</th>
+  <th onclick="sort(0)">Phase</th>
   <th onclick="sort(1)">Source token</th>
   <th onclick="sort(2)">Light</th>
   <th onclick="sort(3)">Dark</th>
@@ -362,10 +378,10 @@ for r in rows:
     note = html.escape(r['note'])
     src_safe = html.escape(r['src'])
     tgt_safe = html.escape(r['target'])
-    origin = r['origin']
-    origin_label = 'Design team' if origin == 'design' else 'Phase 1 Δ≤5'
-    html_out += f"""<tr data-tok="{src_safe}" data-origin="{origin}">
-  <td><span class="pill {origin}">{origin_label}</span></td>
+    phase = r['phase']
+    phase_label = 'Phase 1 Δ≤5' if phase == 'phase1' else 'Phase 2'
+    html_out += f"""<tr data-tok="{src_safe}" data-phase="{phase}">
+  <td><span class="pill {phase}">{phase_label}</span></td>
   <td><span class="name">{src_safe}</span></td>
   <td><span class="hex-cell">{src_sw}<span class="hex">{src_l_display}</span></span></td>
   <td><span class="hex-cell">{src_d_sw}<span class="hex">{src_d_display}</span></span></td>
@@ -387,8 +403,8 @@ function flt() {
   var rows = document.querySelectorAll('#t tbody tr');
   rows.forEach(function(r) {
     var tok = r.getAttribute('data-tok').toLowerCase();
-    var origin = r.getAttribute('data-origin');
-    var show = (!f || tok.indexOf(f) >= 0) && (!o || origin === o);
+    var phase = r.getAttribute('data-phase');
+    var show = (!f || tok.indexOf(f) >= 0) && (!o || phase === o);
     r.style.display = show ? '' : 'none';
   });
 }
