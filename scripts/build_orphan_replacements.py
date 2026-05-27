@@ -243,14 +243,13 @@ def swatch(hex_or_value):
 mapped_tokens = [s for s, v in MAPPINGS.items() if v[0] == 'REPLACE']
 total = len(mapped_tokens)
 total_uses = sum(usage.get(s, 0) for s in mapped_tokens)
+hist_total = sum(n for _, _, n in HISTORICAL_DELTA_SWAPS)
 
 rows = []
-# Only show confirmed mappings (REPLACE). REMOVE → raw hex (no target) and PENDING (not yet
-# mapped) are excluded — this sheet is the audit log of "colors mapped to a new token".
-items = sorted(
-    ((s, v) for s, v in MAPPINGS.items() if v[0] == 'REPLACE'),
-    key=lambda kv: -usage.get(kv[0], 0)
-)
+# Two sources of mappings combined, each tagged with an origin pill:
+#   - "Design team"  — explicit decisions from OrphanTokens.txt; source still in tokens.css today
+#   - "Phase 1 Δ≤5"  — automated migration in commit 22e01ae4c; source already removed
+items = [(s, v) for s, v in MAPPINGS.items() if v[0] == 'REPLACE']
 for src, (action, target, note) in items:
     n = usage.get(src, 0)
     if src.startswith('--lt-c-'):
@@ -258,12 +257,20 @@ for src, (action, target, note) in items:
     else:
         src_l, src_d = LIGHT.get(src, '?'), DARK.get(src, '?')
     tgt_l, tgt_d = LIGHT.get(target, '?'), DARK.get(target, '?')
-    tgt_cell = f'<span class="name">{html.escape(target)}</span>'
     rows.append({
         'src': src, 'src_l': src_l, 'src_d': src_d,
-        'target': target, 'tgt_cell': tgt_cell, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
-        'note': note, 'uses': n,
+        'target': target, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
+        'note': note, 'uses': n, 'origin': 'design',
     })
+for src, target, swaps in HISTORICAL_DELTA_SWAPS:
+    src_l = PRE_LIGHT.get(src, '?'); src_d = PRE_DARK.get(src, '?')
+    tgt_l = LIGHT.get(target, '?'); tgt_d = DARK.get(target, '?')
+    rows.append({
+        'src': src, 'src_l': src_l, 'src_d': src_d,
+        'target': target, 'tgt_l': tgt_l, 'tgt_d': tgt_d,
+        'note': f'commit {HIST_COMMIT[:7]}', 'uses': swaps, 'origin': 'phase1',
+    })
+rows.sort(key=lambda r: -r['uses'])
 
 ts = datetime.datetime.now().strftime('%Y-%m-%d')
 
@@ -280,6 +287,7 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   .stats {{ display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 16px; }}
   .stat {{ display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 14px; border-radius: 8px; font-size: 12px; color: #656d76; background: #f6f8fa; border: 1px solid #d0d7de; }}
   .stat .num {{ font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: #1f2328; }}
+  .stat .num-small {{ font-size: 11px; opacity: 0.7; margin-left: 4px; }}
   .stat.remove {{ background: #ffebe9; border-color: #ffcecb; color: #6a0e1e; }}
   .stat.replace {{ background: #ddf4ff; border-color: #b6e3ff; color: #054078; }}
   .stat.pending {{ background: #fff8c5; border-color: #f1d878; color: #693e00; }}
@@ -295,8 +303,9 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   .hex {{ font-family: ui-monospace, monospace; font-size: 11px; color: #656d76; }}
   .hex-literal {{ font-family: ui-monospace, monospace; font-size: 12px; color: #1f2328; font-weight: 600; }}
   .num {{ text-align: right; font-variant-numeric: tabular-nums; }}
-  .pill {{ display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; }}
-  .pill.replace {{ background: #ddf4ff; color: #054078; }}
+  .pill {{ display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; white-space: nowrap; }}
+  .pill.design {{ background: #ddf4ff; color: #054078; }}
+  .pill.phase1 {{ background: #fff4ec; color: #7a3300; }}
   td.note {{ color: #656d76; font-size: 11px; max-width: 280px; }}
   .hex-cell {{ display: inline-flex; align-items: center; gap: 4px; }}
 </style></head><body>
@@ -306,32 +315,37 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   <a class="back" href="c-token-review.html">--lt-c-* review</a>
 </div>
 
-<h1>Orphan token replacements</h1>
-<div class="meta">DS migration audit · canonical-only targets · last generated {ts}</div>
+<h1>Tokens migration with Δ≤5</h1>
+<div class="meta">Audit log of every non-canonical token mapped to a canonical DS equivalent (light delta ≤ 5, Rule 1 compliant) · last generated {ts}</div>
 
 <div class="stats">
-  <div class="stat"><span class="num">{total}</span> total tokens</div>
-  <div class="stat"><span class="num">{total_uses:,}</span> total usages in worktree</div>
-  <div class="stat replace"><span class="num">{total}</span> orphan → canonical mappings</div>
-  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">{len(HISTORICAL_DELTA_SWAPS)}</span> Δ≤5 historical mappings (already done)</div>
+  <div class="stat replace"><span class="num">{total}</span> orphan → canonical mappings <span class="num-small">({total_uses:,} refs)</span></div>
+  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">{len(HISTORICAL_DELTA_SWAPS)}</span> Phase 1 migrations <span class="num-small">({hist_total:,} swaps)</span></div>
+  <div class="stat"><span class="num">{total + len(HISTORICAL_DELTA_SWAPS)}</span> total tokens <span class="num-small">({total_uses + hist_total:,} refs)</span></div>
 </div>
 
 <div class="controls">
   <input id="f" placeholder="Filter token…" oninput="flt()">
+  <select id="o" onchange="flt()">
+    <option value="">All origins</option>
+    <option value="design">Design team only</option>
+    <option value="phase1">Phase 1 Δ≤5 only</option>
+  </select>
   <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Hover swatch for hex.</span>
 </div>
 
 <table id="t">
 <thead><tr>
-  <th onclick="sort(0)">Source token</th>
-  <th onclick="sort(1)">Light</th>
-  <th onclick="sort(2)">Dark</th>
+  <th onclick="sort(0)">Origin</th>
+  <th onclick="sort(1)">Source token</th>
+  <th onclick="sort(2)">Light</th>
+  <th onclick="sort(3)">Dark</th>
   <th></th>
-  <th onclick="sort(4)">Target</th>
-  <th onclick="sort(5)">Light</th>
-  <th onclick="sort(6)">Dark</th>
-  <th onclick="sort(7)">Notes</th>
-  <th onclick="sort(8)" class="num">Uses</th>
+  <th onclick="sort(5)">Target</th>
+  <th onclick="sort(6)">Light</th>
+  <th onclick="sort(7)">Dark</th>
+  <th onclick="sort(8)">Notes</th>
+  <th onclick="sort(9)" class="num">Uses</th>
 </tr></thead>
 <tbody>
 """
@@ -347,12 +361,16 @@ for r in rows:
     tgt_d_sw = swatch(r['tgt_d']) if r['tgt_d'] else ''
     note = html.escape(r['note'])
     src_safe = html.escape(r['src'])
-    html_out += f"""<tr data-tok="{src_safe}">
+    tgt_safe = html.escape(r['target'])
+    origin = r['origin']
+    origin_label = 'Design team' if origin == 'design' else 'Phase 1 Δ≤5'
+    html_out += f"""<tr data-tok="{src_safe}" data-origin="{origin}">
+  <td><span class="pill {origin}">{origin_label}</span></td>
   <td><span class="name">{src_safe}</span></td>
   <td><span class="hex-cell">{src_sw}<span class="hex">{src_l_display}</span></span></td>
   <td><span class="hex-cell">{src_d_sw}<span class="hex">{src_d_display}</span></span></td>
   <td>→</td>
-  <td>{r['tgt_cell']}</td>
+  <td><span class="name">{tgt_safe}</span></td>
   <td><span class="hex-cell">{tgt_l_sw}<span class="hex">{tgt_l_display}</span></span></td>
   <td><span class="hex-cell">{tgt_d_sw}<span class="hex">{tgt_d_display}</span></span></td>
   <td class="note">{note}</td>
@@ -361,53 +379,17 @@ for r in rows:
 """
 
 html_out += """</tbody></table>
-"""
-
-# --- Section D: historical Δ≤5 mappings (already executed) ---
-hist_total = sum(n for _, _, n in HISTORICAL_DELTA_SWAPS)
-html_out += f"""
-<h2 style="font-size:16px; margin:32px 0 4px;">Δ≤5 historical mappings — already executed</h2>
-<div class="meta">
-  Phase 1 token-migration from commit
-  <a href="https://github.com/LambdatestIncPrivate/lt-web-platform/commit/{HIST_COMMIT}" style="color:#0969da; font-family:ui-monospace,monospace;">{HIST_COMMIT}</a>:
-  legacy <strong>non-canonical</strong> tokens were redirected to their canonical DS equivalents whenever the
-  light hex matched within <strong>Δ ≤ 5</strong> (per Rule 1, no perceptible light-mode shift).
-  Every source listed here has since been <strong>deleted</strong> from <code>tokens.css</code>;
-  source L/D values are recovered from the pre-migration snapshot (lt-components commit <code>01006cc</code>).
-  <br/>
-  <strong>{len(HISTORICAL_DELTA_SWAPS)} distinct pairs · {hist_total:,} swaps total</strong>
-</div>
-<table>
-<thead><tr>
-  <th>Source token</th><th>Light</th><th>Dark</th><th></th><th>Target token</th><th>Light</th><th>Dark</th><th class="num">Swaps</th>
-</tr></thead>
-<tbody>
-"""
-for src, tgt, n in HISTORICAL_DELTA_SWAPS:
-    # Source is now-removed: look up its hex from the pre-migration snapshot.
-    sl = PRE_LIGHT.get(src, '?'); sd = PRE_DARK.get(src, '?')
-    tl = LIGHT.get(tgt, '?'); td = DARK.get(tgt, '?')
-    src_safe = html.escape(src); tgt_safe = html.escape(tgt)
-    html_out += f"""<tr>
-  <td><span class="name">{src_safe}</span></td>
-  <td><span class="hex-cell">{swatch(sl)}<span class="hex">{html.escape(sl[:24])}</span></span></td>
-  <td><span class="hex-cell">{swatch(sd)}<span class="hex">{html.escape(sd[:24])}</span></span></td>
-  <td>→</td>
-  <td><span class="name">{tgt_safe}</span></td>
-  <td><span class="hex-cell">{swatch(tl)}<span class="hex">{html.escape(tl[:24])}</span></span></td>
-  <td><span class="hex-cell">{swatch(td)}<span class="hex">{html.escape(td[:24])}</span></span></td>
-  <td class="num">{n}</td>
-</tr>
-"""
-html_out += """</tbody></table>
 
 <script>
 function flt() {
   var f = document.getElementById('f').value.toLowerCase();
+  var o = document.getElementById('o').value;
   var rows = document.querySelectorAll('#t tbody tr');
   rows.forEach(function(r) {
     var tok = r.getAttribute('data-tok').toLowerCase();
-    r.style.display = (!f || tok.indexOf(f) >= 0) ? '' : 'none';
+    var origin = r.getAttribute('data-origin');
+    var show = (!f || tok.indexOf(f) >= 0) && (!o || origin === o);
+    r.style.display = show ? '' : 'none';
   });
 }
 function sort(col) {
