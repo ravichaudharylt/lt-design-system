@@ -125,38 +125,113 @@ def hex_only(v):
     m = re.match(r'#[0-9a-fA-F]{3,8}', v.strip())
     return m.group(0) if m else v.strip()
 
-# --- Δ≤5 HISTORICAL MAPPINGS — already-executed canonical↔canonical context-correctness swaps.
-# Source: commit 745cfd4ebc7e in lt-web-platform feat/dark-mode worktree
-# "fix(theming): correct semantic token usage per CSS property context — target Δ ≤ 5"
-# Pairs extracted by walking the diff and pairing positional var(--lt-X) → var(--lt-Y) replacements.
+# --- Δ≤5 HISTORICAL MAPPINGS — already-executed NON-canonical → canonical migrations
+# from commit 22e01ae4c (lt-web-platform feat/dark-mode worktree):
+#   "feat(dark-mode): align consumers with design system canonical tokens"
+#   "Phase 1 token migration applied: 6,449 consumer references redirected from legacy
+#    --lt-* names to canonical design tokens"
+# All source tokens here have since been REMOVED from lt-components/src/styles/tokens.css.
+# Source L/D values are looked up from commit 01006cc (last lt-components SHA where every
+# legacy source still existed); target L/D from current tokens.css.
 HISTORICAL_DELTA_SWAPS = [
-    # (source_token, target_token, swap_count)
-    ('--lt-text-secondary',   '--lt-icon-dark',         591),
-    ('--lt-text-muted',       '--lt-icon-primary',      278),
-    ('--lt-bg-base',          '--lt-text-inverse',      190),
-    ('--lt-text-info',        '--lt-icon-info',         179),
-    ('--lt-text-error',       '--lt-icon-error',        168),
-    ('--lt-text-primary',     '--lt-icon-inverse',      127),
-    ('--lt-text-info',        '--lt-border-info',        79),
-    ('--lt-text-success',     '--lt-icon-success',       63),
-    ('--lt-text-purple',      '--lt-icon-purple',        54),
-    ('--lt-text-info',        '--lt-bg-info',            49),
-    ('--lt-text-warning',     '--lt-icon-warning',       27),
-    ('--lt-text-primary',     '--lt-bg-base-inverse',    23),
-    ('--lt-text-error',       '--lt-border-error',       21),
-    ('--lt-text-error',       '--lt-bg-error',           18),
-    ('--lt-text-disabled',    '--lt-icon-disabled',      15),
-    ('--lt-text-muted',       '--lt-bg-secondary',       13),
-    ('--lt-text-inverse',     '--lt-icon-transparent',   12),
-    ('--lt-bg-info',          '--lt-text-info',           8),
-    ('--lt-text-success',     '--lt-border-success',      5),
-    ('--lt-text-orange',      '--lt-bg-orange',           2),
-    ('--lt-text-purple',      '--lt-bg-purple',           2),
-    ('--lt-bg-base-inverse',  '--lt-text-primary',        1),
-    ('--lt-text-inverse',     '--lt-bg-base',             1),
-    ('--lt-text-magenta',     '--lt-bg-magenta',          1),
+    # (source, target, swap_count)  — only NON-canonical → canonical pairs (88 of 90 total)
+    ('--lt-text-gray-636',         '--lt-text-secondary',         454),
+    ('--lt-text-link',             '--lt-text-info',              432),
+    ('--lt-text-on-emphasis',      '--lt-text-inverse',           358),
+    ('--lt-status-danger-fg',      '--lt-text-error',             355),
+    ('--lt-text-dark-24',          '--lt-text-primary',           330),
+    ('--lt-text-subtle',           '--lt-text-muted',             303),
+    ('--lt-accent-primary',        '--lt-text-info',              284),
+    ('--lt-border-neutral-light',  '--lt-border-secondary',       269),
+    ('--lt-bg-hover',              '--lt-bg-base-muted',          257),
+    ('--lt-bg-muted',              '--lt-bg-base-muted',          254),
+    ('--lt-status-success-fg-alt', '--lt-text-success',           107),
+    ('--lt-accent-purple-fg',      '--lt-text-purple',             94),
+    ('--lt-status-warning-fg',     '--lt-text-warning',            77),
+    ('--lt-shadow-tint-medium',    '--lt-shadow-floating-small-2', 45),
+    ('--lt-text-gray-8c9',         '--lt-text-disabled',           45),
+    ('--lt-status-danger-fg-alt',  '--lt-text-error',              43),
+    ('--lt-status-danger-bg',      '--lt-bg-error-muted',          41),
+    ('--lt-accent-primary-muted',  '--lt-bg-info-muted',           39),
+    ('--lt-text-gray-656',         '--lt-text-secondary',          36),
+    ('--lt-border-accent',         '--lt-border-info',             28),
+    ('--lt-bg-f6f7',               '--lt-bg-base-muted',           23),
+    ('--lt-orange-bg',             '--lt-bg-brand-secondary',      22),
+    ('--lt-btn-success-bg',        '--lt-bg-primary',              22),
+    ('--lt-text-orange-bc',        '--lt-text-orange',             18),
+    ('--lt-c-ecf0f1',              '--lt-bg-base-disabled',        15),
+    ('--lt-status-warning-bg',     '--lt-bg-warning-muted',        14),
+    ('--lt-c-a40e26',              '--lt-bg-error-hover',          14),
+    ('--lt-status-success-bg',     '--lt-bg-success-muted',        11),
+    ('--lt-bg-skeleton',           '--lt-bg-base-pressed',         11),
+    ('--lt-c-21262d',              '--lt-bg-base-inverse',         10),
+    ('--lt-bg-ebec',               '--lt-bg-base-pressed',          8),
+    ('--lt-bg-near-white-alt',     '--lt-bg-base',                  8),
+    ('--lt-bg-success-btn-muted2', '--lt-bg-primary-disabled',      7),
+    ('--lt-c-e6edf3',              '--lt-bg-base-pressed',          7),
+    ('--lt-bg-quaternary',         '--lt-bg-base-muted',            7),
+    ('--lt-c-edf0f3',              '--lt-bg-base-disabled',         6),
+    ('--lt-accent-purple-muted',   '--lt-bg-purple-muted',          6),
+    ('--lt-c-e9eff4',              '--lt-bg-base-disabled',         6),
+    ('--lt-status-warning-pale-bg','--lt-bg-orange-muted',          6),
+    ('--lt-primer-fg-subtle-dark', '--lt-text-muted',               6),
+    ('--lt-bg-f8f8f8',             '--lt-bg-base-muted',            5),
+    ('--lt-c-ffeff7',              '--lt-bg-magenta-muted',         5),
+    ('--lt-bg-muted-hover',        '--lt-bg-base-disabled',         5),
+    ('--lt-text-pink',             '--lt-text-magenta',             5),
+    ('--lt-border-danger',         '--lt-border-error',             5),
+    ('--lt-bg-f4f5',               '--lt-bg-base-muted',            5),
+    ('--lt-c-6c757d',              '--lt-text-muted',               4),
+    ('--lt-c-1c8139',              '--lt-text-success',             4),
+    ('--lt-bg-chip-selected',      '--lt-bg-base-disabled',         4),
+    ('--lt-border-subtle',         '--lt-border-secondary',         4),
+    ('--lt-tooltip-bg',            '--lt-bg-base-inverse',          3),
+    ('--lt-border-d1d5',           '--lt-border-secondary',         3),
+    ('--lt-bg-f8f9fa',             '--lt-bg-base-muted',            3),
+    ('--lt-c-fefefe',              '--lt-icon-transparent',         3),
+    ('--lt-c-187733',              '--lt-bg-primary-pressed',       3),
+    ('--lt-c-fdfdfd',              '--lt-bg-base',                  2),
+    ('--lt-c-0668d7',              '--lt-icon-info',                2),
+    ('--lt-c-fbfcff',              '--lt-bg-base',                  2),
+    ('--lt-c-f6f8fc',              '--lt-bg-base-muted',            2),
+    ('--lt-c-e1f4fe',              '--lt-bg-info-muted',            2),
+    ('--lt-bg-f7f8f9',             '--lt-bg-base-muted',            2),
+    ('--lt-primer-canvas-pale',    '--lt-bg-base-disabled',         2),
+    ('--lt-bg-f9f9f9',             '--lt-bg-base-muted',            2),
+    ('--lt-c-8b949e',              '--lt-icon-disabled',            2),
+    ('--lt-c-25292e',              '--lt-bg-base-inverse',          2),
+    ('--lt-c-faf7f9',              '--lt-bg-base-muted',            2),
+    ('--lt-c-f3f7fd',              '--lt-bg-base-muted',            1),
+    ('--lt-c-f6f6f6',              '--lt-bg-base-muted',            1),
+    ('--lt-bg-f7f8',               '--lt-bg-base-muted',            1),
+    ('--lt-c-eaecf3',              '--lt-border-disabled',          1),
+    ('--lt-c-e7e7ec',              '--lt-bg-base-pressed',          1),
+    ('--lt-c-f4f6f8',              '--lt-bg-base-muted',            1),
+    ('--lt-c-e5e9ee',              '--lt-bg-base-pressed',          1),
+    ('--lt-c-676a75',              '--lt-text-secondary',           1),
+    ('--lt-c-ffeded',              '--lt-bg-error-muted',           1),
+    ('--lt-c-e7e8ef',              '--lt-bg-base-pressed',          1),
+    ('--lt-bg-f5f6f7',             '--lt-bg-base-muted',            1),
+    ('--lt-c-cf212e',              '--lt-text-error',               1),
+    ('--lt-text-pink',             '--lt-text-purple',              1),
+    ('--lt-bg-gray-50',            '--lt-bg-base-muted',            1),
+    ('--lt-c-eaecef',              '--lt-bg-base-pressed',          1),
+    ('--lt-card-bg',               '--lt-bg-base',                  1),
+    ('--lt-bg-f9f9',               '--lt-bg-base-muted',            1),
+    ('--lt-bg-eaeb',               '--lt-bg-base-pressed',          1),
+    ('--lt-status-info-bg',        '--lt-bg-info-muted',            1),
+    ('--lt-status-info-fg',        '--lt-text-info',                1),
+    ('--lt-c-f7f9fa',              '--lt-bg-base-muted',            1),
 ]
-HIST_COMMIT = '745cfd4eb'
+HIST_COMMIT = '22e01ae4c'
+
+# Load pre-migration tokens.css for source-token L/D lookup (sources are removed from current).
+_PRE_PATH = os.path.join(os.path.dirname(__file__), 'tokens_pre_migration.css')
+_pre = open(_PRE_PATH).read() if os.path.exists(_PRE_PATH) else ''
+_m = re.search(r':root[^{]*\{(.*?)^\}', _pre, re.S | re.M); _pre_light = _m.group(1) if _m else ''
+_m = re.search(r'\[data-color-mode="dark"\][^{]*\{(.*?)^\}', _pre, re.S | re.M); _pre_dark = _m.group(1) if _m else ''
+PRE_LIGHT = {n: v.strip() for n, v in re.findall(r'(--lt-[a-z0-9-]+)\s*:\s*([^;]+);', _pre_light)}
+PRE_DARK  = {n: v.strip() for n, v in re.findall(r'(--lt-[a-z0-9-]+)\s*:\s*([^;]+);', _pre_dark)}
 
 def swatch(hex_or_value):
     if not hex_or_value: return ''
@@ -293,12 +368,12 @@ hist_total = sum(n for _, _, n in HISTORICAL_DELTA_SWAPS)
 html_out += f"""
 <h2 style="font-size:16px; margin:32px 0 4px;">Δ≤5 historical mappings — already executed</h2>
 <div class="meta">
-  Semantic-misuse fix from commit
-  <a href="https://github.com/ravichaudharylt/lt-web-platform/commit/{HIST_COMMIT}" style="color:#0969da; font-family:ui-monospace,monospace;">{HIST_COMMIT}</a>:
-  for each <code>var(--lt-X)</code> used in a CSS-property context that didn't match the token's section
-  (e.g. a text token used in <code>background-color</code>), it was substituted with the section-correct
-  equivalent — but only when the target's light value matched within <strong>Δ ≤ 5</strong>
-  (per Rule 1, no perceptible light-mode shift). Both source &amp; target are canonical DS tokens.
+  Phase 1 token-migration from commit
+  <a href="https://github.com/LambdatestIncPrivate/lt-web-platform/commit/{HIST_COMMIT}" style="color:#0969da; font-family:ui-monospace,monospace;">{HIST_COMMIT}</a>:
+  legacy <strong>non-canonical</strong> tokens were redirected to their canonical DS equivalents whenever the
+  light hex matched within <strong>Δ ≤ 5</strong> (per Rule 1, no perceptible light-mode shift).
+  Every source listed here has since been <strong>deleted</strong> from <code>tokens.css</code>;
+  source L/D values are recovered from the pre-migration snapshot (lt-components commit <code>01006cc</code>).
   <br/>
   <strong>{len(HISTORICAL_DELTA_SWAPS)} distinct pairs · {hist_total:,} swaps total</strong>
 </div>
@@ -309,7 +384,8 @@ html_out += f"""
 <tbody>
 """
 for src, tgt, n in HISTORICAL_DELTA_SWAPS:
-    sl = LIGHT.get(src, '?'); sd = DARK.get(src, '?')
+    # Source is now-removed: look up its hex from the pre-migration snapshot.
+    sl = PRE_LIGHT.get(src, '?'); sd = PRE_DARK.get(src, '?')
     tl = LIGHT.get(tgt, '?'); td = DARK.get(tgt, '?')
     src_safe = html.escape(src); tgt_safe = html.escape(tgt)
     html_out += f"""<tr>
