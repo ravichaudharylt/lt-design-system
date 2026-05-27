@@ -324,14 +324,8 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
 <div class="meta">Audit log of every legacy/non-canonical token redirected to its canonical DS equivalent · last generated {ts}</div>
 
 <div class="phase-notes">
-  <p><span class="pill phase1">Phase 1 Δ≤5</span> Automated migration in commit
-    <a href="https://github.com/LambdatestIncPrivate/lt-web-platform/commit/{HIST_COMMIT}" style="color:#0969da; font-family:ui-monospace,monospace;">{HIST_COMMIT}</a>:
-    legacy tokens were redirected whenever the canonical target's <strong>light hex matched within Δ ≤ 5</strong>
-    (Rule 1 — no perceptible light-mode shift). Every source has been deleted from <code>tokens.css</code>.
-    Source L/D recovered from pre-migration snapshot (lt-components commit <code>01006cc</code>).</p>
-  <p><span class="pill phase2">Phase 2</span> Design-team curated mappings from <code>OrphanTokens.txt</code>:
-    explicit semantic decisions (not always Δ≤5 — some consolidate a semantic family).
-    Source tokens still in <code>tokens.css</code> today; the <em>Uses</em> column shows current worktree references.</p>
+  <p><span class="pill phase1">Phase 1</span> Mapped when the canonical target's light hex matched within <strong>Δ ≤ 5</strong>.</p>
+  <p><span class="pill phase2">Phase 2</span> Reviewed by the design team and Komal.</p>
 </div>
 
 <div class="stats">
