@@ -50,6 +50,7 @@
   <div class="stat remove"><span class="num">9</span> REMOVE → raw hex</div>
   <div class="stat replace"><span class="num">54</span> REPLACE → canonical DS token</div>
   <div class="stat pending"><span class="num">1</span> PENDING</div>
+  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">24</span> Δ≤5 historical mappings (already done)</div>
 </div>
 
 <div class="controls">
@@ -844,6 +845,216 @@
   <td><span class="hex-cell"><span class="hex"></span></span></td>
   <td class="note">awaiting Komal confirmation</td>
   <td class="num">2</td>
+</tr>
+</tbody></table>
+
+<h2 style="font-size:16px; margin:32px 0 4px;">Δ≤5 historical mappings — already executed</h2>
+<div class="meta">
+  Semantic-misuse fix from commit
+  <a href="https://github.com/ravichaudharylt/lt-web-platform/commit/745cfd4eb" style="color:#0969da; font-family:ui-monospace,monospace;">745cfd4eb</a>:
+  for each <code>var(--lt-X)</code> used in a CSS-property context that didn't match the token's section
+  (e.g. a text token used in <code>background-color</code>), it was substituted with the section-correct
+  equivalent — but only when the target's light value matched within <strong>Δ ≤ 5</strong>
+  (per Rule 1, no perceptible light-mode shift). Both source &amp; target are canonical DS tokens.
+  <br/>
+  <strong>24 distinct pairs · 1,927 swaps total</strong>
+</div>
+<table>
+<thead><tr>
+  <th>Source token</th><th>Light</th><th></th><th>→ Target token</th><th>Light</th><th class="num">Swaps</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-dark</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num">591</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num">278</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-bg-base</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-inverse</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num">190</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num">179</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num">168</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-inverse</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num">127</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num">79</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num">63</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-purple</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-purple</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
+  <td class="num">54</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num">49</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-warning</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9a6700"></span><span class="hex">#9a6700</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-warning</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9a6700"></span><span class="hex">#9a6700</span></span></td>
+  <td class="num">27</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-inverse</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num">23</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
+  <td class="num">21</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
+  <td class="num">18</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td class="num">15</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num">13</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-inverse</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-icon-transparent</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num">12</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-bg-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num">8</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num">5</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-orange</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bc4c00"></span><span class="hex">#bc4c00</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-orange</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bc4c00"></span><span class="hex">#bc4c00</span></span></td>
+  <td class="num">2</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-purple</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-purple</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
+  <td class="num">2</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-bg-base-inverse</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-inverse</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><span class="name">--lt-text-magenta</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bf3989"></span><span class="hex">#bf3989</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-magenta</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#bf3989"></span><span class="hex">#bf3989</span></span></td>
+  <td class="num">1</td>
 </tr>
 </tbody></table>
 

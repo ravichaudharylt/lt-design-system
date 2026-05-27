@@ -125,6 +125,39 @@ def hex_only(v):
     m = re.match(r'#[0-9a-fA-F]{3,8}', v.strip())
     return m.group(0) if m else v.strip()
 
+# --- Δ≤5 HISTORICAL MAPPINGS — already-executed canonical↔canonical context-correctness swaps.
+# Source: commit 745cfd4ebc7e in lt-web-platform feat/dark-mode worktree
+# "fix(theming): correct semantic token usage per CSS property context — target Δ ≤ 5"
+# Pairs extracted by walking the diff and pairing positional var(--lt-X) → var(--lt-Y) replacements.
+HISTORICAL_DELTA_SWAPS = [
+    # (source_token, target_token, swap_count)
+    ('--lt-text-secondary',   '--lt-icon-dark',         591),
+    ('--lt-text-muted',       '--lt-icon-primary',      278),
+    ('--lt-bg-base',          '--lt-text-inverse',      190),
+    ('--lt-text-info',        '--lt-icon-info',         179),
+    ('--lt-text-error',       '--lt-icon-error',        168),
+    ('--lt-text-primary',     '--lt-icon-inverse',      127),
+    ('--lt-text-info',        '--lt-border-info',        79),
+    ('--lt-text-success',     '--lt-icon-success',       63),
+    ('--lt-text-purple',      '--lt-icon-purple',        54),
+    ('--lt-text-info',        '--lt-bg-info',            49),
+    ('--lt-text-warning',     '--lt-icon-warning',       27),
+    ('--lt-text-primary',     '--lt-bg-base-inverse',    23),
+    ('--lt-text-error',       '--lt-border-error',       21),
+    ('--lt-text-error',       '--lt-bg-error',           18),
+    ('--lt-text-disabled',    '--lt-icon-disabled',      15),
+    ('--lt-text-muted',       '--lt-bg-secondary',       13),
+    ('--lt-text-inverse',     '--lt-icon-transparent',   12),
+    ('--lt-bg-info',          '--lt-text-info',           8),
+    ('--lt-text-success',     '--lt-border-success',      5),
+    ('--lt-text-orange',      '--lt-bg-orange',           2),
+    ('--lt-text-purple',      '--lt-bg-purple',           2),
+    ('--lt-bg-base-inverse',  '--lt-text-primary',        1),
+    ('--lt-text-inverse',     '--lt-bg-base',             1),
+    ('--lt-text-magenta',     '--lt-bg-magenta',          1),
+]
+HIST_COMMIT = '745cfd4eb'
+
 def swatch(hex_or_value):
     if not hex_or_value: return ''
     h = hex_only(hex_or_value)
@@ -221,6 +254,7 @@ html_out = f"""<!doctype html><html><head><meta charset="utf-8">
   <div class="stat remove"><span class="num">{n_remove}</span> REMOVE → raw hex</div>
   <div class="stat replace"><span class="num">{n_replace}</span> REPLACE → canonical DS token</div>
   <div class="stat pending"><span class="num">{n_pending}</span> PENDING</div>
+  <div class="stat" style="background:#fff4ec; border-color:#fcd0b0; color:#7a3300;"><span class="num">{len(HISTORICAL_DELTA_SWAPS)}</span> Δ≤5 historical mappings (already done)</div>
 </div>
 
 <div class="controls">
@@ -275,6 +309,41 @@ for r in rows:
 </tr>
 """
 
+html_out += """</tbody></table>
+"""
+
+# --- Section D: historical Δ≤5 mappings (already executed) ---
+hist_total = sum(n for _, _, n in HISTORICAL_DELTA_SWAPS)
+html_out += f"""
+<h2 style="font-size:16px; margin:32px 0 4px;">Δ≤5 historical mappings — already executed</h2>
+<div class="meta">
+  Semantic-misuse fix from commit
+  <a href="https://github.com/ravichaudharylt/lt-web-platform/commit/{HIST_COMMIT}" style="color:#0969da; font-family:ui-monospace,monospace;">{HIST_COMMIT}</a>:
+  for each <code>var(--lt-X)</code> used in a CSS-property context that didn't match the token's section
+  (e.g. a text token used in <code>background-color</code>), it was substituted with the section-correct
+  equivalent — but only when the target's light value matched within <strong>Δ ≤ 5</strong>
+  (per Rule 1, no perceptible light-mode shift). Both source &amp; target are canonical DS tokens.
+  <br/>
+  <strong>{len(HISTORICAL_DELTA_SWAPS)} distinct pairs · {hist_total:,} swaps total</strong>
+</div>
+<table>
+<thead><tr>
+  <th>Source token</th><th>Light</th><th></th><th>→ Target token</th><th>Light</th><th class="num">Swaps</th>
+</tr></thead>
+<tbody>
+"""
+for src, tgt, n in HISTORICAL_DELTA_SWAPS:
+    sl = LIGHT.get(src, '?'); tl = LIGHT.get(tgt, '?')
+    src_safe = html.escape(src); tgt_safe = html.escape(tgt)
+    html_out += f"""<tr>
+  <td><span class="name">{src_safe}</span></td>
+  <td><span class="hex-cell">{swatch(sl)}<span class="hex">{html.escape(sl[:24])}</span></span></td>
+  <td>→</td>
+  <td><span class="name">{tgt_safe}</span></td>
+  <td><span class="hex-cell">{swatch(tl)}<span class="hex">{html.escape(tl[:24])}</span></span></td>
+  <td class="num">{n}</td>
+</tr>
+"""
 html_out += """</tbody></table>
 
 <script>
