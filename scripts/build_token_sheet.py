@@ -89,10 +89,15 @@ def property_of(line, pos, name):
                 if 'shadow' in p: return 'shadow'
                 if p == 'fill': return 'fill'
                 if p == 'stroke': return 'stroke'
-        # 2. JSX inline-style / attribute
-        m = re.search(r'\b(color|backgroundColor|background|borderColor|border[A-Z][a-z]*|outlineColor|boxShadow|fill|stroke|iconColor|tintColor|placeholderColor|hoverColor|fillColor|strokeColor|bgColor|textColor)\s*[:=]\s*[\'"`{][^\'"`}]*$', before)
-        if m:
-            p = m.group(1).lower()
+        # 2. JSX inline-style / attribute — pick the CLOSEST `<prop>:` or `<prop>=`
+        # to var(). Permissive: any chars allowed between prop and the var() so we
+        # match ternaries like `borderBottom: cond ? `1px solid var(--lt-X)` : none`.
+        # We pick the rightmost match (closest to the var() position).
+        last_match = None
+        for mm in re.finditer(r'\b(color|backgroundColor|background|borderColor|border[A-Z][a-z]*|outlineColor|boxShadow|fill|stroke|iconColor|tintColor|placeholderColor|hoverColor|fillColor|strokeColor|bgColor|textColor)\s*[:=]', before):
+            last_match = mm
+        if last_match:
+            p = last_match.group(1).lower()
             if 'fill' in p: return 'fill'
             if 'stroke' in p: return 'stroke'
             if 'shadow' in p: return 'shadow'

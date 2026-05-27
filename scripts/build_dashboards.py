@@ -74,10 +74,13 @@ def property_of(line, pos, name):
             if 'shadow' in p: return 'shadow'
             if p == 'fill': return 'fill'
             if p == 'stroke': return 'stroke'
-    # JSX inline-style or attribute
-    m = re.search(r'\b(color|backgroundColor|background|borderColor|border[A-Z][a-z]*|outlineColor|boxShadow|fill|stroke|iconColor|tintColor|placeholderColor)\s*[:=]\s*[\'"`{][^\'"`}]*$', before)
-    if m:
-        p = m.group(1).lower()
+    # JSX inline-style or attribute — match the CLOSEST `prop:` or `prop=` to var()
+    # (permissive — allows ternaries between prop and the var())
+    last_match = None
+    for mm in re.finditer(r'\b(color|backgroundColor|background|borderColor|border[A-Z][a-z]*|outlineColor|boxShadow|fill|stroke|iconColor|tintColor|placeholderColor)\s*[:=]', before):
+        last_match = mm
+    if last_match:
+        p = last_match.group(1).lower()
         if 'fill' in p: return 'fill'
         if 'stroke' in p: return 'stroke'
         if 'shadow' in p: return 'shadow'
