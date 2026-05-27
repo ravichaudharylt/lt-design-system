@@ -304,19 +304,22 @@ html_out += f"""
 </div>
 <table>
 <thead><tr>
-  <th>Source token</th><th>Light</th><th></th><th>→ Target token</th><th>Light</th><th class="num">Swaps</th>
+  <th>Source token</th><th>Light</th><th>Dark</th><th></th><th>Target token</th><th>Light</th><th>Dark</th><th class="num">Swaps</th>
 </tr></thead>
 <tbody>
 """
 for src, tgt, n in HISTORICAL_DELTA_SWAPS:
-    sl = LIGHT.get(src, '?'); tl = LIGHT.get(tgt, '?')
+    sl = LIGHT.get(src, '?'); sd = DARK.get(src, '?')
+    tl = LIGHT.get(tgt, '?'); td = DARK.get(tgt, '?')
     src_safe = html.escape(src); tgt_safe = html.escape(tgt)
     html_out += f"""<tr>
   <td><span class="name">{src_safe}</span></td>
   <td><span class="hex-cell">{swatch(sl)}<span class="hex">{html.escape(sl[:24])}</span></span></td>
+  <td><span class="hex-cell">{swatch(sd)}<span class="hex">{html.escape(sd[:24])}</span></span></td>
   <td>→</td>
   <td><span class="name">{tgt_safe}</span></td>
   <td><span class="hex-cell">{swatch(tl)}<span class="hex">{html.escape(tl[:24])}</span></span></td>
+  <td><span class="hex-cell">{swatch(td)}<span class="hex">{html.escape(td[:24])}</span></span></td>
   <td class="num">{n}</td>
 </tr>
 """
