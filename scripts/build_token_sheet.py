@@ -384,7 +384,8 @@ const filteredPctEl = document.getElementById('filtered-pct');
 const filteredRefsEl = document.getElementById('filtered-refs');
 const filteredRefsPctEl = document.getElementById('filtered-refs-pct');
 
-const TOTAL_REFS_ALL = rows.reduce((s, r) => s + parseInt(r.dataset.count || '0', 10), 0);
+let TOTAL_REFS_ALL = 0;
+rows.forEach(r => { TOTAL_REFS_ALL += parseInt(r.dataset.count || '0', 10); });
 
 function applyFilters() {
   let visible = 0;
