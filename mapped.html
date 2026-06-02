@@ -30,6 +30,7 @@
   .pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.4px; white-space: nowrap; }
   .pill.phase1 { background: #fff4ec; color: #7a3300; }
   .pill.phase2 { background: #ddf4ff; color: #054078; }
+  .pill.hex-literal { background: #f0fff3; color: #1a7f37; }
   .phase-notes { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; font-size: 12px; color: #1f2328; }
   .phase-notes p { margin: 0 0 6px; }
   .phase-notes p:last-child { margin-bottom: 0; }
@@ -49,6 +50,7 @@
 <div class="phase-notes">
   <p><span class="pill phase1">Phase 1</span> Mapped when the canonical target's light hex matched within <strong>Δ ≤ 5</strong>.</p>
   <p><span class="pill phase2">Phase 2</span> Reviewed by the design team and Komal.</p>
+  <p><span class="pill hex-literal">Hex literal</span> Hex→token precedents mined from dark-mode migration commits; canonical target, same-context prefix, RGB Δ ≤ 40 (source token = N/A).</p>
 </div>
 
 <div class="stats">
@@ -63,6 +65,7 @@
     <option value="">All phases</option>
     <option value="phase1">Phase 1 Δ≤5 only</option>
     <option value="phase2">Phase 2 only</option>
+    <option value="hex-literal">Hex literal only</option>
   </select>
   <span style="font-size:11px; color:#656d76; margin-left:12px;">Click any column header to sort. Hover swatch for hex.</span>
 </div>
@@ -81,6 +84,30 @@
   <th onclick="sort(9)" class="num">Uses</th>
 </tr></thead>
 <tbody>
+<tr data-tok="#333333" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#333333</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#333333"></span><span class="hex">#333333</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#333333"></span><span class="hex">#333333</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">761</td>
+</tr>
+<tr data-tok="#666666" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#666666</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#666666"></span><span class="hex">#666666</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#666666"></span><span class="hex">#666666</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">610</td>
+</tr>
 <tr data-tok="--lt-text-gray-636" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-gray-636</span></td>
@@ -104,6 +131,18 @@
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">432</td>
+</tr>
+<tr data-tok="#dddddd" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#dddddd</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">396</td>
 </tr>
 <tr data-tok="--lt-text-on-emphasis" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
@@ -213,6 +252,54 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">254</td>
 </tr>
+<tr data-tok="#eaeaea" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#eaeaea</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eaeaea"></span><span class="hex">#eaeaea</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eaeaea"></span><span class="hex">#eaeaea</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">234</td>
+</tr>
+<tr data-tok="#d4d4d4" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#d4d4d4</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d4d4d4"></span><span class="hex">#d4d4d4</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d4d4d4"></span><span class="hex">#d4d4d4</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">188</td>
+</tr>
+<tr data-tok="#f7f7f7" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f7f7f7</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f7f7f7"></span><span class="hex">#f7f7f7</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f7f7f7"></span><span class="hex">#f7f7f7</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">153</td>
+</tr>
+<tr data-tok="#cf222e" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#cf222e</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">116</td>
+</tr>
 <tr data-tok="--lt-status-success-fg-alt" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-status-success-fg-alt</span></td>
@@ -272,6 +359,54 @@
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">text-only</td>
   <td class="num">54</td>
+</tr>
+<tr data-tok="#888888" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#888888</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#888888"></span><span class="hex">#888888</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#888888"></span><span class="hex">#888888</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">54</td>
+</tr>
+<tr data-tok="#f0f0f0" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f0f0f0</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f0f0"></span><span class="hex">#f0f0f0</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f0f0"></span><span class="hex">#f0f0f0</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">54</td>
+</tr>
+<tr data-tok="#cccccc" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#cccccc</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cccccc"></span><span class="hex">#cccccc</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cccccc"></span><span class="hex">#cccccc</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">48</td>
+</tr>
+<tr data-tok="#9b9b9b" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#9b9b9b</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9b9b9b"></span><span class="hex">#9b9b9b</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9b9b9b"></span><span class="hex">#9b9b9b</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">46</td>
 </tr>
 <tr data-tok="--lt-shadow-tint-medium" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
@@ -333,6 +468,18 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">39</td>
 </tr>
+<tr data-tok="#eeeeee" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#eeeeee</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eeeeee"></span><span class="hex">#eeeeee</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eeeeee"></span><span class="hex">#eeeeee</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">38</td>
+</tr>
 <tr data-tok="--lt-text-gray-656" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-text-gray-656</span></td>
@@ -381,6 +528,18 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">28</td>
 </tr>
+<tr data-tok="#656d76" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#656d76</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#656d76"></span><span class="hex">#656d76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#656d76"></span><span class="hex">#656d76</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">25</td>
+</tr>
 <tr data-tok="--lt-bg-f6f7" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
   <td><span class="name">--lt-bg-f6f7</span></td>
@@ -391,6 +550,18 @@
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
+  <td class="num">23</td>
+</tr>
+<tr data-tok="#57606a" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#57606a</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#57606a"></span><span class="hex">#57606a</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#57606a"></span><span class="hex">#57606a</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text context</td>
   <td class="num">23</td>
 </tr>
 <tr data-tok="--lt-orange-bg" data-phase="phase1">
@@ -416,6 +587,42 @@
   <td><span class="hex-cell"><span class="sw" style="background:#238636"></span><span class="hex">#238636</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">22</td>
+</tr>
+<tr data-tok="#dddddd66" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#dddddd66</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">22</td>
+</tr>
+<tr data-tok="#1f2328" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#1f2328</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1f2328"></span><span class="hex">#1f2328</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1f2328"></span><span class="hex">#1f2328</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">21</td>
+</tr>
+<tr data-tok="#e1e4e8" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#e1e4e8</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e1e4e8"></span><span class="hex">#e1e4e8</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e1e4e8"></span><span class="hex">#e1e4e8</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">19</td>
 </tr>
 <tr data-tok="--lt-text-orange-bc" data-phase="phase1">
   <td><span class="pill phase1">Phase 1 Δ≤5</span></td>
@@ -463,6 +670,42 @@
   <td><span class="hex-cell"><span class="sw" style="background:#a40e26"></span><span class="hex">#a40e26</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#b62324"></span><span class="hex">#b62324</span></span></td>
   <td class="note">commit 22e01ae</td>
+  <td class="num">14</td>
+</tr>
+<tr data-tok="#f3f4f6" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f3f4f6</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3f4f6"></span><span class="hex">#f3f4f6</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3f4f6"></span><span class="hex">#f3f4f6</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">14</td>
+</tr>
+<tr data-tok="#cf370e" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#cf370e</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf370e"></span><span class="hex">#cf370e</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cf370e"></span><span class="hex">#cf370e</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-error</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">14</td>
+</tr>
+<tr data-tok="#0366d6" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#0366d6</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0366d6"></span><span class="hex">#0366d6</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0366d6"></span><span class="hex">#0366d6</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-info</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
+  <td class="note">text context</td>
   <td class="num">14</td>
 </tr>
 <tr data-tok="--lt-text-tertiary" data-phase="phase2">
@@ -525,6 +768,18 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">11</td>
 </tr>
+<tr data-tok="#e8e9ed" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#e8e9ed</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e8e9ed"></span><span class="hex">#e8e9ed</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e8e9ed"></span><span class="hex">#e8e9ed</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-pressed</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">11</td>
+</tr>
 <tr data-tok="--lt-primer-accent-muted" data-phase="phase2">
   <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-primer-accent-muted</span></td>
@@ -549,6 +804,30 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">10</td>
 </tr>
+<tr data-tok="#d4d4d4" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#d4d4d4</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d4d4d4"></span><span class="hex">#d4d4d4</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d4d4d4"></span><span class="hex">#d4d4d4</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">stroke context</td>
+  <td class="num">10</td>
+</tr>
+<tr data-tok="#6a737d" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#6a737d</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6a737d"></span><span class="hex">#6a737d</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6a737d"></span><span class="hex">#6a737d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">10</td>
+</tr>
 <tr data-tok="--lt-border-e0" data-phase="phase2">
   <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-e0</span></td>
@@ -559,6 +838,42 @@
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
+  <td class="num">9</td>
+</tr>
+<tr data-tok="#d0d7deb2" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#d0d7deb2</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">9</td>
+</tr>
+<tr data-tok="#e9e9e9" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#e9e9e9</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e9e9e9"></span><span class="hex">#e9e9e9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e9e9e9"></span><span class="hex">#e9e9e9</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">9</td>
+</tr>
+<tr data-tok="#ecf0f1" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#ecf0f1</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ecf0f1"></span><span class="hex">#ecf0f1</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ecf0f1"></span><span class="hex">#ecf0f1</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
+  <td class="note">bg context</td>
   <td class="num">9</td>
 </tr>
 <tr data-tok="--lt-bg-tag" data-phase="phase2">
@@ -607,6 +922,30 @@
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0d1117"></span><span class="hex">#0d1117</span></span></td>
   <td class="note">commit 22e01ae</td>
+  <td class="num">8</td>
+</tr>
+<tr data-tok="#e0e0e0" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#e0e0e0</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e0e0e0"></span><span class="hex">#e0e0e0</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e0e0e0"></span><span class="hex">#e0e0e0</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">8</td>
+</tr>
+<tr data-tok="#747474" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#747474</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#747474"></span><span class="hex">#747474</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#747474"></span><span class="hex">#747474</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td class="note">text context</td>
   <td class="num">8</td>
 </tr>
 <tr data-tok="--lt-bg-eaeaea" data-phase="phase2">
@@ -681,6 +1020,18 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
 </tr>
+<tr data-tok="#dddddd" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#dddddd</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">stroke context</td>
+  <td class="num">7</td>
+</tr>
 <tr data-tok="--lt-accent-brand" data-phase="phase2">
   <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-accent-brand</span></td>
@@ -751,6 +1102,78 @@
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">commit 22e01ae</td>
+  <td class="num">6</td>
+</tr>
+<tr data-tok="#edf0f3" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#edf0f3</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#edf0f3"></span><span class="hex">#edf0f3</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#edf0f3"></span><span class="hex">#edf0f3</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">6</td>
+</tr>
+<tr data-tok="#f3f3f3" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f3f3f3</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3f3f3"></span><span class="hex">#f3f3f3</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f3f3f3"></span><span class="hex">#f3f3f3</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">6</td>
+</tr>
+<tr data-tok="#e9eff4" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#e9eff4</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e9eff4"></span><span class="hex">#e9eff4</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e9eff4"></span><span class="hex">#e9eff4</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-disabled</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">6</td>
+</tr>
+<tr data-tok="#ebecf0" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#ebecf0</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ebecf0"></span><span class="hex">#ebecf0</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#ebecf0"></span><span class="hex">#ebecf0</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-pressed</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">6</td>
+</tr>
+<tr data-tok="#197935" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#197935</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#197935"></span><span class="hex">#197935</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#197935"></span><span class="hex">#197935</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">6</td>
+</tr>
+<tr data-tok="#463c3c" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#463c3c</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#463c3c"></span><span class="hex">#463c3c</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#463c3c"></span><span class="hex">#463c3c</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-primary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note">text context</td>
   <td class="num">6</td>
 </tr>
 <tr data-tok="--lt-text-light-gray" data-phase="phase2">
@@ -837,6 +1260,42 @@
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
 </tr>
+<tr data-tok="#cccccc9e" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#cccccc9e</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cccccc"></span><span class="hex">#cccccc</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#cccccc"></span><span class="hex">#cccccc</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">5</td>
+</tr>
+<tr data-tok="#f4f5f9" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f4f5f9</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f4f5f9"></span><span class="hex">#f4f5f9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f4f5f9"></span><span class="hex">#f4f5f9</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">5</td>
+</tr>
+<tr data-tok="#59636e" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#59636e</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#59636e"></span><span class="hex">#59636e</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#59636e"></span><span class="hex">#59636e</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">5</td>
+</tr>
 <tr data-tok="--lt-border-e1e" data-phase="phase2">
   <td><span class="pill phase2">Phase 2</span></td>
   <td><span class="name">--lt-border-e1e</span></td>
@@ -895,6 +1354,66 @@
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
+  <td class="num">4</td>
+</tr>
+<tr data-tok="#6c757d" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#6c757d</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6c757d"></span><span class="hex">#6c757d</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6c757d"></span><span class="hex">#6c757d</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">4</td>
+</tr>
+<tr data-tok="#f8f8f8" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f8f8f8</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f8f8f8"></span><span class="hex">#f8f8f8</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f8f8f8"></span><span class="hex">#f8f8f8</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">4</td>
+</tr>
+<tr data-tok="#d1d9e0" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#d1d9e0</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1d9e0"></span><span class="hex">#d1d9e0</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d1d9e0"></span><span class="hex">#d1d9e0</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-secondary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
+  <td class="note">border context</td>
+  <td class="num">4</td>
+</tr>
+<tr data-tok="#fff5e5" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#fff5e5</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fff5e5"></span><span class="hex">#fff5e5</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fff5e5"></span><span class="hex">#fff5e5</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-orange-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#fff1e5"></span><span class="hex">#fff1e5</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#db6d281a"></span><span class="hex">#db6d281a</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">4</td>
+</tr>
+<tr data-tok="#f9f9fa" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f9f9fa</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f9f9fa"></span><span class="hex">#f9f9fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f9f9fa"></span><span class="hex">#f9f9fa</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
   <td class="num">4</td>
 </tr>
 <tr data-tok="--lt-bg-active" data-phase="phase2">
@@ -991,6 +1510,66 @@
   <td><span class="hex-cell"><span class="sw" style="background:#197935"></span><span class="hex">#197935</span></span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#2e9a40"></span><span class="hex">#2e9a40</span></span></td>
   <td class="note">commit 22e01ae</td>
+  <td class="num">3</td>
+</tr>
+<tr data-tok="#1c8139" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#1c8139</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1c8139"></span><span class="hex">#1c8139</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1c8139"></span><span class="hex">#1c8139</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-text-success</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
+  <td class="note">text context</td>
+  <td class="num">3</td>
+</tr>
+<tr data-tok="#54aeff" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#54aeff</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#54aeff"></span><span class="hex">#54aeff</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#54aeff"></span><span class="hex">#54aeff</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-border-info-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#54aeff66"></span><span class="hex">#54aeff66</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#388bfd66"></span><span class="hex">#388bfd66</span></span></td>
+  <td class="note">stroke context</td>
+  <td class="num">3</td>
+</tr>
+<tr data-tok="#dddddd" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#dddddd</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#dddddd"></span><span class="hex">#dddddd</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-base-muted</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">3</td>
+</tr>
+<tr data-tok="#f4f5f9" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#f4f5f9</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f4f5f9"></span><span class="hex">#f4f5f9</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f4f5f9"></span><span class="hex">#f4f5f9</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-tertiary</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f4f4f4"></span><span class="hex">#f4f4f4</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
+  <td class="note">bg context</td>
+  <td class="num">3</td>
+</tr>
+<tr data-tok="#333333" data-phase="hex-literal">
+  <td><span class="pill hex-literal">Hex literal</span></td>
+  <td><span class="name">#333333</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#333333"></span><span class="hex">#333333</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#333333"></span><span class="hex">#333333</span></span></td>
+  <td>→</td>
+  <td><span class="name">--lt-bg-emphasis</span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#101010"></span><span class="hex">#101010</span></span></td>
+  <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
+  <td class="note">bg context</td>
   <td class="num">3</td>
 </tr>
 <tr data-tok="--lt-border-ccc" data-phase="phase2">
