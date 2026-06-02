@@ -31,6 +31,12 @@
   .pill.phase1 { background: #fff4ec; color: #7a3300; }
   .pill.phase2 { background: #ddf4ff; color: #054078; }
   .pill.hex-literal { background: #f0fff3; color: #1a7f37; }
+  td.delta { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
+  td.delta.delta-zero { color: #6e7781; }
+  td.delta.delta-low  { color: #1a7f37; background: #dafbe1; }
+  td.delta.delta-mid  { color: #7a3300; background: #fff4ec; }
+  td.delta.delta-high { color: #d1242f; background: #ffebe9; }
+  td.delta.delta-na   { color: #afb8c1; }
   .phase-notes { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; font-size: 12px; color: #1f2328; }
   .phase-notes p { margin: 0 0 6px; }
   .phase-notes p:last-child { margin-bottom: 0; }
@@ -50,7 +56,7 @@
 <div class="phase-notes">
   <p><span class="pill phase1">Phase 1</span> Mapped when the canonical target's light hex matched within <strong>Δ ≤ 5</strong>.</p>
   <p><span class="pill phase2">Phase 2</span> Reviewed by the design team and Komal.</p>
-  <p><span class="pill hex-literal">Hex literal</span> Hex→token precedents mined from 6 dark-mode migration commits (<code>d4645396</code> + <code>21733a21</code> + <code>4fd2b676</code> + <code>dec10914</code> + <code>960504c9</code> + <code>22e01ae4</code>); canonical target, same-context prefix, RGB Δ ≤ 40 (source token = N/A; see Note column for source commits).</p>
+  <p><span class="pill hex-literal">Hex literal</span> Two-stage history: a literal hex (e.g. <code>#333</code>) was first tokenized to a semantic name (<code>--lt-text-primary</code>) with its <em>original</em> value preserved (<code>--lt-text-primary: #333;</code>). The DS retheme later updated the token's value to its canonical DS hex (<code>--lt-text-primary: #24292f;</code>), causing the apparent Δ between the source hex and the current token light value. Mined from 6 migration commits (<code>d4645396</code>, <code>21733a21</code>, <code>4fd2b676</code>, <code>dec10914</code>, <code>960504c9</code>, <code>22e01ae4</code>); filtered to canonical targets, matching context, RGB Δ ≤ 40. Source-token column shows the hex itself (no original token name).</p>
 </div>
 
 <div class="stats">
@@ -80,9 +86,10 @@
   <th></th>
   <th onclick="sort(5)">Target</th>
   <th onclick="sort(6)">Light</th>
-  <th onclick="sort(7)">Dark</th>
-  <th onclick="sort(8)">Notes</th>
-  <th onclick="sort(9)" class="num">Uses</th>
+  <th onclick="sort(7)" class="num" title="Max RGB channel delta between source-light and target-light hex">Δ&nbsp;light</th>
+  <th onclick="sort(8)">Dark</th>
+  <th onclick="sort(9)">Notes</th>
+  <th onclick="sort(10)" class="num">Uses</th>
 </tr></thead>
 <tbody>
 <tr data-tok="#333333" data-phase="hex-literal">
@@ -93,6 +100,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-mid">15</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">text context · 21733a21 (677), d4645396 (84)</td>
   <td class="num">761</td>
@@ -105,6 +113,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-mid">16</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text context · 21733a21 (475), d4645396 (135)</td>
   <td class="num">610</td>
@@ -117,6 +126,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">454</td>
@@ -129,6 +139,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">432</td>
@@ -141,6 +152,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · 21733a21 (263), d4645396 (133)</td>
   <td class="num">396</td>
@@ -153,6 +165,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-inverse</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">358</td>
@@ -165,6 +178,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">355</td>
@@ -177,6 +191,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">330</td>
@@ -189,6 +204,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">303</td>
@@ -201,6 +217,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-high">47</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">text-only</td>
   <td class="num">287</td>
@@ -213,6 +230,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">284</td>
@@ -225,6 +243,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">269</td>
@@ -237,6 +256,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">257</td>
@@ -249,6 +269,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">254</td>
@@ -261,6 +282,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-high">26</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · 21733a21 (178), d4645396 (56)</td>
   <td class="num">234</td>
@@ -273,6 +295,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (164), 21733a21 (24)</td>
   <td class="num">188</td>
@@ -285,6 +308,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · 21733a21 (138), d4645396 (15)</td>
   <td class="num">153</td>
@@ -297,6 +321,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">text context · 21733a21 (67), d4645396 (49)</td>
   <td class="num">116</td>
@@ -309,6 +334,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">107</td>
@@ -321,6 +347,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only; leave bg-* as-is</td>
   <td class="num">97</td>
@@ -333,6 +360,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-purple</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#ab7df8"></span><span class="hex">#ab7df8</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">94</td>
@@ -345,6 +373,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-warning</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#9a6700"></span><span class="hex">#9a6700</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#d29922"></span><span class="hex">#d29922</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">77</td>
@@ -357,6 +386,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">65</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">text-only</td>
   <td class="num">54</td>
@@ -369,6 +399,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td class="num delta delta-high">23</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
   <td class="note">text context · 21733a21 (37), d4645396 (17)</td>
   <td class="num">54</td>
@@ -381,6 +412,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · 21733a21 (42), d4645396 (12)</td>
   <td class="num">54</td>
@@ -393,6 +425,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">18</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (43), 21733a21 (5)</td>
   <td class="num">48</td>
@@ -405,6 +438,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td class="num delta delta-mid">15</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
   <td class="note">text context · 21733a21 (33), d4645396 (13)</td>
   <td class="num">46</td>
@@ -417,6 +451,7 @@
   <td>→</td>
   <td><span class="name">--lt-shadow-floating-small-2</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#424a530a"></span><span class="hex">#424a530a</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#01040966"></span><span class="hex">#01040966</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">45</td>
@@ -429,6 +464,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">45</td>
@@ -441,6 +477,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">43</td>
@@ -453,6 +490,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-error-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f851491a"></span><span class="hex">#f851491a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">41</td>
@@ -465,6 +503,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-info-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#388bfd1a"></span><span class="hex">#388bfd1a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">39</td>
@@ -477,6 +516,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-mid">12</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (25), 21733a21 (13)</td>
   <td class="num">38</td>
@@ -489,6 +529,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">36</td>
@@ -501,6 +542,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-mid">7</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">text-only</td>
   <td class="num">35</td>
@@ -513,6 +555,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-high">54</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text-only</td>
   <td class="num">33</td>
@@ -525,6 +568,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#1f6feb"></span><span class="hex">#1f6feb</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">28</td>
@@ -537,6 +581,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text context · d4645396 (13), 21733a21 (12)</td>
   <td class="num">25</td>
@@ -549,6 +594,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">23</td>
@@ -561,6 +607,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-mid">12</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text context · d4645396 (18), 21733a21 (5)</td>
   <td class="num">23</td>
@@ -573,6 +620,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-brand-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#c24e00"></span><span class="hex">#c24e00</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#db6d28"></span><span class="hex">#db6d28</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">22</td>
@@ -585,6 +633,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1f883d"></span><span class="hex">#1f883d</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#238636"></span><span class="hex">#238636</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">22</td>
@@ -597,6 +646,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (22)</td>
   <td class="num">22</td>
@@ -609,6 +659,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-mid">7</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">text context · d4645396 (11), 21733a21 (10)</td>
   <td class="num">21</td>
@@ -621,6 +672,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">17</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (14), 21733a21 (5)</td>
   <td class="num">19</td>
@@ -633,6 +685,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-orange</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bc4c00"></span><span class="hex">#bc4c00</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#db6d28"></span><span class="hex">#db6d28</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">18</td>
@@ -645,6 +698,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">15</td>
@@ -657,6 +711,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-warning-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fff8c5"></span><span class="hex">#fff8c5</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#bb800926"></span><span class="hex">#bb800926</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">14</td>
@@ -669,6 +724,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-error-hover</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#a40e26"></span><span class="hex">#a40e26</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#b62324"></span><span class="hex">#b62324</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">14</td>
@@ -681,6 +737,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (14)</td>
   <td class="num">14</td>
@@ -693,6 +750,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">33</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">text context · d4645396 (12), 21733a21 (2)</td>
   <td class="num">14</td>
@@ -705,6 +763,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-mid">6</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">text context · d4645396 (13), 21733a21 (1)</td>
   <td class="num">14</td>
@@ -717,6 +776,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-high">55</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">text-only</td>
   <td class="num">13</td>
@@ -729,6 +789,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-mid">12</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg-only (despite name)</td>
   <td class="num">13</td>
@@ -741,6 +802,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
   <td class="num">12</td>
@@ -753,6 +815,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-success-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#dafbe1"></span><span class="hex">#dafbe1</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#2ea04326"></span><span class="hex">#2ea04326</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">11</td>
@@ -765,6 +828,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">11</td>
@@ -777,6 +841,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">bg context · d4645396 (8), 21733a21 (3)</td>
   <td class="num">11</td>
@@ -789,6 +854,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-info-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#54aeff66"></span><span class="hex">#54aeff66</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#388bfd66"></span><span class="hex">#388bfd66</span></span></td>
   <td class="note">border-only; target has α66</td>
   <td class="num">10</td>
@@ -801,6 +867,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-inverse</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">10</td>
@@ -813,6 +880,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">stroke context · d4645396 (10)</td>
   <td class="num">10</td>
@@ -825,6 +893,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-mid">7</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text context · 21733a21 (10)</td>
   <td class="num">10</td>
@@ -837,6 +906,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">16</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
   <td class="num">9</td>
@@ -849,6 +919,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (9)</td>
   <td class="num">9</td>
@@ -861,6 +932,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-high">25</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (9)</td>
   <td class="num">9</td>
@@ -873,6 +945,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">bg context · d4645396 (9)</td>
   <td class="num">9</td>
@@ -885,6 +958,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-mid">7</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg-only</td>
   <td class="num">8</td>
@@ -897,6 +971,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">33</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">text-only</td>
   <td class="num">8</td>
@@ -909,6 +984,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">8</td>
@@ -921,6 +997,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#0d1117"></span><span class="hex">#0d1117</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">8</td>
@@ -933,6 +1010,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">16</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (7), 21733a21 (1)</td>
   <td class="num">8</td>
@@ -945,6 +1023,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">text context · d4645396 (8)</td>
   <td class="num">8</td>
@@ -957,6 +1036,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-high">26</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only (despite name)</td>
   <td class="num">7</td>
@@ -969,6 +1049,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1f883d"></span><span class="hex">#1f883d</span></span></td>
+  <td class="num delta delta-high">28</td>
   <td><span class="hex-cell"><span class="sw" style="background:#238636"></span><span class="hex">#238636</span></span></td>
   <td class="note">bg-only</td>
   <td class="num">7</td>
@@ -981,6 +1062,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">47</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">text-only</td>
   <td class="num">7</td>
@@ -993,6 +1075,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-primary-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#95d8a6"></span><span class="hex">#95d8a6</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#105823"></span><span class="hex">#105823</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
@@ -1005,6 +1088,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
@@ -1017,6 +1101,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">7</td>
@@ -1029,6 +1114,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">stroke context · d4645396 (7)</td>
   <td class="num">7</td>
@@ -1041,6 +1127,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-brand-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ed5f00"></span><span class="hex">#ed5f00</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7813f"></span><span class="hex">#f7813f</span></span></td>
   <td class="note">bg-only</td>
   <td class="num">6</td>
@@ -1053,6 +1140,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
@@ -1065,6 +1153,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-purple-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fbefff"></span><span class="hex">#fbefff</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#ab7df826"></span><span class="hex">#ab7df826</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
@@ -1077,6 +1166,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
@@ -1089,6 +1179,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-orange-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fff1e5"></span><span class="hex">#fff1e5</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#db6d281a"></span><span class="hex">#db6d281a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
@@ -1101,6 +1192,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">6</td>
@@ -1113,6 +1205,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">bg context · d4645396 (6)</td>
   <td class="num">6</td>
@@ -1125,6 +1218,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-mid">7</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (4), 21733a21 (2)</td>
   <td class="num">6</td>
@@ -1137,6 +1231,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">bg context · d4645396 (6)</td>
   <td class="num">6</td>
@@ -1149,6 +1244,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">bg context · d4645396 (6)</td>
   <td class="num">6</td>
@@ -1161,6 +1257,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num delta delta-mid">6</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td class="note">text context · 21733a21 (6)</td>
   <td class="num">6</td>
@@ -1173,6 +1270,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-high">34</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">text context · d4645396 (6)</td>
   <td class="num">6</td>
@@ -1185,6 +1283,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-high">54</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text-only</td>
   <td class="num">5</td>
@@ -1197,6 +1296,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
@@ -1209,6 +1309,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-magenta-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffeff7"></span><span class="hex">#ffeff7</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#db61a21a"></span><span class="hex">#db61a21a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
@@ -1221,6 +1322,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
@@ -1233,6 +1335,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-magenta</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#bf3989"></span><span class="hex">#bf3989</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#db61a2"></span><span class="hex">#db61a2</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
@@ -1245,6 +1348,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#cf222e"></span><span class="hex">#cf222e</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#da3633"></span><span class="hex">#da3633</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
@@ -1257,6 +1361,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">5</td>
@@ -1269,6 +1374,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">18</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (5)</td>
   <td class="num">5</td>
@@ -1281,6 +1387,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (3), 21733a21 (2)</td>
   <td class="num">5</td>
@@ -1293,6 +1400,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text context · 21733a21 (5)</td>
   <td class="num">5</td>
@@ -1305,6 +1413,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">17</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
   <td class="num">4</td>
@@ -1317,6 +1426,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
@@ -1329,6 +1439,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
@@ -1341,6 +1452,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
@@ -1353,6 +1465,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">4</td>
@@ -1365,6 +1478,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note">text context · d4645396 (4)</td>
   <td class="num">4</td>
@@ -1377,6 +1491,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (4)</td>
   <td class="num">4</td>
@@ -1389,6 +1504,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border context · d4645396 (4)</td>
   <td class="num">4</td>
@@ -1401,6 +1517,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-orange-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fff1e5"></span><span class="hex">#fff1e5</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#db6d281a"></span><span class="hex">#db6d281a</span></span></td>
   <td class="note">bg context · d4645396 (3), 21733a21 (1)</td>
   <td class="num">4</td>
@@ -1413,6 +1530,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (3), 21733a21 (1)</td>
   <td class="num">4</td>
@@ -1425,6 +1543,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg-only</td>
   <td class="num">3</td>
@@ -1437,6 +1556,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg-only</td>
   <td class="num">3</td>
@@ -1449,6 +1569,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-mid">12</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text-only</td>
   <td class="num">3</td>
@@ -1461,6 +1582,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-inverse</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
@@ -1473,6 +1595,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
@@ -1485,6 +1608,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
@@ -1497,6 +1621,7 @@
   <td>→</td>
   <td><span class="name">--lt-icon-transparent</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
@@ -1509,6 +1634,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-primary-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#197935"></span><span class="hex">#197935</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#2e9a40"></span><span class="hex">#2e9a40</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">3</td>
@@ -1521,6 +1647,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td class="note">text context · d4645396 (3)</td>
   <td class="num">3</td>
@@ -1533,6 +1660,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-info-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#54aeff66"></span><span class="hex">#54aeff66</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#388bfd66"></span><span class="hex">#388bfd66</span></span></td>
   <td class="note">stroke context · d4645396 (3)</td>
   <td class="num">3</td>
@@ -1545,6 +1673,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-high">29</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">bg context · d4645396 (3)</td>
   <td class="num">3</td>
@@ -1557,6 +1686,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-tertiary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f4f4f4"></span><span class="hex">#f4f4f4</span></span></td>
+  <td class="num delta delta-low">5</td>
   <td><span class="hex-cell"><span class="sw" style="background:#21262d"></span><span class="hex">#21262d</span></span></td>
   <td class="note">bg context · 21733a21 (3)</td>
   <td class="num">3</td>
@@ -1569,6 +1699,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-emphasis</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#101010"></span><span class="hex">#101010</span></span></td>
+  <td class="num delta delta-high">35</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note">bg context · 21733a21 (3)</td>
   <td class="num">3</td>
@@ -1581,6 +1712,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">18</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
   <td class="num">2</td>
@@ -1593,6 +1725,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-error-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ff818266"></span><span class="hex">#ff818266</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f8514966"></span><span class="hex">#f8514966</span></span></td>
   <td class="note">target has α66</td>
   <td class="num">2</td>
@@ -1605,6 +1738,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
   <td class="num">2</td>
@@ -1617,6 +1751,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#0d1117"></span><span class="hex">#0d1117</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1629,6 +1764,7 @@
   <td>→</td>
   <td><span class="name">--lt-icon-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#1f6feb"></span><span class="hex">#1f6feb</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1641,6 +1777,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#0d1117"></span><span class="hex">#0d1117</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1653,6 +1790,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1665,6 +1803,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-info-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#388bfd1a"></span><span class="hex">#388bfd1a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1677,6 +1816,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1689,6 +1829,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b2299"></span><span class="hex">#161b2299</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1701,6 +1842,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1713,6 +1855,7 @@
   <td>→</td>
   <td><span class="name">--lt-icon-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7681"></span><span class="hex">#6e7681</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1725,6 +1868,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-inverse</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1737,6 +1881,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">2</td>
@@ -1749,6 +1894,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8c959f"></span><span class="hex">#8c959f</span></span></td>
+  <td class="num delta delta-mid">15</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d859080"></span><span class="hex">#7d859080</span></span></td>
   <td class="note">text-only</td>
   <td class="num">1</td>
@@ -1761,6 +1907,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1773,6 +1920,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1785,6 +1933,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1797,6 +1946,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-disabled</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#eaeef2b2"></span><span class="hex">#eaeef2b2</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d66"></span><span class="hex">#3d444d66</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1809,6 +1959,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1821,6 +1972,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1833,6 +1985,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">2</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1845,6 +1998,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1857,6 +2011,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-error-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
+  <td class="num delta delta-low">4</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f851491a"></span><span class="hex">#f851491a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1869,6 +2024,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1881,6 +2037,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1893,6 +2050,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1905,6 +2063,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-purple</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#8250df"></span><span class="hex">#8250df</span></span></td>
+  <td class="num delta delta-high">86</td>
   <td><span class="hex-cell"><span class="sw" style="background:#ab7df8"></span><span class="hex">#ab7df8</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1917,6 +2076,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1929,6 +2089,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1941,6 +2102,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffffff"></span><span class="hex">#ffffff</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#0d1117"></span><span class="hex">#0d1117</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1953,6 +2115,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1965,6 +2128,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-pressed</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#e7ebef"></span><span class="hex">#e7ebef</span></span></td>
+  <td class="num delta delta-low">3</td>
   <td><span class="hex-cell"><span class="sw" style="background:#161b22"></span><span class="hex">#161b22</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1977,6 +2141,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-info-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#388bfd1a"></span><span class="hex">#388bfd1a</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -1989,6 +2154,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-zero">0</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -2001,6 +2167,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-base-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#f6f8fa"></span><span class="hex">#f6f8fa</span></span></td>
+  <td class="num delta delta-low">1</td>
   <td><span class="hex-cell"><span class="sw" style="background:#010409"></span><span class="hex">#010409</span></span></td>
   <td class="note">commit 22e01ae</td>
   <td class="num">1</td>
@@ -2013,6 +2180,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-mid">16</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">red — per context</td>
   <td class="num">0</td>
@@ -2025,6 +2193,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-high">169</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2037,6 +2206,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-high">21</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2049,6 +2219,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-error-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
+  <td class="num delta delta-high">49</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f851491a"></span><span class="hex">#f851491a</span></span></td>
   <td class="note">Flash danger (no flash token)</td>
   <td class="num">0</td>
@@ -2061,6 +2232,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-high">39</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">blue — per context</td>
   <td class="num">0</td>
@@ -2073,6 +2245,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-warning-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#fff8c5"></span><span class="hex">#fff8c5</span></span></td>
+  <td class="num delta delta-high">21</td>
   <td><span class="hex-cell"><span class="sw" style="background:#bb800926"></span><span class="hex">#bb800926</span></span></td>
   <td class="note">tag-yellow → warning-muted (hex match)</td>
   <td class="num">0</td>
@@ -2085,6 +2258,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-error-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ffebe9"></span><span class="hex">#ffebe9</span></span></td>
+  <td class="num delta delta-mid">17</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f851491a"></span><span class="hex">#f851491a</span></span></td>
   <td class="note">tag-pink → error-muted (hex match)</td>
   <td class="num">0</td>
@@ -2097,6 +2271,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-brand-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ed5f00"></span><span class="hex">#ed5f00</span></span></td>
+  <td class="num delta delta-high">81</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f7813f"></span><span class="hex">#f7813f</span></span></td>
   <td class="note">invisible-btn orange → brand orange</td>
   <td class="num">0</td>
@@ -2109,6 +2284,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">18</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2121,6 +2297,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-mid">18</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2133,6 +2310,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-high">94</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2145,6 +2323,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-high">92</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">verify</td>
   <td class="num">0</td>
@@ -2157,6 +2336,7 @@
   <td>→</td>
   <td><span class="name">--lt-bg-info-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#ddf4ff"></span><span class="hex">#ddf4ff</span></span></td>
+  <td class="num delta delta-high">35</td>
   <td><span class="hex-cell"><span class="sw" style="background:#388bfd1a"></span><span class="hex">#388bfd1a</span></span></td>
   <td class="note">tag-blueAccent → info-muted</td>
   <td class="num">0</td>
@@ -2169,6 +2349,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">48</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">red — per context</td>
   <td class="num">0</td>
@@ -2181,6 +2362,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-high">34</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2193,6 +2375,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num delta delta-high">58</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td class="note">also audit --lt-c-d29922 in LogLevels</td>
   <td class="num">0</td>
@@ -2205,6 +2388,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-high">47</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">blue — per context</td>
   <td class="num">0</td>
@@ -2217,6 +2401,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">51</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">confirm w/ Rajat</td>
   <td class="num">0</td>
@@ -2229,6 +2414,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-mid">10</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2241,6 +2427,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">66</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">severe → error (canonical)</td>
   <td class="num">0</td>
@@ -2253,6 +2440,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-high">51</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">severe → error (canonical)</td>
   <td class="num">0</td>
@@ -2265,6 +2453,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-error</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d1242f"></span><span class="hex">#d1242f</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f85149"></span><span class="hex">#f85149</span></span></td>
   <td class="note">red — per context</td>
   <td class="num">0</td>
@@ -2277,6 +2466,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-primary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#24292f"></span><span class="hex">#24292f</span></span></td>
+  <td class="num delta delta-high">46</td>
   <td><span class="hex-cell"><span class="sw" style="background:#f0f6fc"></span><span class="hex">#f0f6fc</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2289,6 +2479,7 @@
   <td>→</td>
   <td><span class="name">--lt-border-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#d0d7de"></span><span class="hex">#d0d7de</span></span></td>
+  <td class="num delta delta-high">25</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3d444d"></span><span class="hex">#3d444d</span></span></td>
   <td class="note">border-only</td>
   <td class="num">0</td>
@@ -2301,6 +2492,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-mid">6</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note">blue — per context</td>
   <td class="num">0</td>
@@ -2313,6 +2505,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-success</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#1a7f37"></span><span class="hex">#1a7f37</span></span></td>
+  <td class="num delta delta-high">46</td>
   <td><span class="hex-cell"><span class="sw" style="background:#3fb950"></span><span class="hex">#3fb950</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2325,6 +2518,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-muted</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#6e7781"></span><span class="hex">#6e7781</span></span></td>
+  <td class="num delta delta-mid">13</td>
   <td><span class="hex-cell"><span class="sw" style="background:#7d8590"></span><span class="hex">#7d8590</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2337,6 +2531,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-info</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#0969da"></span><span class="hex">#0969da</span></span></td>
+  <td class="num delta delta-high">55</td>
   <td><span class="hex-cell"><span class="sw" style="background:#4493f8"></span><span class="hex">#4493f8</span></span></td>
   <td class="note"></td>
   <td class="num">0</td>
@@ -2349,6 +2544,7 @@
   <td>→</td>
   <td><span class="name">--lt-text-secondary</span></td>
   <td><span class="hex-cell"><span class="sw" style="background:#636c76"></span><span class="hex">#636c76</span></span></td>
+  <td class="num delta delta-mid">7</td>
   <td><span class="hex-cell"><span class="sw" style="background:#9198a1"></span><span class="hex">#9198a1</span></span></td>
   <td class="note">text-only</td>
   <td class="num">0</td>
