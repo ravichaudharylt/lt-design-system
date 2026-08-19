@@ -36,9 +36,12 @@ HTML dashboards published in this repo (GitHub Pages).
 
 The design palette is derived at build time: every token declared in `tokens.css`
 that is not listed in `data/orphan_tokens.json` is an official design token; hexes
-come straight from `tokens.css`. `data/orphan_tokens.json` mirrors col A of the
-"Design Team Review" Google Sheet (326 orphans) — re-export it from the sheet if
-orphans are ever added or removed there. `data/design_palette_names.json` supplies
+come straight from `tokens.css`. `data/orphan_tokens.json` holds every known
+orphan token name: col A of the "Design Team Review" Google Sheet (324 rows) plus
+zero-usage orphans removed from review while still declared in tokens.css
+(currently `--lt-accent-brand`, `--lt-primer-danger-muted`). Drop a name from the
+list only once its declaration is gone from tokens.css; re-export from the sheet
+if orphans are added there. `data/design_palette_names.json` supplies
 display slash-names and section labels; a palette token missing from it falls back
 to a name derived from its var name.
 
