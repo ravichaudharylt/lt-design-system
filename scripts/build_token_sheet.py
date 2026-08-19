@@ -284,7 +284,7 @@ html = f"""<!DOCTYPE html>
   <a href="mapping.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#0969da,#054078); color:white; text-decoration:none; letter-spacing:0.3px;">Migration roadmap &amp; mapping →</a>
   <a href="mapped.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#cf222e,#8b0820); color:white; text-decoration:none; letter-spacing:0.3px;">Orphan replacements →</a>
 </h1>
-<div class="meta">Generated {now} &middot; <strong>Post-Phase-1 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
+<div class="meta">Generated {now} &middot; <strong>Post-Phase-3 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
 <div class="stats">
   <span class="stat-pill total"><span class="num" id="total-count">{TOTAL}</span><span>total tokens</span></span>
   <span class="stat-pill total" style="background:#f5fbff;color:#054078;border:1px solid #b6e3ff"><span class="num">{DESIGN_COUNT}</span><span>★ official design tokens</span></span>
