@@ -1,35 +1,20 @@
 """Generate the main token_sheet.html (used as index.html on Pages)."""
-import re, os, collections, openpyxl
+import re, os, collections, json
 
-TOKENS_CSS = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components/src/styles/tokens.css'
+TOKENS_CSS = os.environ.get('TOKENS_CSS',
+    '/Users/ravichaudhary/Desktop/LambdaTest/lt-components/src/styles/tokens.css')
 WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
 LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
-XLSX = '/Users/ravichaudhary/Downloads/dark-mode-color-audit (1).xlsx'
+DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 
-# Build the set of "official design system" token names by deriving --lt-* canonicals
-# from the design palette in the audit xlsx.
-def _design_canonical(name):
-    parts = name.split('/')
-    if parts[0] == 'color': parts = parts[1:]
-    return '--lt-' + '-'.join(parts)
-
-DESIGN_TOKENS = set()
-try:
-    wb = openpyxl.load_workbook(XLSX, data_only=True)
-    section = None
-    for row in wb['FINAL'].iter_rows(values_only=True):
-        a, name, light, dark = row[0], row[1], row[2], row[3]
-        if a and not name: section = a; continue
-        if not name or not light: continue
-        if str(name).upper() == 'TOKENS USED IN DESIGN SYSTEM': continue
-        nm = str(name).strip()
-        # Targeted rename: design team listed 2 rows under ICON section but
-        # named "color/border/X". They were meant to be "color/icon/X".
-        if section == 'ICON' and nm.startswith('color/border/'):
-            nm = 'color/icon/' + nm.split('/', 2)[2]
-        DESIGN_TOKENS.add(_design_canonical(nm))
-except Exception as e:
-    print(f"warning: could not load design palette: {e}")
+# Official design tokens = everything declared in tokens.css that is not a known
+# orphan. data/orphan_tokens.json mirrors col A of the "Design Team Review" Google
+# Sheet (the live review state); tokens.css is the live palette source.
+with open(os.path.join(DATA, 'orphan_tokens.json')) as fh:
+    ORPHAN_TOKENS = set(json.load(fh))
+with open(TOKENS_CSS) as fh:
+    _declared = set(re.findall(r'(--lt-[a-zA-Z0-9-]+)\s*:', fh.read()))
+DESIGN_TOKENS = _declared - ORPHAN_TOKENS
 
 # 1. Parse tokens.css → tokens{name: {light, dark}} + utility class map
 tokens = {}

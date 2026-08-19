@@ -13,7 +13,7 @@ import os, re, json, collections
 
 WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
 LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
-TOKENS_CSS = f'{LTC}/src/styles/tokens.css'
+TOKENS_CSS = os.environ.get('TOKENS_CSS', f'{LTC}/src/styles/tokens.css')
 OUT = '/Users/ravichaudhary/Desktop/LambdaTest/dark-mode-reports/c_token_review.html'
 
 # --- token hex values from tokens.css (light block) ---

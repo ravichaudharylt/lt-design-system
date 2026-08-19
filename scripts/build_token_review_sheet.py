@@ -1,6 +1,6 @@
 """Review sheet for ALL non-design-canonical --lt-* tokens (the "orphans").
 
-Design canonicals (114, from dark-mode-color-audit FINAL sheet) are EXCLUDED.
+Design canonicals (declared in tokens.css minus known orphans) are EXCLUDED.
 Everything else defined in tokens.css is in scope: --lt-c-* value-encoded tokens
 AND semantic-named non-canonical tokens (--lt-text-teal-43b, --lt-bg-emphasis, ...).
 
@@ -12,27 +12,16 @@ import os, re, json, collections
 
 WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
 LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
-TOKENS_CSS = f'{LTC}/src/styles/tokens.css'
-XLSX = '/Users/ravichaudhary/Downloads/dark-mode-color-audit (1).xlsx'
+TOKENS_CSS = os.environ.get('TOKENS_CSS', f'{LTC}/src/styles/tokens.css')
 OUT = '/Users/ravichaudhary/Desktop/LambdaTest/dark-mode-reports/token_review.html'
+DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 
-# --- design canonical set (to EXCLUDE) ---
-import openpyxl
-def canonical(name):
-    parts = name.split('/')
-    if parts[0] == 'color': parts = parts[1:]
-    return '--lt-' + '-'.join(parts)
-design_set = set()
-wb = openpyxl.load_workbook(XLSX, data_only=True)
-section = None
-for row in wb['FINAL'].iter_rows(values_only=True):
-    a, name, light, dark = row[0], row[1], row[2], row[3]
-    if a and not name: section = a; continue
-    if name and light and str(name).upper() != 'TOKENS USED IN DESIGN SYSTEM':
-        nm = str(name).strip()
-        if section == 'ICON' and nm.startswith('color/border/'):
-            nm = 'color/icon/' + nm.split('/', 2)[2]
-        design_set.add(canonical(nm))
+# --- design canonical set (to EXCLUDE) = declared in tokens.css minus known orphans
+# (data/orphan_tokens.json mirrors col A of the Design Team Review sheet) ---
+with open(os.path.join(DATA, 'orphan_tokens.json')) as fh:
+    ORPHAN_TOKENS = set(json.load(fh))
+with open(TOKENS_CSS) as fh:
+    design_set = set(re.findall(r'(--lt-[a-zA-Z0-9-]+)\s*:', fh.read())) - ORPHAN_TOKENS
 
 # --- all tokens defined in tokens.css (light block hex) ---
 tok_hex = {}

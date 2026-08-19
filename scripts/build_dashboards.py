@@ -2,10 +2,11 @@
 Rebuild both dashboards (token_sheet + mapping report) from current state.
 Self-contained — doesn't depend on prior /tmp scripts.
 """
-import openpyxl, re, os, math, collections, json
+import re, os, math, collections, json
 
-TOKENS_CSS = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components/src/styles/tokens.css'
-XLSX = '/Users/ravichaudhary/Downloads/dark-mode-color-audit (1).xlsx'
+TOKENS_CSS = os.environ.get('TOKENS_CSS',
+    '/Users/ravichaudhary/Desktop/LambdaTest/lt-components/src/styles/tokens.css')
+DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
 LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
 REPORTS = '/Users/ravichaudhary/Desktop/LambdaTest/dark-mode-reports'
@@ -31,23 +32,41 @@ def is_clean_hex(s):
 
 def rgb_dist(a,b): return math.sqrt(sum((a[i]-b[i])**2 for i in range(3)))
 
-# 1. Design palette
-wb = openpyxl.load_workbook(XLSX, data_only=True)
-ws = wb['FINAL']
-design=[]; section=None
-for row in ws.iter_rows(values_only=True):
-    a,name,light,dark = row[0],row[1],row[2],row[3]
-    if a and not name: section=a; continue
-    if name and light:
-        if str(name).upper() == 'TOKENS USED IN DESIGN SYSTEM': continue
-        nm = str(name).strip()
-        # Targeted fix: design team has 2 rows listed under ICON section but named
-        # `color/border/secondary*`. Those specific rows should be `color/icon/*`.
-        # ONLY apply this targeted fix — other segments (overlay/, component/) are valid.
-        if section == 'ICON' and nm.startswith('color/border/'):
-            nm = 'color/icon/' + nm.split('/', 2)[2]
-        design.append({'design':nm,'section':section,'light':str(light).strip().lower(),
-                       'dark':str(dark).strip().lower() if dark else '','rgb':parse_hex(str(light))})
+# 1. Design palette — live from tokens.css: everything declared that is not a known
+# orphan (data/orphan_tokens.json mirrors col A of the Design Team Review sheet).
+# Display names/sections come from data/design_palette_names.json; a palette token
+# added to tokens.css later falls back to a name derived from its var name.
+with open(os.path.join(DATA, 'orphan_tokens.json')) as fh:
+    ORPHAN_TOKENS = set(json.load(fh))
+with open(os.path.join(DATA, 'design_palette_names.json')) as fh:
+    PALETTE_META = json.load(fh)
+
+_ptok={}; _pscheme=None
+with open(TOKENS_CSS) as fh:
+    for line in fh:
+        if line.startswith(':root,'): _pscheme='light'
+        elif '[data-color-mode="dark"]' in line: _pscheme='dark'
+        elif line.startswith('}'): _pscheme=None
+        if not _pscheme: continue
+        m = re.match(r'\s*(--lt-[a-zA-Z0-9-]+)\s*:\s*([^;]+);', line)
+        if m: _ptok.setdefault(m.group(1),{})[_pscheme]=m.group(2).strip().lower()
+
+_SECTION_BY_PREFIX = {'bg':'BACKGROUND','text':'TEXT','icon':'ICON','border':'BORDER',
+                      'component':'COMPONENT SPECIFIC','shadow':'SHADOW'}
+_SECTION_ORDER = ['BACKGROUND','TEXT','ICON','BORDER','COMPONENT SPECIFIC','SHADOW','OTHER']
+def _derived_meta(var):
+    parts = var[len('--lt-'):].split('-')
+    return {'name': 'color/' + parts[0] + '/' + '-'.join(parts[1:]),
+            'section': _SECTION_BY_PREFIX.get(parts[0], 'OTHER')}
+
+design=[]
+for var in _ptok:
+    if var in ORPHAN_TOKENS: continue
+    meta = PALETTE_META.get(var) or _derived_meta(var)
+    light = _ptok[var].get('light','')
+    design.append({'design':meta['name'],'section':meta['section'],'light':light,
+                   'dark':_ptok[var].get('dark',''),'rgb':parse_hex(light)})
+design.sort(key=lambda d: (_SECTION_ORDER.index(d['section']) if d['section'] in _SECTION_ORDER else 99, d['design']))
 
 # 2. Current tokens
 tokens={}; scheme=None

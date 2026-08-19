@@ -27,11 +27,20 @@ HTML dashboards published in this repo (GitHub Pages).
 
 ## Hard-coded paths (update if your checkout differs)
 
-- `TOKENS_CSS` → `lt-components/src/styles/tokens.css`
-- `XLSX` → `~/Downloads/dark-mode-color-audit (1).xlsx` (the `(1)` is intentional —
-  the May-13 revision with 114 design canonicals; the older `dark-mode-color-audit.xlsx`
-  has only 97 and will give wrong counts)
+- `TOKENS_CSS` → `lt-components/src/styles/tokens.css` (overridable via the
+  `TOKENS_CSS` env var, e.g. a `git show <sha>:src/styles/tokens.css` extract or
+  the `/tmp/lt-components-mirror` checkout). Must be at the TE-13484 tip or newer.
 - `WP` → `lt-web-platform-worktrees/feat-dark-mode`
+
+## Live sources (no xlsx)
+
+The design palette is derived at build time: every token declared in `tokens.css`
+that is not listed in `data/orphan_tokens.json` is an official design token; hexes
+come straight from `tokens.css`. `data/orphan_tokens.json` mirrors col A of the
+"Design Team Review" Google Sheet (326 orphans) — re-export it from the sheet if
+orphans are ever added or removed there. `data/design_palette_names.json` supplies
+display slash-names and section labels; a palette token missing from it falls back
+to a name derived from its var name.
 
 ## Usage
 
