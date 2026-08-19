@@ -1,5 +1,4 @@
 [
- "--lt-accent-brand",
  "--lt-accent-brand-hover",
  "--lt-accent-emphasis",
  "--lt-bg-active",
@@ -288,7 +287,6 @@
  "--lt-primer-border-neutral-dark",
  "--lt-primer-canvas-1b",
  "--lt-primer-danger-fg-dark",
- "--lt-primer-danger-muted",
  "--lt-primer-fg-disabled",
  "--lt-primer-fg-muted",
  "--lt-scrollbar-thumb",

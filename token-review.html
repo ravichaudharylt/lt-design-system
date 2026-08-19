@@ -24,15 +24,15 @@
  .legend span { margin-right: 12px; }
 </style></head><body>
 <h1>Orphan Token Review &mdash; non-design-canonical --lt-* tokens</h1>
-<div class="sub">One row per usage. Design canonicals (114) excluded. Generated for review &mdash; no changes applied. Sorted by ref count.</div>
+<div class="sub">One row per usage. Design canonicals (115) excluded. Generated for review &mdash; no changes applied. Sorted by ref count.</div>
 <div class="stats">
- <div class="pill"><b>59</b> orphan tokens in scope</div>
+ <div class="pill"><b>56</b> orphan tokens in scope</div>
  <div class="pill"><b>39</b> --lt-c-* (value-encoded)</div>
- <div class="pill"><b>18</b> semantic-named non-canonical</div>
- <div class="pill"><b>2</b> zero-ref (pure orphan)</div>
- <div class="pill"><b>404</b> total usages</div>
+ <div class="pill"><b>17</b> semantic-named non-canonical</div>
+ <div class="pill"><b>0</b> zero-ref (pure orphan)</div>
+ <div class="pill"><b>403</b> total usages</div>
  <div class="pill"><b>84</b> usages in DEAD css classes</div>
- <div class="pill"><b>404</b> usages in unreachable files</div>
+ <div class="pill"><b>403</b> usages in unreachable files</div>
 </div>
 <div class="controls legend">
  <span>Token: <input id="fTok" oninput="flt()" placeholder="--lt-..."></span>
@@ -58,11 +58,6 @@
  <th onclick="sortT(9)">Class state</th><th onclick="sortT(10)">File reach</th>
  <th>Suggested action (review)</th>
 </tr></thead><tbody>
-<tr class="zero" data-token="--lt-accent-brand" data-type="" data-state="zero" data-kind="semantic"><td class="mono">--lt-accent-brand</td><td>semantic</td><td class="mono"><span class="sw" style="background:#ed5f00"></span>#ed5f00</td><td class="num">0</td><td class="file">&mdash;</td><td class="num">&mdash;</td><td class="ctx">(no usages — pure orphan in tokens.css)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>delete from tokens.css</td></tr>
-<tr class="zero" data-token="--lt-primer-danger-muted" data-type="" data-state="zero" data-kind="semantic"><td class="mono">--lt-primer-danger-muted</td><td>semantic</td><td class="mono"><span class="sw" style="background:#ff8182"></span>#ff8182</td><td class="num">0</td><td class="file">&mdash;</td><td class="num">&mdash;</td><td class="ctx">(no usages — pure orphan in tokens.css)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>delete from tokens.css</td></tr>
-<tr class="unreach" data-token="--lt-accent-primary-subtle" data-type="css-prop" data-state="unreach" data-kind="semantic"><td class="mono">--lt-accent-primary-subtle</td><td>semantic</td><td class="mono">rgb(
-    from var(--lt-primer-accent-muted) r g b / 0.4
-  )</td><td class="num">1</td><td class="file">packages/TestPageComponents/src/components/TestDetailTopHeader/index.module.css</td><td class="num">101</td><td class="ctx mono">border: 1px solid var(--lt-accent-primary-subtle);</td><td>css-prop</td><td class="mono">remark</td><td>consumed</td><td>unreachable</td><td>in dead-code file - revert to upstream</td></tr>
 <tr class="unreach" data-token="--lt-c-475467" data-type="scss-prop" data-state="unreach" data-kind="c-token"><td class="mono">--lt-c-475467</td><td>c-token</td><td class="mono"><span class="sw" style="background:#475467"></span>#475467</td><td class="num">1</td><td class="file">apps/mobile-web-client/src/component/DevicePerformance/DevicePerformance.scss</td><td class="num">589</td><td class="ctx mono">color: var(--lt-c-475467);</td><td>scss-prop</td><td class="mono">perf-chart</td><td>global-class</td><td>unreachable</td><td>in dead-code file - revert to upstream</td></tr>
 <tr class="unreach" data-token="--lt-c-4abcc5" data-type="scss-prop" data-state="unreach" data-kind="c-token"><td class="mono">--lt-c-4abcc5</td><td>c-token</td><td class="mono"><span class="sw" style="background:#4abcc5"></span>#4abcc5</td><td class="num">1</td><td class="file">apps/mobile-web-client/src/component/CheckBox/index.scss</td><td class="num">39</td><td class="ctx mono">background: var(--lt-c-4abcc5) !important;</td><td>scss-prop</td><td class="mono">checkbox</td><td>global-class</td><td>unreachable</td><td>in dead-code file - revert to upstream</td></tr>
 <tr class="unreach" data-token="--lt-c-591111" data-type="css-prop" data-state="unreach" data-kind="c-token"><td class="mono">--lt-c-591111</td><td>c-token</td><td class="mono"><span class="sw" style="background:#591111"></span>#591111</td><td class="num">1</td><td class="file">packages/TestPageWeb/src/components/VideoContainer/index.module.css</td><td class="num">50</td><td class="ctx mono">color: var(--lt-c-591111);</td><td>css-prop</td><td class="mono">videoCapabiltyHeading</td><td>consumed</td><td>unreachable</td><td>in dead-code file - revert to upstream</td></tr>
