@@ -85,7 +85,16 @@
     incl. <code>#087493</code> literals), <code>3d8cfe04</code> swept teal from all live flows
     (66 per-role edits), and <code>6a5c0620</code> swept the deprecated flows (69 edits) —
     clearing the LWC gate on <code>--lt-brand-teal</code>/<code>-light</code> declaration
-    removal, which now waits only on the lt-web-platform per-site pass.</p>
+    removal. The closing sweep landed 2026-08-20: lt-web-platform <code>3eb1e698d</code>
+    (157 var() substitutions / 62 files, per-role) + lt-components <code>728c55b</code> retired
+    the final four declarations (<code>--lt-brand-teal</code>, <code>--lt-text-teal-43b</code> →
+    <code>--lt-text-primary</code>, <code>--lt-brand-teal-light</code> →
+    <code>--lt-border-secondary</code>/<code>--lt-bg-base-muted</code>,
+    <code>--lt-text-dark-purple</code> → <code>--lt-text-purple</code>/<code>--lt-bg-purple</code>
+    per Ravi's call), with cross-repo stragglers in accessibility-client-sdk <code>a72b0a4</code>
+    and LWC-2.0 <code>a68304ef</code>. <strong>Terminal state: all 326 audited orphans resolved;
+    tokens.css now holds exactly the 114-token design palette, with zero orphan references in
+    any dark-mode worktree.</strong></p>
 </div>
 
 <div class="stats">

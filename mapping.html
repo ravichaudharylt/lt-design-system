@@ -45,16 +45,16 @@
 </h1>
 <div class="meta">Phase 1 complete — 100% design system coverage in tokens.css. Showing migration roadmap for remaining legacy/orphan tokens.</div>
 <div class="stats">
-  <span class="stat total"><span class="num">4</span> orphans remaining</span>
+  <span class="stat total"><span class="num">0</span> orphans remaining</span>
 </div>
-<div class="stats" style="margin-top:-8px;flex-wrap:wrap"><span class="stat band-pill" style="background:#ffc2a0;color:#7a3a00;cursor:pointer;" data-band="60_80" title="Click to filter to Δ 61–80"><span class="num">2</span> Δ 61–80 · 8 uses</span><span class="stat band-pill" style="background:#ffbabb;color:#82071e;cursor:pointer;" data-band="80_100" title="Click to filter to Δ 81–100"><span class="num">2</span> Δ 81–100 · 124 uses</span></div>
+<div class="stats" style="margin-top:-8px;flex-wrap:wrap"></div>
 <div class="legend">
   Color delta: <span class="delta delta-good">≤ 5 near-identical</span>
   <span class="delta delta-ok">6–25 acceptable</span>
   <span class="delta delta-poor">&gt; 25 visible drift</span>
 </div>
 <div class="nav-tabs">
-  <button class="active" data-tab="recommendations">Migration roadmap (4 orphans)</button>
+  <button class="active" data-tab="recommendations">Migration roadmap (0 orphans)</button>
   <button data-tab="exact">Design system tokens (114)</button>
   <button data-tab="unmappable">Manual review (0)</button>
 </div>
@@ -62,51 +62,13 @@
   <input type="text" id="filter" placeholder="Filter by token name, hex, or target...">
   <select id="delta-filter">
   <option value="all">All deltas</option>
-  <option value="band-60_80">Δ 61–80</option>
   <option value="cum-10">Δ ≤ 10 (cumulative)</option>
   <option value="cum-20">Δ ≤ 20 (cumulative)</option>
   <option value="cum-50">Δ ≤ 50 (cumulative)</option>
-  <option value="band-80_100">Δ 81–100</option>
   </select>
 </div>
 <div id="tab-recommendations" class="tab-content active">
-<div class="group" data-target="color/text/disabled">
-<h3><span class='swatch' style='background:#8c959f'></span><span class='design-name'>color/text/disabled</span> <span class='swatch' style='background:#7d859080'></span><span class='hex'>#8c959f / #7d859080</span>
-<span class='group-count'>1 orphans · 20 total usages</span></h3>
-<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-text-teal-43b #43bac5 color/text/disabled" data-delta="delta-poor" data-band="80_100" data-distance="90.2">
-<td><span class='current-name'>--lt-text-teal-43b</span></td>
-<td><span class='swatch' style='background:#43bac5'></span><span class='hex'>#43bac5</span></td>
-<td><span class='swatch' style='background:#0ebac5'></span><span class='hex'>#0ebac5</span></td>
-<td><span class='delta delta-poor'>90.2</span></td>
-<td style='text-align:right'>20</td>
-<td><span class='arrow'>→</span><span class='design-name'>color/text/disabled</span></td></tr></tbody></table></div><div class="group" data-target="color/text/info">
-<h3><span class='swatch' style='background:#0969da'></span><span class='design-name'>color/text/info</span> <span class='swatch' style='background:#4493f8'></span><span class='hex'>#0969da / #4493f8</span>
-<span class='group-count'>1 orphans · 104 total usages</span></h3>
-<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-brand-teal #0ebac5 color/text/info" data-delta="delta-poor" data-band="80_100" data-distance="83.8">
-<td><span class='current-name'>--lt-brand-teal</span></td>
-<td><span class='swatch' style='background:#0ebac5'></span><span class='hex'>#0ebac5</span></td>
-<td><span class='swatch' style='background:#0ebac5'></span><span class='hex'>#0ebac5</span></td>
-<td><span class='delta delta-poor'>83.8</span></td>
-<td style='text-align:right'>104</td>
-<td><span class='arrow'>→</span><span class='design-name'>color/text/info</span></td></tr></tbody></table></div><div class="group" data-target="color/text/secondary">
-<h3><span class='swatch' style='background:#636c76'></span><span class='design-name'>color/text/secondary</span> <span class='swatch' style='background:#9198a1'></span><span class='hex'>#636c76 / #9198a1</span>
-<span class='group-count'>1 orphans · 4 total usages</span></h3>
-<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-text-dark-purple #512a97 color/text/secondary" data-delta="delta-poor" data-band="60_80" data-distance="76.0">
-<td><span class='current-name'>--lt-text-dark-purple</span></td>
-<td><span class='swatch' style='background:#512a97'></span><span class='hex'>#512a97</span></td>
-<td><span class='swatch' style='background:#a371f7'></span><span class='hex'>#a371f7</span></td>
-<td><span class='delta delta-poor'>76.0</span></td>
-<td style='text-align:right'>4</td>
-<td><span class='arrow'>→</span><span class='design-name'>color/text/secondary</span></td></tr></tbody></table></div><div class="group" data-target="color/border/info-muted">
-<h3><span class='swatch' style='background:#54aeff66'></span><span class='design-name'>color/border/info-muted</span> <span class='swatch' style='background:#388bfd66'></span><span class='hex'>#54aeff66 / #388bfd66</span>
-<span class='group-count'>1 orphans · 4 total usages</span></h3>
-<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-brand-teal-light #2ab4c0 color/border/info-muted" data-delta="delta-poor" data-band="60_80" data-distance="76.0">
-<td><span class='current-name'>--lt-brand-teal-light</span></td>
-<td><span class='swatch' style='background:#2ab4c0'></span><span class='hex'>#2ab4c0</span></td>
-<td><span class='swatch' style='background:#43bac5'></span><span class='hex'>#43bac5</span></td>
-<td><span class='delta delta-poor'>76.0</span></td>
-<td style='text-align:right'>4</td>
-<td><span class='arrow'>→</span><span class='design-name'>color/border/info-muted</span></td></tr></tbody></table></div></div><div id="tab-exact" class="tab-content"><p style="color:#666">The official design system palette as currently present in tokens.css — all 97 tokens. Use this as a reference when picking colors.</p><h3>BACKGROUND (35)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/bg/base --lt-bg-base">
+</div><div id="tab-exact" class="tab-content"><p style="color:#666">The official design system palette as currently present in tokens.css — all 97 tokens. Use this as a reference when picking colors.</p><h3>BACKGROUND (35)</h3><table><thead><tr><th style="width:40%">Design Token</th><th>Light</th><th>Dark</th><th>Canonical --lt-* name</th></tr></thead><tbody><tr data-search="color/bg/base --lt-bg-base">
 <td><span class='design-name'>color/bg/base</span></td>
 <td><span class='swatch' style='background:#ffffff'></span><span class='hex'>#ffffff</span></td>
 <td><span class='swatch' style='background:#0d1117'></span><span class='hex'>#0d1117</span></td>

@@ -50,8 +50,6 @@
  "--lt-border-muted",
  "--lt-border-strong",
  "--lt-border-tertiary",
- "--lt-brand-teal",
- "--lt-brand-teal-light",
  "--lt-c-0000ff",
  "--lt-c-002b36",
  "--lt-c-0065ff",
@@ -252,7 +250,6 @@
  "--lt-text-dark",
  "--lt-text-dark-10",
  "--lt-text-dark-1f",
- "--lt-text-dark-purple",
  "--lt-text-error-red",
  "--lt-text-gray",
  "--lt-text-gray-444",
@@ -269,6 +266,5 @@
  "--lt-text-placeholder",
  "--lt-text-red-fd",
  "--lt-text-red-ff6",
- "--lt-text-teal-43b",
  "--lt-text-tertiary"
 ]
