@@ -8,9 +8,13 @@ HTML dashboards published in this repo (GitHub Pages).
 | Script | Generates | Published as |
 |---|---|---|
 | `build_token_sheet.py` | `dark-mode-reports/token_sheet.html` | `index.html` |
-| `build_dashboards.py` | `dark-mode-reports/token_mapping.html` | `mapping.html` |
-| `build_c_token_review_sheet.py` | `dark-mode-reports/c_token_review.html` | `c-token-review.html` |
-| `build_token_review_sheet.py` | `dark-mode-reports/token_review.html` | `token-review.html` |
+| `build_dashboards.py` | `dark-mode-reports/token_mapping.html` | local analysis only |
+| `build_c_token_review_sheet.py` | `dark-mode-reports/c_token_review.html` | local analysis only |
+| `build_token_review_sheet.py` | `dark-mode-reports/token_review.html` | local analysis only |
+
+Published pages are `index.html` (token sheet) and `mapped.html` (migration audit
+log, manually maintained) — the other report pages were retired at the audit's
+terminal state (all 326 orphans resolved).
 
 ## Analysis / cleanup tools
 

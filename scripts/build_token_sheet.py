@@ -266,8 +266,7 @@ html = f"""<!DOCTYPE html>
 </head><body>
 <h1 style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
   LambdaTest Design Token Sheet
-  <a href="mapping.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#0969da,#054078); color:white; text-decoration:none; letter-spacing:0.3px;">Migration roadmap &amp; mapping →</a>
-  <a href="mapped.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#cf222e,#8b0820); color:white; text-decoration:none; letter-spacing:0.3px;">Orphan replacements →</a>
+    <a href="mapped.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#cf222e,#8b0820); color:white; text-decoration:none; letter-spacing:0.3px;">Orphan replacements →</a>
 </h1>
 <div class="meta">Generated {now} &middot; <strong>Post-Phase-3 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
 <div class="stats">
