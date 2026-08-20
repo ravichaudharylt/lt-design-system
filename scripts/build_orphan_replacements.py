@@ -64,6 +64,7 @@ MAPPINGS = {
     '--lt-c-ff6600':            ('REPLACE', '--lt-text-error',        'severe → error (canonical)'),
     '--lt-c-ff5757':            ('REPLACE', '--lt-text-error',        'severe → error (canonical)'),
     '--lt-c-de2d2d':            ('REPLACE', '--lt-text-error',        'red — per context'),
+    '--lt-c-591111':            ('REPLACE', '--lt-text-error',        'video-capability warning banner — semantic error red'),
     '--lt-c-101001':            ('REPLACE', '--lt-text-primary',      ''),
     '--lt-c-e9e9e9':            ('REPLACE', '--lt-border-secondary',  'border-only'),
     '--lt-c-0366d6':            ('REPLACE', '--lt-text-info',         'blue — per context'),
