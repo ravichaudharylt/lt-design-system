@@ -80,7 +80,12 @@
     retired <code>--lt-c-c1d9f5</code> (→ <code>rgb(from var(--lt-text-info) r g b / 0.25)</code>,
     ref swaps pending commit in lt-web-platform) and <code>--lt-accent-primary-subtle</code>
     (internal alias computing to transparent since <code>627d843</code>; its one consumer moved
-    to <code>--lt-border-info-muted</code>).</p>
+    to <code>--lt-border-info-muted</code>). Cross-repo, LWC-2.0 is fully brand-teal-free:
+    <code>7250f26b</code> split the retired <code>--lt-status-special-teal-fg</code> (25 sites,
+    incl. <code>#087493</code> literals), <code>3d8cfe04</code> swept teal from all live flows
+    (66 per-role edits), and <code>6a5c0620</code> swept the deprecated flows (69 edits) —
+    clearing the LWC gate on <code>--lt-brand-teal</code>/<code>-light</code> declaration
+    removal, which now waits only on the lt-web-platform per-site pass.</p>
 </div>
 
 <div class="stats">
