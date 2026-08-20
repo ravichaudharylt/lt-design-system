@@ -76,7 +76,11 @@
     lt-web-platform <code>c3293c36e</code> (72 files) + lt-components <code>42402f2</code>.
     Dead-class cleanup: <code>27eb3e5e4</code> removed 88 unreferenced CSS rules (−886 lines,
     19 files) from the brand-teal audit's dead bucket, cutting unreachable <code>#0EBAC5</code>
-    literals 213 → 182 ahead of the brand-teal retirement.</p>
+    literals 213 → 182 ahead of the brand-teal retirement. lt-components <code>fe181dd</code>
+    retired <code>--lt-c-c1d9f5</code> (→ <code>rgb(from var(--lt-text-info) r g b / 0.25)</code>,
+    ref swaps pending commit in lt-web-platform) and <code>--lt-accent-primary-subtle</code>
+    (internal alias computing to transparent since <code>627d843</code>; its one consumer moved
+    to <code>--lt-border-info-muted</code>).</p>
 </div>
 
 <div class="stats">

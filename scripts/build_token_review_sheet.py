@@ -10,8 +10,8 @@ One row per *usage*. Columns:
 """
 import os, re, json, collections
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 TOKENS_CSS = os.environ.get('TOKENS_CSS', f'{LTC}/src/styles/tokens.css')
 OUT = '/Users/ravichaudhary/Desktop/LambdaTest/dark-mode-reports/token_review.html'
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')

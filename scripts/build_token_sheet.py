@@ -2,9 +2,9 @@
 import re, os, collections, json
 
 TOKENS_CSS = os.environ.get('TOKENS_CSS',
-    '/Users/ravichaudhary/Desktop/LambdaTest/lt-components/src/styles/tokens.css')
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+    '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode/src/styles/tokens.css')
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 
 # Official design tokens = everything declared in tokens.css that is not a known

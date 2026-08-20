@@ -10,7 +10,7 @@ import os, re, sys, json, collections
 PRODUCT = sys.argv[1] if len(sys.argv) > 1 else 'magic-leap-dashboard'
 THRESHOLD = int(sys.argv[2]) if len(sys.argv) > 2 else 5
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
 APP_DIR = f'{WP}/apps/{PRODUCT}'
 APP_SRC = f'{APP_DIR}/src'
 

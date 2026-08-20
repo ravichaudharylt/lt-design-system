@@ -1,15 +1,15 @@
 """Generate orphan-replacements.html — audit log for deprecated tokens and their canonical DS replacements.
 
 Source of truth:
-  - /Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode/OrphanTokens.txt
+  - /Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode/OrphanTokens.txt
   - lt-components/src/styles/tokens.css (for L/D hex lookup)
   - dark-mode-color-audit (1).xlsx FINAL sheet (canonical 112-token DS set)
   - worktree apps/+packages/ for usage counts
 """
 import re, os, html, collections, openpyxl, json, datetime, sys
 
-WP   = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC  = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP   = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC  = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 XLSX = '/Users/ravichaudhary/Downloads/dark-mode-color-audit (1).xlsx'
 OUT  = '/tmp/lt-design-system/mapped.html'
 

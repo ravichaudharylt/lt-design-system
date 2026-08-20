@@ -8,8 +8,8 @@ packages/<pkg>/src/<sub> and resolve there (dist is built FROM src).
 """
 import os, re, json, collections
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 
 IMPORT_RE = re.compile(r'''(?:^|[\s;])(?:import|export)\s+(?:[^'"]*?\s+from\s+)?['"]([^'"]+)['"]''', re.M)
 REQUIRE_RE = re.compile(r'''require\s*\(\s*['"]([^'"]+)['"]\s*\)''')

@@ -5,8 +5,8 @@ Groups by product/package and reports per-file orphan-token usage counts.
 """
 import os, re, json, collections, subprocess
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 TOKENS_CSS = f'{LTC}/src/styles/tokens.css'
 XLSX = '/Users/ravichaudhary/Downloads/dark-mode-color-audit (1).xlsx'
 

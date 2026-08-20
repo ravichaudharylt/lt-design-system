@@ -12,8 +12,8 @@ For each candidate "dead" class found by the first scan:
 """
 import os, re, collections, json
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 
 # Parse all CSS module classes (same as first-pass scanner)
 all_css_classes = {}  # path → {className: [tokens]}

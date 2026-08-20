@@ -45,16 +45,16 @@
 </h1>
 <div class="meta">Phase 1 complete — 100% design system coverage in tokens.css. Showing migration roadmap for remaining legacy/orphan tokens.</div>
 <div class="stats">
-  <span class="stat total"><span class="num">5</span> orphans remaining</span>
+  <span class="stat total"><span class="num">4</span> orphans remaining</span>
 </div>
-<div class="stats" style="margin-top:-8px;flex-wrap:wrap"><span class="stat band-pill" style="background:#ffe2c2;color:#9a4a00;cursor:pointer;" data-band="20_40" title="Click to filter to Δ 21–40"><span class="num">1</span> Δ 21–40 · 6 uses</span><span class="stat band-pill" style="background:#ffc2a0;color:#7a3a00;cursor:pointer;" data-band="60_80" title="Click to filter to Δ 61–80"><span class="num">2</span> Δ 61–80 · 8 uses</span><span class="stat band-pill" style="background:#ffbabb;color:#82071e;cursor:pointer;" data-band="80_100" title="Click to filter to Δ 81–100"><span class="num">2</span> Δ 81–100 · 124 uses</span></div>
+<div class="stats" style="margin-top:-8px;flex-wrap:wrap"><span class="stat band-pill" style="background:#ffc2a0;color:#7a3a00;cursor:pointer;" data-band="60_80" title="Click to filter to Δ 61–80"><span class="num">2</span> Δ 61–80 · 8 uses</span><span class="stat band-pill" style="background:#ffbabb;color:#82071e;cursor:pointer;" data-band="80_100" title="Click to filter to Δ 81–100"><span class="num">2</span> Δ 81–100 · 124 uses</span></div>
 <div class="legend">
   Color delta: <span class="delta delta-good">≤ 5 near-identical</span>
   <span class="delta delta-ok">6–25 acceptable</span>
   <span class="delta delta-poor">&gt; 25 visible drift</span>
 </div>
 <div class="nav-tabs">
-  <button class="active" data-tab="recommendations">Migration roadmap (5 orphans)</button>
+  <button class="active" data-tab="recommendations">Migration roadmap (4 orphans)</button>
   <button data-tab="exact">Design system tokens (114)</button>
   <button data-tab="unmappable">Manual review (0)</button>
 </div>
@@ -62,25 +62,15 @@
   <input type="text" id="filter" placeholder="Filter by token name, hex, or target...">
   <select id="delta-filter">
   <option value="all">All deltas</option>
-  <option value="band-20_40">Δ 21–40</option>
+  <option value="band-60_80">Δ 61–80</option>
   <option value="cum-10">Δ ≤ 10 (cumulative)</option>
   <option value="cum-20">Δ ≤ 20 (cumulative)</option>
   <option value="cum-50">Δ ≤ 50 (cumulative)</option>
-  <option value="band-60_80">Δ 61–80</option>
   <option value="band-80_100">Δ 81–100</option>
   </select>
 </div>
 <div id="tab-recommendations" class="tab-content active">
-<div class="group" data-target="color/bg/invisible-hover">
-<h3><span class='swatch' style='background:#d0d7de33'></span><span class='design-name'>color/bg/invisible-hover</span> <span class='swatch' style='background:#656c7633'></span><span class='hex'>#d0d7de33 / #656c7633</span>
-<span class='group-count'>1 orphans · 6 total usages</span></h3>
-<table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-c-c1d9f5 #c1d9f5 color/bg/invisible-hover" data-delta="delta-poor" data-band="20_40" data-distance="27.5">
-<td><span class='current-name'>--lt-c-c1d9f5</span></td>
-<td><span class='swatch' style='background:#c1d9f5'></span><span class='hex'>#c1d9f5</span></td>
-<td><span class='swatch' style='background:#c1d9f5'></span><span class='hex'>#c1d9f5</span></td>
-<td><span class='delta delta-poor'>27.5</span></td>
-<td style='text-align:right'>6</td>
-<td><span class='arrow'>→</span><span class='design-name'>color/bg/invisible-hover</span></td></tr></tbody></table></div><div class="group" data-target="color/text/disabled">
+<div class="group" data-target="color/text/disabled">
 <h3><span class='swatch' style='background:#8c959f'></span><span class='design-name'>color/text/disabled</span> <span class='swatch' style='background:#7d859080'></span><span class='hex'>#8c959f / #7d859080</span>
 <span class='group-count'>1 orphans · 20 total usages</span></h3>
 <table><thead><tr><th style="width:32%">Current orphan</th><th style="width:14%">Light</th><th style="width:14%">Dark</th><th style="width:8%">Δ</th><th style="width:8%; text-align:right">Uses</th><th>Recommendation</th></tr></thead><tbody><tr data-search="--lt-text-teal-43b #43bac5 color/text/disabled" data-delta="delta-poor" data-band="80_100" data-distance="90.2">

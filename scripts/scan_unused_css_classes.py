@@ -10,8 +10,8 @@ Then identify tokens whose ALL refs land in dead classes.
 """
 import os, re, collections
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 
 # 1. Parse all CSS module files for class definitions + their var() refs
 class_to_tokens = collections.defaultdict(lambda: collections.defaultdict(list))

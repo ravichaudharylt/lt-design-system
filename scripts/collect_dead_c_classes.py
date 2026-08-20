@@ -10,8 +10,8 @@ Output: /tmp/dead_c_classes_plan.json
 """
 import os, re, json, collections, subprocess
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 
 # 1. Parse all *.module.css → {path: {class: [tokens]}}, line-based brace tracking
 mod_classes = {}

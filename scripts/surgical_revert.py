@@ -5,7 +5,7 @@ Other classes in the file are preserved as-is.
 """
 import os, re, json, subprocess
 
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
 plan = json.load(open('/tmp/surgical_revert_plan.json'))
 
 def find_class_blocks(content, classname):

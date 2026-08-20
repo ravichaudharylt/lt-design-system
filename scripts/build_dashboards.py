@@ -5,10 +5,10 @@ Self-contained — doesn't depend on prior /tmp scripts.
 import re, os, math, collections, json
 
 TOKENS_CSS = os.environ.get('TOKENS_CSS',
-    '/Users/ravichaudhary/Desktop/LambdaTest/lt-components/src/styles/tokens.css')
+    '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode/src/styles/tokens.css')
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
-WP = '/Users/ravichaudhary/Desktop/LambdaTest/lt-web-platform-worktrees/feat-dark-mode'
-LTC = '/Users/ravichaudhary/Desktop/LambdaTest/lt-components'
+WP = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-web-platform-dark-mode'
+LTC = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode/lt-components-dark-mode'
 REPORTS = '/Users/ravichaudhary/Desktop/LambdaTest/dark-mode-reports'
 DELTA = 5
 

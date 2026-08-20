@@ -30,7 +30,7 @@ HTML dashboards published in this repo (GitHub Pages).
 - `TOKENS_CSS` → `lt-components/src/styles/tokens.css` (overridable via the
   `TOKENS_CSS` env var, e.g. a `git show <sha>:src/styles/tokens.css` extract or
   the `/tmp/lt-components-mirror` checkout). Must be at the TE-13484 tip or newer.
-- `WP` → `lt-web-platform-worktrees/feat-dark-mode`
+- `WP` → `DarkMode/lt-web-platform-dark-mode`
 
 ## Live sources (no xlsx)
 
