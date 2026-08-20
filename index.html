@@ -46,11 +46,11 @@
   LambdaTest Design Token Sheet
     <a href="mapped.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#cf222e,#8b0820); color:white; text-decoration:none; letter-spacing:0.3px;">Orphan replacements →</a>
 </h1>
-<div class="meta">Generated 2026-08-20 17:20 &middot; <strong>Post-Phase-3 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
+<div class="meta">Generated 2026-08-20 17:26 &middot; <strong>Post-Phase-3 migration</strong> &middot; light + dark scheme &middot; usage across all 8 dark-mode repos (lt-web-platform, lt-components, extension, SmartUI, LWC-2.0, nuisance-sdk, a11y-client-sdk, lt-common-header)</div>
 <div class="stats">
   <span class="stat-pill total"><span class="num" id="total-count">114</span><span>total tokens</span></span>
   <span class="stat-pill total" style="background:#f5fbff;color:#054078;border:1px solid #b6e3ff"><span class="num">114</span><span>★ official design tokens</span></span>
-  <span class="stat-pill total" style="background:#dafbe1;color:#1a7f37"><span class="num">14,940</span><span>total references</span></span>
+  <span class="stat-pill total" style="background:#dafbe1;color:#1a7f37"><span class="num">16,994</span><span>total references</span></span>
 </div>
 <div class="controls">
   <input type="text" id="filter" placeholder="Filter tokens (name, hex, product, property...)">
@@ -70,12 +70,6 @@
   <button data-source="design">★ Official design system</button>
   <button data-source="non-design">Legacy / orphan</button>
 </div>
-<div class="filter-row filter-buttons" data-group="ctype">
-  <span class="filter-label">Token type</span>
-  <button data-ctype="all" class="active">All</button>
-  <button data-ctype="c">--lt-c-* (value-encoded)</button>
-  <button data-ctype="named">Named (semantic)</button>
-</div>
 <div class="filter-row filter-buttons" data-group="product">
   <span class="filter-label">Product</span>
   <button data-product="all" class="active">All</button>
@@ -85,6 +79,12 @@
   <button data-product="mobile-web-client">mobile-web-client</button>
   <button data-product="magic-leap-dashboard">magic-leap-dashboard</button>
   <button data-product="packages">packages</button>
+  <button data-product="extension">extension</button>
+  <button data-product="smartui">smartui</button>
+  <button data-product="lwc-2.0">lwc-2.0</button>
+  <button data-product="nuisance-sdk">nuisance-sdk</button>
+  <button data-product="a11y-client-sdk">a11y-client-sdk</button>
+  <button data-product="lt-common-header">lt-common-header</button>
   <button data-product="internal">internal (tokens.css)</button>
 </div>
 <div id="filter-result-stats" style="display:none;align-items:center;gap:10px;margin:6px 0 14px;padding:10px 14px;background:#fff8c5;border:1px solid #f1d878;border-radius:8px;flex-wrap:wrap">
@@ -101,62 +101,62 @@
   <th data-sort="props">Used as</th>
   <th data-sort="products">Products</th>
 </tr></thead><tbody>
-<tr class="design-token" data-name="--lt-border-secondary" data-prop="border" data-count="2742" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|internal|other" data-source="design">
+<tr class="design-token" data-name="--lt-border-secondary" data-prop="border" data-count="3109" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|internal|lt-components|extension|smartui|nuisance-sdk|a11y-client-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-border-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#d0d7de'></span><span class=hex>#d0d7de</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#3d444d'></span><span class=hex>#3d444d</span></div></td>
-<td class=count>2742</td>
-<td class=props><span class='border'>border:2431</span><span class='bg'>bg:209</span><span class='other'>other:73</span><span class='text'>text:10</span><span class='stroke'>stroke:9</span><span class='shadow'>shadow:8</span><span class='fill'>fill:2</span></td>
-<td class=products><span>kaneai (1621)</span><span>hyperexecute (445)</span><span>mobile-web-client (314)</span><span>packages (268)</span><span>magic-leap-dashboard (82)</span><span>other (11)</span><span>internal (tokens.css) (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-primary" data-prop="text" data-count="2016" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>3109</td>
+<td class=props><span class='border'>border:2773</span><span class='bg'>bg:213</span><span class='other'>other:92</span><span class='shadow'>shadow:10</span><span class='text'>text:10</span><span class='stroke'>stroke:9</span><span class='fill'>fill:2</span></td>
+<td class=products><span>kaneai (1621)</span><span>hyperexecute (445)</span><span>mobile-web-client (314)</span><span>packages (268)</span><span>lwc-2.0 (213)</span><span>smartui (102)</span><span>magic-leap-dashboard (82)</span><span>lt-common-header (25)</span><span>extension (19)</span><span>lt-components (11)</span><span>a11y-client-sdk (5)</span><span>nuisance-sdk (3)</span><span>internal (tokens.css) (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-primary" data-prop="text" data-count="2396" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|nuisance-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-text-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#24292f'></span><span class=hex>#24292f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#f0f6fc'></span><span class=hex>#f0f6fc</span></div></td>
-<td class=count>2016</td>
-<td class=props><span class='text'>text:1653</span><span class='shadow'>shadow:115</span><span class='other'>other:84</span><span class='bg'>bg:83</span><span class='border'>border:74</span><span class='fill'>fill:4</span><span class='stroke'>stroke:3</span></td>
-<td class=products><span>kaneai (993)</span><span>hyperexecute (413)</span><span>mobile-web-client (269)</span><span>packages (207)</span><span>magic-leap-dashboard (124)</span><span>other (10)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-secondary" data-prop="text" data-count="1965" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>2396</td>
+<td class=props><span class='text'>text:2016</span><span class='shadow'>shadow:115</span><span class='other'>other:95</span><span class='bg'>bg:83</span><span class='border'>border:74</span><span class='fill'>fill:7</span><span class='stroke'>stroke:6</span></td>
+<td class=products><span>kaneai (993)</span><span>hyperexecute (413)</span><span>mobile-web-client (269)</span><span>lwc-2.0 (267)</span><span>packages (207)</span><span>magic-leap-dashboard (124)</span><span>smartui (59)</span><span>lt-common-header (35)</span><span>nuisance-sdk (13)</span><span>lt-components (10)</span><span>extension (6)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-secondary" data-prop="text" data-count="2101" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|nuisance-sdk|a11y-client-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-text-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#636c76'></span><span class=hex>#636c76</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#9198a1'></span><span class=hex>#9198a1</span></div></td>
-<td class=count>1965</td>
-<td class=props><span class='text'>text:1532</span><span class='stroke'>stroke:154</span><span class='other'>other:93</span><span class='fill'>fill:89</span><span class='bg'>bg:55</span><span class='border'>border:39</span><span class='shadow'>shadow:3</span></td>
-<td class=products><span>kaneai (1291)</span><span>hyperexecute (341)</span><span>packages (177)</span><span>mobile-web-client (129)</span><span>magic-leap-dashboard (26)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-base-muted" data-prop="bg" data-count="1181" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>2101</td>
+<td class=props><span class='text'>text:1659</span><span class='stroke'>stroke:154</span><span class='other'>other:97</span><span class='fill'>fill:94</span><span class='bg'>bg:55</span><span class='border'>border:39</span><span class='shadow'>shadow:3</span></td>
+<td class=products><span>kaneai (1291)</span><span>hyperexecute (341)</span><span>packages (177)</span><span>mobile-web-client (129)</span><span>lwc-2.0 (59)</span><span>smartui (44)</span><span>magic-leap-dashboard (26)</span><span>lt-common-header (21)</span><span>extension (9)</span><span>nuisance-sdk (2)</span><span>lt-components (1)</span><span>a11y-client-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-base-muted" data-prop="bg" data-count="1362" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|a11y-client-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-bg-base-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#f6f8fa'></span><span class=hex>#f6f8fa</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#010409'></span><span class=hex>#010409</span></div></td>
-<td class=count>1181</td>
-<td class=props><span class='bg'>bg:1100</span><span class='other'>other:56</span><span class='border'>border:14</span><span class='text'>text:6</span><span class='fill'>fill:5</span></td>
-<td class=products><span>kaneai (612)</span><span>hyperexecute (236)</span><span>mobile-web-client (153)</span><span>packages (128)</span><span>magic-leap-dashboard (45)</span><span>other (7)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-base" data-prop="bg" data-count="1075" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>1362</td>
+<td class=props><span class='bg'>bg:1270</span><span class='other'>other:67</span><span class='border'>border:14</span><span class='text'>text:6</span><span class='fill'>fill:5</span></td>
+<td class=products><span>kaneai (612)</span><span>hyperexecute (236)</span><span>mobile-web-client (153)</span><span>packages (128)</span><span>lwc-2.0 (93)</span><span>smartui (73)</span><span>magic-leap-dashboard (45)</span><span>lt-common-header (8)</span><span>lt-components (7)</span><span>a11y-client-sdk (5)</span><span>extension (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-base" data-prop="bg" data-count="1350" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|a11y-client-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-bg-base <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ffffff'></span><span class=hex>#ffffff</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#0d1117'></span><span class=hex>#0d1117</span></div></td>
-<td class=count>1075</td>
-<td class=props><span class='bg'>bg:908</span><span class='other'>other:65</span><span class='fill'>fill:50</span><span class='border'>border:32</span><span class='text'>text:11</span><span class='stroke'>stroke:8</span><span class='shadow'>shadow:1</span></td>
-<td class=products><span>kaneai (478)</span><span>hyperexecute (187)</span><span>mobile-web-client (180)</span><span>packages (147)</span><span>magic-leap-dashboard (75)</span><span>other (8)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-info" data-prop="text" data-count="811" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>1350</td>
+<td class=props><span class='bg'>bg:1176</span><span class='other'>other:71</span><span class='fill'>fill:50</span><span class='border'>border:33</span><span class='text'>text:11</span><span class='stroke'>stroke:8</span><span class='shadow'>shadow:1</span></td>
+<td class=products><span>kaneai (478)</span><span>lwc-2.0 (207)</span><span>hyperexecute (187)</span><span>mobile-web-client (180)</span><span>packages (147)</span><span>magic-leap-dashboard (75)</span><span>smartui (39)</span><span>lt-common-header (20)</span><span>lt-components (8)</span><span>extension (6)</span><span>a11y-client-sdk (3)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-info" data-prop="text" data-count="881" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|nuisance-sdk|a11y-client-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-text-info <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#0969da'></span><span class=hex>#0969da</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#4493f8'></span><span class=hex>#4493f8</span></div></td>
-<td class=count>811</td>
-<td class=props><span class='text'>text:446</span><span class='other'>other:202</span><span class='border'>border:60</span><span class='bg'>bg:49</span><span class='fill'>fill:26</span><span class='shadow'>shadow:18</span><span class='stroke'>stroke:10</span></td>
-<td class=products><span>kaneai (516)</span><span>packages (112)</span><span>mobile-web-client (94)</span><span>hyperexecute (72)</span><span>magic-leap-dashboard (14)</span><span>other (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-error" data-prop="text" data-count="496" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>881</td>
+<td class=props><span class='text'>text:514</span><span class='other'>other:203</span><span class='border'>border:60</span><span class='bg'>bg:50</span><span class='fill'>fill:26</span><span class='shadow'>shadow:18</span><span class='stroke'>stroke:10</span></td>
+<td class=products><span>kaneai (516)</span><span>packages (112)</span><span>mobile-web-client (94)</span><span>hyperexecute (72)</span><span>lwc-2.0 (36)</span><span>smartui (22)</span><span>magic-leap-dashboard (14)</span><span>lt-common-header (9)</span><span>lt-components (3)</span><span>a11y-client-sdk (2)</span><span>nuisance-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-error" data-prop="text" data-count="531" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|nuisance-sdk|a11y-client-sdk|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-text-error <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#d1242f'></span><span class=hex>#d1242f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#f85149'></span><span class=hex>#f85149</span></div></td>
-<td class=count>496</td>
-<td class=props><span class='text'>text:298</span><span class='other'>other:99</span><span class='bg'>bg:46</span><span class='border'>border:27</span><span class='fill'>fill:19</span><span class='stroke'>stroke:7</span></td>
-<td class=products><span>kaneai (302)</span><span>packages (64)</span><span>mobile-web-client (52)</span><span>hyperexecute (46)</span><span>magic-leap-dashboard (29)</span><span>other (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-dark" data-prop="stroke" data-count="476" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
+<td class=count>531</td>
+<td class=props><span class='text'>text:324</span><span class='other'>other:108</span><span class='bg'>bg:46</span><span class='border'>border:27</span><span class='fill'>fill:19</span><span class='stroke'>stroke:7</span></td>
+<td class=products><span>kaneai (302)</span><span>packages (64)</span><span>mobile-web-client (52)</span><span>hyperexecute (46)</span><span>magic-leap-dashboard (29)</span><span>smartui (29)</span><span>lt-components (3)</span><span>lwc-2.0 (2)</span><span>extension (1)</span><span>nuisance-sdk (1)</span><span>a11y-client-sdk (1)</span><span>lt-common-header (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-icon-dark" data-prop="stroke" data-count="497" data-products="mobile-web-client|kaneai|hyperexecute|packages|extension|smartui" data-source="design">
 <td><div class=name>--lt-icon-dark <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#636c76'></span><span class=hex>#636c76</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#a1a9b3'></span><span class=hex>#a1a9b3</span></div></td>
-<td class=count>476</td>
-<td class=props><span class='stroke'>stroke:337</span><span class='fill'>fill:139</span></td>
-<td class=products><span>kaneai (357)</span><span>packages (104)</span><span>hyperexecute (9)</span><span>mobile-web-client (6)</span></td></tr>
+<td class=count>497</td>
+<td class=props><span class='stroke'>stroke:337</span><span class='fill'>fill:160</span></td>
+<td class=products><span>kaneai (357)</span><span>packages (104)</span><span>smartui (20)</span><span>hyperexecute (9)</span><span>mobile-web-client (6)</span><span>extension (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-icon-primary" data-prop="stroke" data-count="425" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
 <td><div class=name>--lt-icon-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#6e7781'></span><span class=hex>#6e7781</span></div></td>
@@ -164,83 +164,97 @@
 <td class=count>425</td>
 <td class=props><span class='stroke'>stroke:305</span><span class='fill'>fill:115</span><span class='text'>text:3</span><span class='bg'>bg:1</span><span class='other'>other:1</span></td>
 <td class=products><span>kaneai (276)</span><span>mobile-web-client (141)</span><span>packages (7)</span><span>hyperexecute (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-inverse" data-prop="text" data-count="341" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<tr class="design-token" data-name="--lt-text-inverse" data-prop="text" data-count="392" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|nuisance-sdk" data-source="design">
 <td><div class=name>--lt-text-inverse <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ffffff'></span><span class=hex>#ffffff</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#f0f6fc'></span><span class=hex>#f0f6fc</span></div></td>
-<td class=count>341</td>
-<td class=props><span class='text'>text:297</span><span class='bg'>bg:21</span><span class='other'>other:17</span><span class='border'>border:5</span><span class='fill'>fill:1</span></td>
-<td class=products><span>kaneai (95)</span><span>mobile-web-client (75)</span><span>packages (74)</span><span>hyperexecute (53)</span><span>magic-leap-dashboard (42)</span><span>other (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-muted" data-prop="text" data-count="304" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>392</td>
+<td class=props><span class='text'>text:346</span><span class='bg'>bg:21</span><span class='other'>other:18</span><span class='border'>border:5</span><span class='fill'>fill:2</span></td>
+<td class=products><span>kaneai (95)</span><span>mobile-web-client (75)</span><span>packages (74)</span><span>hyperexecute (53)</span><span>magic-leap-dashboard (42)</span><span>smartui (41)</span><span>nuisance-sdk (10)</span><span>lt-components (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-muted" data-prop="text" data-count="353" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|nuisance-sdk|a11y-client-sdk|lwc-2.0" data-source="design">
 <td><div class=name>--lt-text-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#6e7781'></span><span class=hex>#6e7781</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#7d8590'></span><span class=hex>#7d8590</span></div></td>
-<td class=count>304</td>
-<td class=props><span class='text'>text:248</span><span class='other'>other:36</span><span class='border'>border:11</span><span class='bg'>bg:6</span><span class='stroke'>stroke:1</span><span class='fill'>fill:1</span><span class='shadow'>shadow:1</span></td>
-<td class=products><span>kaneai (105)</span><span>mobile-web-client (75)</span><span>packages (74)</span><span>hyperexecute (25)</span><span>magic-leap-dashboard (20)</span><span>other (5)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-success" data-prop="text" data-count="232" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>353</td>
+<td class=props><span class='text'>text:296</span><span class='other'>other:37</span><span class='border'>border:11</span><span class='bg'>bg:6</span><span class='stroke'>stroke:1</span><span class='fill'>fill:1</span><span class='shadow'>shadow:1</span></td>
+<td class=products><span>kaneai (105)</span><span>mobile-web-client (75)</span><span>packages (74)</span><span>lwc-2.0 (44)</span><span>hyperexecute (25)</span><span>magic-leap-dashboard (20)</span><span>lt-components (5)</span><span>smartui (3)</span><span>nuisance-sdk (1)</span><span>a11y-client-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-success" data-prop="text" data-count="257" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui" data-source="design">
 <td><div class=name>--lt-text-success <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1a7f37'></span><span class=hex>#1a7f37</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#3fb950'></span><span class=hex>#3fb950</span></div></td>
-<td class=count>232</td>
-<td class=props><span class='text'>text:91</span><span class='other'>other:73</span><span class='bg'>bg:26</span><span class='fill'>fill:24</span><span class='border'>border:9</span><span class='stroke'>stroke:7</span><span class='shadow'>shadow:2</span></td>
-<td class=products><span>kaneai (151)</span><span>hyperexecute (31)</span><span>packages (28)</span><span>mobile-web-client (16)</span><span>magic-leap-dashboard (5)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-base-inverse" data-prop="bg" data-count="224" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>257</td>
+<td class=props><span class='text'>text:114</span><span class='other'>other:75</span><span class='bg'>bg:26</span><span class='fill'>fill:24</span><span class='border'>border:9</span><span class='stroke'>stroke:7</span><span class='shadow'>shadow:2</span></td>
+<td class=products><span>kaneai (151)</span><span>hyperexecute (31)</span><span>packages (28)</span><span>smartui (25)</span><span>mobile-web-client (16)</span><span>magic-leap-dashboard (5)</span><span>lt-components (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-base-inverse" data-prop="bg" data-count="251" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|nuisance-sdk|lwc-2.0" data-source="design">
 <td><div class=name>--lt-bg-base-inverse <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#24292f'></span><span class=hex>#24292f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#3d444d'></span><span class=hex>#3d444d</span></div></td>
-<td class=count>224</td>
-<td class=props><span class='bg'>bg:98</span><span class='border'>border:72</span><span class='text'>text:19</span><span class='shadow'>shadow:18</span><span class='other'>other:16</span><span class='fill'>fill:1</span></td>
-<td class=products><span>hyperexecute (84)</span><span>mobile-web-client (50)</span><span>kaneai (34)</span><span>packages (34)</span><span>magic-leap-dashboard (17)</span><span>other (5)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-disabled" data-prop="text" data-count="184" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>251</td>
+<td class=props><span class='bg'>bg:113</span><span class='border'>border:76</span><span class='text'>text:21</span><span class='other'>other:19</span><span class='shadow'>shadow:18</span><span class='stroke'>stroke:3</span><span class='fill'>fill:1</span></td>
+<td class=products><span>hyperexecute (84)</span><span>mobile-web-client (50)</span><span>kaneai (34)</span><span>packages (34)</span><span>smartui (20)</span><span>magic-leap-dashboard (17)</span><span>lt-components (5)</span><span>extension (3)</span><span>nuisance-sdk (3)</span><span>lwc-2.0 (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-disabled" data-prop="text" data-count="192" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|nuisance-sdk|a11y-client-sdk|lt-common-header" data-source="design">
 <td><div class=name>--lt-text-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8c959f'></span><span class=hex>#8c959f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#7d859080'></span><span class=hex>#7d859080</span></div></td>
-<td class=count>184</td>
-<td class=props><span class='text'>text:138</span><span class='bg'>bg:20</span><span class='other'>other:12</span><span class='border'>border:8</span><span class='shadow'>shadow:5</span><span class='fill'>fill:1</span></td>
-<td class=products><span>kaneai (79)</span><span>mobile-web-client (43)</span><span>packages (28)</span><span>hyperexecute (20)</span><span>magic-leap-dashboard (7)</span><span>other (7)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-info" data-prop="stroke" data-count="177" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
+<td class=count>192</td>
+<td class=props><span class='text'>text:145</span><span class='bg'>bg:21</span><span class='other'>other:12</span><span class='border'>border:8</span><span class='shadow'>shadow:5</span><span class='fill'>fill:1</span></td>
+<td class=products><span>kaneai (79)</span><span>mobile-web-client (43)</span><span>packages (28)</span><span>hyperexecute (20)</span><span>magic-leap-dashboard (7)</span><span>lt-components (7)</span><span>smartui (4)</span><span>nuisance-sdk (2)</span><span>a11y-client-sdk (1)</span><span>lt-common-header (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-icon-info" data-prop="stroke" data-count="181" data-products="mobile-web-client|kaneai|hyperexecute|packages|smartui|a11y-client-sdk" data-source="design">
 <td><div class=name>--lt-icon-info <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#0969da'></span><span class=hex>#0969da</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1f6feb'></span><span class=hex>#1f6feb</span></div></td>
-<td class=count>177</td>
-<td class=props><span class='stroke'>stroke:88</span><span class='fill'>fill:87</span><span class='text'>text:2</span></td>
-<td class=products><span>kaneai (133)</span><span>mobile-web-client (21)</span><span>packages (16)</span><span>hyperexecute (7)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-info-muted" data-prop="bg" data-count="161" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>181</td>
+<td class=props><span class='stroke'>stroke:90</span><span class='fill'>fill:89</span><span class='text'>text:2</span></td>
+<td class=products><span>kaneai (133)</span><span>mobile-web-client (21)</span><span>packages (16)</span><span>hyperexecute (7)</span><span>smartui (3)</span><span>a11y-client-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-info-muted" data-prop="bg" data-count="172" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|lwc-2.0" data-source="design">
 <td><div class=name>--lt-bg-info-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ddf4ff'></span><span class=hex>#ddf4ff</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#388bfd1a'></span><span class=hex>#388bfd1a</span></div></td>
-<td class=count>161</td>
-<td class=props><span class='bg'>bg:139</span><span class='other'>other:18</span><span class='fill'>fill:3</span><span class='border'>border:1</span></td>
-<td class=products><span>kaneai (125)</span><span>mobile-web-client (15)</span><span>packages (11)</span><span>hyperexecute (6)</span><span>magic-leap-dashboard (2)</span><span>other (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-error" data-prop="fill" data-count="149" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
-<td><div class=name>--lt-icon-error <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#d1242f'></span><span class=hex>#d1242f</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f85149'></span><span class=hex>#f85149</span></div></td>
-<td class=count>149</td>
-<td class=props><span class='fill'>fill:86</span><span class='stroke'>stroke:63</span></td>
-<td class=products><span>kaneai (129)</span><span>packages (16)</span><span>mobile-web-client (3)</span><span>hyperexecute (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-info" data-prop="border" data-count="146" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>172</td>
+<td class=props><span class='bg'>bg:145</span><span class='other'>other:23</span><span class='fill'>fill:3</span><span class='border'>border:1</span></td>
+<td class=products><span>kaneai (125)</span><span>mobile-web-client (15)</span><span>packages (11)</span><span>smartui (9)</span><span>hyperexecute (6)</span><span>magic-leap-dashboard (2)</span><span>lt-components (2)</span><span>lwc-2.0 (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-info" data-prop="border" data-count="170" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|nuisance-sdk|lwc-2.0" data-source="design">
 <td><div class=name>--lt-border-info <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#0969da'></span><span class=hex>#0969da</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1f6feb'></span><span class=hex>#1f6feb</span></div></td>
-<td class=count>146</td>
-<td class=props><span class='border'>border:141</span><span class='other'>other:2</span><span class='text'>text:2</span><span class='bg'>bg:1</span></td>
-<td class=products><span>kaneai (84)</span><span>mobile-web-client (23)</span><span>packages (18)</span><span>hyperexecute (15)</span><span>magic-leap-dashboard (5)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-warning" data-prop="text" data-count="139" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>170</td>
+<td class=props><span class='border'>border:165</span><span class='other'>other:2</span><span class='text'>text:2</span><span class='bg'>bg:1</span></td>
+<td class=products><span>kaneai (84)</span><span>mobile-web-client (23)</span><span>packages (18)</span><span>lwc-2.0 (17)</span><span>hyperexecute (15)</span><span>magic-leap-dashboard (5)</span><span>smartui (5)</span><span>lt-components (1)</span><span>extension (1)</span><span>nuisance-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-base-pressed" data-prop="bg" data-count="161" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|a11y-client-sdk|lwc-2.0" data-source="design">
+<td><div class=name>--lt-bg-base-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#e7ebef'></span><span class=hex>#e7ebef</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#161b22'></span><span class=hex>#161b22</span></div></td>
+<td class=count>161</td>
+<td class=props><span class='bg'>bg:129</span><span class='other'>other:18</span><span class='border'>border:13</span><span class='text'>text:1</span></td>
+<td class=products><span>lwc-2.0 (59)</span><span>mobile-web-client (34)</span><span>kaneai (24)</span><span>packages (23)</span><span>hyperexecute (10)</span><span>magic-leap-dashboard (10)</span><span>a11y-client-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-icon-error" data-prop="fill" data-count="154" data-products="mobile-web-client|kaneai|hyperexecute|packages|smartui" data-source="design">
+<td><div class=name>--lt-icon-error <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#d1242f'></span><span class=hex>#d1242f</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f85149'></span><span class=hex>#f85149</span></div></td>
+<td class=count>154</td>
+<td class=props><span class='fill'>fill:87</span><span class='stroke'>stroke:63</span><span class='text'>text:4</span></td>
+<td class=products><span>kaneai (129)</span><span>packages (16)</span><span>smartui (5)</span><span>mobile-web-client (3)</span><span>hyperexecute (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-warning" data-prop="text" data-count="149" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui" data-source="design">
 <td><div class=name>--lt-text-warning <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#9a6700'></span><span class=hex>#9a6700</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#d29922'></span><span class=hex>#d29922</span></div></td>
-<td class=count>139</td>
-<td class=props><span class='text'>text:57</span><span class='other'>other:33</span><span class='border'>border:27</span><span class='fill'>fill:14</span><span class='bg'>bg:4</span><span class='stroke'>stroke:3</span><span class='shadow'>shadow:1</span></td>
-<td class=products><span>kaneai (106)</span><span>packages (11)</span><span>mobile-web-client (8)</span><span>hyperexecute (8)</span><span>magic-leap-dashboard (5)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-info" data-prop="bg" data-count="111" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
+<td class=count>149</td>
+<td class=props><span class='text'>text:66</span><span class='other'>other:34</span><span class='border'>border:27</span><span class='fill'>fill:14</span><span class='bg'>bg:4</span><span class='stroke'>stroke:3</span><span class='shadow'>shadow:1</span></td>
+<td class=products><span>kaneai (106)</span><span>packages (11)</span><span>smartui (10)</span><span>mobile-web-client (8)</span><span>hyperexecute (8)</span><span>magic-leap-dashboard (5)</span><span>lt-components (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-info" data-prop="bg" data-count="133" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|lt-common-header|lwc-2.0" data-source="design">
 <td><div class=name>--lt-bg-info <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#0969da'></span><span class=hex>#0969da</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1f6feb'></span><span class=hex>#1f6feb</span></div></td>
-<td class=count>111</td>
-<td class=props><span class='bg'>bg:80</span><span class='border'>border:14</span><span class='text'>text:9</span><span class='other'>other:6</span><span class='shadow'>shadow:2</span></td>
-<td class=products><span>kaneai (38)</span><span>hyperexecute (30)</span><span>mobile-web-client (22)</span><span>packages (18)</span><span>magic-leap-dashboard (2)</span><span>other (1)</span></td></tr>
+<td class=count>133</td>
+<td class=props><span class='bg'>bg:100</span><span class='border'>border:14</span><span class='text'>text:9</span><span class='other'>other:8</span><span class='shadow'>shadow:2</span></td>
+<td class=products><span>kaneai (38)</span><span>hyperexecute (30)</span><span>mobile-web-client (22)</span><span>packages (18)</span><span>smartui (14)</span><span>lwc-2.0 (7)</span><span>magic-leap-dashboard (2)</span><span>lt-components (1)</span><span>lt-common-header (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-error-muted" data-prop="bg" data-count="115" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|smartui|a11y-client-sdk" data-source="design">
+<td><div class=name>--lt-bg-error-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#ffebe9'></span><span class=hex>#ffebe9</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f851491a'></span><span class=hex>#f851491a</span></div></td>
+<td class=count>115</td>
+<td class=props><span class='bg'>bg:89</span><span class='other'>other:23</span><span class='fill'>fill:1</span><span class='shadow'>shadow:1</span><span class='border'>border:1</span></td>
+<td class=products><span>kaneai (54)</span><span>packages (33)</span><span>mobile-web-client (11)</span><span>smartui (7)</span><span>magic-leap-dashboard (6)</span><span>hyperexecute (3)</span><span>a11y-client-sdk (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-icon-inverse" data-prop="stroke" data-count="109" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
 <td><div class=name>--lt-icon-inverse <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#24292f'></span><span class=hex>#24292f</span></div></td>
@@ -248,20 +262,6 @@
 <td class=count>109</td>
 <td class=props><span class='stroke'>stroke:63</span><span class='fill'>fill:46</span></td>
 <td class=products><span>kaneai (66)</span><span>packages (32)</span><span>mobile-web-client (8)</span><span>hyperexecute (2)</span><span>magic-leap-dashboard (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-error-muted" data-prop="bg" data-count="107" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
-<td><div class=name>--lt-bg-error-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#ffebe9'></span><span class=hex>#ffebe9</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f851491a'></span><span class=hex>#f851491a</span></div></td>
-<td class=count>107</td>
-<td class=props><span class='bg'>bg:86</span><span class='other'>other:18</span><span class='fill'>fill:1</span><span class='shadow'>shadow:1</span><span class='border'>border:1</span></td>
-<td class=products><span>kaneai (54)</span><span>packages (33)</span><span>mobile-web-client (11)</span><span>magic-leap-dashboard (6)</span><span>hyperexecute (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-base-pressed" data-prop="bg" data-count="101" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
-<td><div class=name>--lt-bg-base-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#e7ebef'></span><span class=hex>#e7ebef</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#161b22'></span><span class=hex>#161b22</span></div></td>
-<td class=count>101</td>
-<td class=props><span class='bg'>bg:70</span><span class='other'>other:17</span><span class='border'>border:13</span><span class='text'>text:1</span></td>
-<td class=products><span>mobile-web-client (34)</span><span>kaneai (24)</span><span>packages (23)</span><span>hyperexecute (10)</span><span>magic-leap-dashboard (10)</span></td></tr>
 <tr class="design-token" data-name="--lt-border-disabled" data-prop="border" data-count="99" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
 <td><div class=name>--lt-border-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#eaeef2b2'></span><span class=hex>#eaeef2b2</span></div></td>
@@ -269,48 +269,76 @@
 <td class=count>99</td>
 <td class=props><span class='border'>border:80</span><span class='bg'>bg:10</span><span class='other'>other:9</span></td>
 <td class=products><span>hyperexecute (57)</span><span>kaneai (15)</span><span>packages (13)</span><span>mobile-web-client (12)</span><span>magic-leap-dashboard (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-purple" data-prop="text" data-count="68" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
+<tr class="design-token" data-name="--lt-border-primary" data-prop="border" data-count="81" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|smartui|lwc-2.0" data-source="design">
+<td><div class=name>--lt-border-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#6e7781'></span><span class=hex>#6e7781</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#8b949e'></span><span class=hex>#8b949e</span></div></td>
+<td class=count>81</td>
+<td class=props><span class='border'>border:80</span><span class='other'>other:1</span></td>
+<td class=products><span>lwc-2.0 (30)</span><span>smartui (15)</span><span>hyperexecute (9)</span><span>kaneai (8)</span><span>mobile-web-client (7)</span><span>packages (6)</span><span>lt-components (5)</span><span>magic-leap-dashboard (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-purple" data-prop="text" data-count="77" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|smartui|a11y-client-sdk" data-source="design">
 <td><div class=name>--lt-text-purple <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8250df'></span><span class=hex>#8250df</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ab7df8'></span><span class=hex>#ab7df8</span></div></td>
-<td class=count>68</td>
-<td class=props><span class='text'>text:35</span><span class='other'>other:28</span><span class='fill'>fill:4</span><span class='border'>border:1</span></td>
-<td class=products><span>kaneai (49)</span><span>hyperexecute (9)</span><span>packages (6)</span><span>mobile-web-client (3)</span><span>magic-leap-dashboard (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-shadow-floating-small-2" data-prop="shadow" data-count="67" data-products="mobile-web-client|kaneai|hyperexecute|packages|other" data-source="design">
+<td class=count>77</td>
+<td class=props><span class='text'>text:42</span><span class='other'>other:29</span><span class='fill'>fill:4</span><span class='border'>border:1</span><span class='bg'>bg:1</span></td>
+<td class=products><span>kaneai (49)</span><span>hyperexecute (9)</span><span>smartui (8)</span><span>packages (6)</span><span>mobile-web-client (3)</span><span>magic-leap-dashboard (1)</span><span>a11y-client-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-base-disabled" data-prop="bg" data-count="76" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|lt-components|extension|smartui|nuisance-sdk|a11y-client-sdk|lwc-2.0" data-source="design">
+<td><div class=name>--lt-bg-base-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#eaeef2b2'></span><span class=hex>#eaeef2b2</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#161b2299'></span><span class=hex>#161b2299</span></div></td>
+<td class=count>76</td>
+<td class=props><span class='bg'>bg:62</span><span class='other'>other:12</span><span class='border'>border:1</span><span class='fill'>fill:1</span></td>
+<td class=products><span>smartui (17)</span><span>kaneai (14)</span><span>hyperexecute (12)</span><span>packages (10)</span><span>magic-leap-dashboard (7)</span><span>mobile-web-client (6)</span><span>lwc-2.0 (4)</span><span>lt-components (2)</span><span>nuisance-sdk (2)</span><span>extension (1)</span><span>a11y-client-sdk (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-success" data-prop="bg" data-count="73" data-products="kaneai|hyperexecute|packages|smartui|nuisance-sdk" data-source="design">
+<td><div class=name>--lt-bg-success <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#1f883d'></span><span class=hex>#1f883d</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
+<td class=count>73</td>
+<td class=props><span class='bg'>bg:62</span><span class='other'>other:4</span><span class='border'>border:4</span><span class='text'>text:2</span><span class='fill'>fill:1</span></td>
+<td class=products><span>kaneai (55)</span><span>hyperexecute (8)</span><span>nuisance-sdk (8)</span><span>packages (1)</span><span>smartui (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-icon-success" data-prop="stroke" data-count="70" data-products="kaneai|packages|extension|smartui" data-source="design">
+<td><div class=name>--lt-icon-success <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#1a7f37'></span><span class=hex>#1a7f37</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
+<td class=count>70</td>
+<td class=props><span class='stroke'>stroke:32</span><span class='fill'>fill:32</span><span class='text'>text:4</span><span class='other'>other:2</span></td>
+<td class=products><span>kaneai (62)</span><span>smartui (6)</span><span>packages (1)</span><span>extension (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-shadow-floating-small-2" data-prop="shadow" data-count="67" data-products="mobile-web-client|kaneai|hyperexecute|packages|lt-components" data-source="design">
 <td><div class=name>--lt-shadow-floating-small-2 <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#424a530a'></span><span class=hex>#424a530a</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#01040966'></span><span class=hex>#01040966</span></div></td>
 <td class=count>67</td>
 <td class=props><span class='shadow'>shadow:36</span><span class='other'>other:31</span></td>
-<td class=products><span>kaneai (53)</span><span>other (5)</span><span>hyperexecute (4)</span><span>packages (3)</span><span>mobile-web-client (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-success" data-prop="bg" data-count="64" data-products="kaneai|hyperexecute|packages" data-source="design">
-<td><div class=name>--lt-bg-success <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#1f883d'></span><span class=hex>#1f883d</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
-<td class=count>64</td>
-<td class=props><span class='bg'>bg:53</span><span class='other'>other:4</span><span class='border'>border:4</span><span class='text'>text:2</span><span class='fill'>fill:1</span></td>
-<td class=products><span>kaneai (55)</span><span>hyperexecute (8)</span><span>packages (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-success" data-prop="stroke" data-count="63" data-products="kaneai|packages" data-source="design">
-<td><div class=name>--lt-icon-success <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#1a7f37'></span><span class=hex>#1a7f37</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
-<td class=count>63</td>
-<td class=props><span class='stroke'>stroke:32</span><span class='fill'>fill:31</span></td>
-<td class=products><span>kaneai (62)</span><span>packages (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-warning-muted" data-prop="bg" data-count="58" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
-<td><div class=name>--lt-bg-warning-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#fff8c5'></span><span class=hex>#fff8c5</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#bb800926'></span><span class=hex>#bb800926</span></div></td>
-<td class=count>58</td>
-<td class=props><span class='bg'>bg:51</span><span class='other'>other:6</span><span class='border'>border:1</span></td>
-<td class=products><span>kaneai (38)</span><span>hyperexecute (9)</span><span>mobile-web-client (5)</span><span>packages (4)</span><span>magic-leap-dashboard (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-error" data-prop="border" data-count="56" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
+<td class=products><span>kaneai (53)</span><span>lt-components (5)</span><span>hyperexecute (4)</span><span>packages (3)</span><span>mobile-web-client (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-error" data-prop="border" data-count="60" data-products="mobile-web-client|kaneai|hyperexecute|packages|extension|lwc-2.0" data-source="design">
 <td><div class=name>--lt-border-error <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#cf222e'></span><span class=hex>#cf222e</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#da3633'></span><span class=hex>#da3633</span></div></td>
+<td class=count>60</td>
+<td class=props><span class='border'>border:51</span><span class='other'>other:5</span><span class='bg'>bg:3</span><span class='text'>text:1</span></td>
+<td class=products><span>kaneai (33)</span><span>hyperexecute (11)</span><span>mobile-web-client (6)</span><span>packages (6)</span><span>lwc-2.0 (3)</span><span>extension (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-inverse" data-prop="border" data-count="60" data-products="mobile-web-client|smartui" data-source="design">
+<td><div class=name>--lt-border-inverse <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#24292f'></span><span class=hex>#24292f</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f0f6fc'></span><span class=hex>#f0f6fc</span></div></td>
+<td class=count>60</td>
+<td class=props><span class='border'>border:57</span><span class='shadow'>shadow:2</span><span class='other'>other:1</span></td>
+<td class=products><span>smartui (53)</span><span>mobile-web-client (7)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-warning-muted" data-prop="bg" data-count="59" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|smartui" data-source="design">
+<td><div class=name>--lt-bg-warning-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#fff8c5'></span><span class=hex>#fff8c5</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#bb800926'></span><span class=hex>#bb800926</span></div></td>
+<td class=count>59</td>
+<td class=props><span class='bg'>bg:51</span><span class='other'>other:7</span><span class='border'>border:1</span></td>
+<td class=products><span>kaneai (38)</span><span>hyperexecute (9)</span><span>mobile-web-client (5)</span><span>packages (4)</span><span>magic-leap-dashboard (2)</span><span>smartui (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-success-muted" data-prop="bg" data-count="56" data-products="mobile-web-client|kaneai|hyperexecute|packages|smartui|nuisance-sdk" data-source="design">
+<td><div class=name>--lt-bg-success-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#dafbe1'></span><span class=hex>#dafbe1</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#2ea04326'></span><span class=hex>#2ea04326</span></div></td>
 <td class=count>56</td>
-<td class=props><span class='border'>border:48</span><span class='other'>other:4</span><span class='bg'>bg:3</span><span class='text'>text:1</span></td>
-<td class=products><span>kaneai (33)</span><span>hyperexecute (11)</span><span>mobile-web-client (6)</span><span>packages (6)</span></td></tr>
+<td class=props><span class='bg'>bg:38</span><span class='other'>other:17</span><span class='fill'>fill:1</span></td>
+<td class=products><span>kaneai (27)</span><span>packages (11)</span><span>smartui (7)</span><span>hyperexecute (6)</span><span>mobile-web-client (4)</span><span>nuisance-sdk (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-icon-purple" data-prop="stroke" data-count="56" data-products="kaneai|packages" data-source="design">
 <td><div class=name>--lt-icon-purple <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8250df'></span><span class=hex>#8250df</span></div></td>
@@ -318,13 +346,13 @@
 <td class=count>56</td>
 <td class=props><span class='stroke'>stroke:37</span><span class='fill'>fill:19</span></td>
 <td class=products><span>kaneai (35)</span><span>packages (21)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-base-disabled" data-prop="bg" data-count="51" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
-<td><div class=name>--lt-bg-base-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#eaeef2b2'></span><span class=hex>#eaeef2b2</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#161b2299'></span><span class=hex>#161b2299</span></div></td>
-<td class=count>51</td>
-<td class=props><span class='bg'>bg:42</span><span class='other'>other:7</span><span class='border'>border:1</span><span class='fill'>fill:1</span></td>
-<td class=products><span>kaneai (14)</span><span>hyperexecute (12)</span><span>packages (10)</span><span>magic-leap-dashboard (7)</span><span>mobile-web-client (6)</span><span>other (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-error" data-prop="bg" data-count="52" data-products="mobile-web-client|kaneai|hyperexecute|packages|smartui|lwc-2.0" data-source="design">
+<td><div class=name>--lt-bg-error <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#cf222e'></span><span class=hex>#cf222e</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#da3633'></span><span class=hex>#da3633</span></div></td>
+<td class=count>52</td>
+<td class=props><span class='bg'>bg:43</span><span class='other'>other:9</span></td>
+<td class=products><span>kaneai (31)</span><span>packages (6)</span><span>smartui (6)</span><span>mobile-web-client (4)</span><span>hyperexecute (3)</span><span>lwc-2.0 (2)</span></td></tr>
 <tr class="design-token" data-name="--lt-border-error-muted" data-prop="other" data-count="50" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
 <td><div class=name>--lt-border-error-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ff818266'></span><span class=hex>#ff818266</span></div></td>
@@ -332,55 +360,48 @@
 <td class=count>50</td>
 <td class=props><span class='other'>other:32</span><span class='border'>border:18</span></td>
 <td class=products><span>mobile-web-client (32)</span><span>packages (10)</span><span>kaneai (6)</span><span>hyperexecute (1)</span><span>magic-leap-dashboard (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-success-muted" data-prop="bg" data-count="48" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
-<td><div class=name>--lt-bg-success-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#dafbe1'></span><span class=hex>#dafbe1</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#2ea04326'></span><span class=hex>#2ea04326</span></div></td>
-<td class=count>48</td>
-<td class=props><span class='bg'>bg:35</span><span class='other'>other:12</span><span class='fill'>fill:1</span></td>
-<td class=products><span>kaneai (27)</span><span>packages (11)</span><span>hyperexecute (6)</span><span>mobile-web-client (4)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-info-muted" data-prop="border" data-count="48" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
+<tr class="design-token" data-name="--lt-border-info-muted" data-prop="border" data-count="50" data-products="mobile-web-client|kaneai|hyperexecute|packages|smartui" data-source="design">
 <td><div class=name>--lt-border-info-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#54aeff66'></span><span class=hex>#54aeff66</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#388bfd66'></span><span class=hex>#388bfd66</span></div></td>
-<td class=count>48</td>
-<td class=props><span class='border'>border:32</span><span class='other'>other:13</span><span class='bg'>bg:2</span><span class='stroke'>stroke:1</span></td>
-<td class=products><span>kaneai (28)</span><span>hyperexecute (9)</span><span>mobile-web-client (6)</span><span>packages (5)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-error" data-prop="bg" data-count="44" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
-<td><div class=name>--lt-bg-error <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#cf222e'></span><span class=hex>#cf222e</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#da3633'></span><span class=hex>#da3633</span></div></td>
-<td class=count>44</td>
-<td class=props><span class='bg'>bg:38</span><span class='other'>other:6</span></td>
-<td class=products><span>kaneai (31)</span><span>packages (6)</span><span>mobile-web-client (4)</span><span>hyperexecute (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-primary" data-prop="border" data-count="36" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|other" data-source="design">
-<td><div class=name>--lt-border-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#6e7781'></span><span class=hex>#6e7781</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#8b949e'></span><span class=hex>#8b949e</span></div></td>
-<td class=count>36</td>
-<td class=props><span class='border'>border:35</span><span class='other'>other:1</span></td>
-<td class=products><span>hyperexecute (9)</span><span>kaneai (8)</span><span>mobile-web-client (7)</span><span>packages (6)</span><span>other (5)</span><span>magic-leap-dashboard (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-brand-primary" data-prop="bg" data-count="33" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
+<td class=count>50</td>
+<td class=props><span class='border'>border:32</span><span class='other'>other:15</span><span class='bg'>bg:2</span><span class='stroke'>stroke:1</span></td>
+<td class=products><span>kaneai (28)</span><span>hyperexecute (9)</span><span>mobile-web-client (6)</span><span>packages (5)</span><span>smartui (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-brand-primary" data-prop="bg" data-count="36" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|extension|smartui" data-source="design">
 <td><div class=name>--lt-bg-brand-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ed5f00'></span><span class=hex>#ed5f00</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#f7813f'></span><span class=hex>#f7813f</span></div></td>
-<td class=count>33</td>
-<td class=props><span class='bg'>bg:17</span><span class='other'>other:7</span><span class='border'>border:5</span><span class='text'>text:4</span></td>
-<td class=products><span>kaneai (16)</span><span>hyperexecute (8)</span><span>mobile-web-client (3)</span><span>magic-leap-dashboard (3)</span><span>packages (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-primary" data-prop="bg" data-count="29" data-products="mobile-web-client|kaneai|hyperexecute" data-source="design">
-<td><div class=name>--lt-bg-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#1f883d'></span><span class=hex>#1f883d</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
-<td class=count>29</td>
-<td class=props><span class='bg'>bg:17</span><span class='other'>other:7</span><span class='fill'>fill:4</span><span class='text'>text:1</span></td>
-<td class=products><span>kaneai (14)</span><span>hyperexecute (13)</span><span>mobile-web-client (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-secondary" data-prop="bg" data-count="25" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
+<td class=count>36</td>
+<td class=props><span class='bg'>bg:19</span><span class='other'>other:8</span><span class='border'>border:5</span><span class='text'>text:4</span></td>
+<td class=products><span>kaneai (16)</span><span>hyperexecute (8)</span><span>mobile-web-client (3)</span><span>magic-leap-dashboard (3)</span><span>packages (3)</span><span>smartui (2)</span><span>extension (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-secondary" data-prop="bg" data-count="36" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages|smartui" data-source="design">
 <td><div class=name>--lt-bg-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#6e7781'></span><span class=hex>#6e7781</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#30363d'></span><span class=hex>#30363d</span></div></td>
-<td class=count>25</td>
-<td class=props><span class='bg'>bg:21</span><span class='other'>other:2</span><span class='text'>text:1</span><span class='border'>border:1</span></td>
-<td class=products><span>kaneai (9)</span><span>mobile-web-client (5)</span><span>hyperexecute (5)</span><span>magic-leap-dashboard (4)</span><span>packages (2)</span></td></tr>
+<td class=count>36</td>
+<td class=props><span class='bg'>bg:31</span><span class='other'>other:3</span><span class='text'>text:1</span><span class='border'>border:1</span></td>
+<td class=products><span>smartui (11)</span><span>kaneai (9)</span><span>mobile-web-client (5)</span><span>hyperexecute (5)</span><span>magic-leap-dashboard (4)</span><span>packages (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-invisible-hover" data-prop="bg" data-count="35" data-products="mobile-web-client|kaneai|hyperexecute|smartui|a11y-client-sdk" data-source="design">
+<td><div class=name>--lt-bg-invisible-hover <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#d0d7de33'></span><span class=hex>#d0d7de33</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#656c7633'></span><span class=hex>#656c7633</span></div></td>
+<td class=count>35</td>
+<td class=props><span class='bg'>bg:26</span><span class='other'>other:7</span><span class='text'>text:2</span></td>
+<td class=products><span>smartui (16)</span><span>kaneai (7)</span><span>mobile-web-client (4)</span><span>hyperexecute (4)</span><span>a11y-client-sdk (4)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-primary" data-prop="bg" data-count="32" data-products="mobile-web-client|kaneai|hyperexecute|smartui" data-source="design">
+<td><div class=name>--lt-bg-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#1f883d'></span><span class=hex>#1f883d</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
+<td class=count>32</td>
+<td class=props><span class='bg'>bg:20</span><span class='other'>other:7</span><span class='fill'>fill:4</span><span class='text'>text:1</span></td>
+<td class=products><span>kaneai (14)</span><span>hyperexecute (13)</span><span>smartui (3)</span><span>mobile-web-client (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-orange" data-prop="other" data-count="27" data-products="mobile-web-client|kaneai|packages|smartui" data-source="design">
+<td><div class=name>--lt-text-orange <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#bc4c00'></span><span class=hex>#bc4c00</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#db6d28'></span><span class=hex>#db6d28</span></div></td>
+<td class=count>27</td>
+<td class=props><span class='other'>other:14</span><span class='text'>text:10</span><span class='fill'>fill:3</span></td>
+<td class=products><span>kaneai (13)</span><span>packages (8)</span><span>mobile-web-client (4)</span><span>smartui (2)</span></td></tr>
 <tr class="design-token" data-name="--lt-icon-warning" data-prop="fill" data-count="25" data-products="kaneai" data-source="design">
 <td><div class=name>--lt-icon-warning <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#9a6700'></span><span class=hex>#9a6700</span></div></td>
@@ -388,41 +409,55 @@
 <td class=count>25</td>
 <td class=props><span class='fill'>fill:21</span><span class='stroke'>stroke:4</span></td>
 <td class=products><span>kaneai (25)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-orange" data-prop="other" data-count="25" data-products="mobile-web-client|kaneai|packages" data-source="design">
-<td><div class=name>--lt-text-orange <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#bc4c00'></span><span class=hex>#bc4c00</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#db6d28'></span><span class=hex>#db6d28</span></div></td>
-<td class=count>25</td>
-<td class=props><span class='other'>other:13</span><span class='text'>text:9</span><span class='fill'>fill:3</span></td>
-<td class=products><span>kaneai (13)</span><span>packages (8)</span><span>mobile-web-client (4)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-brand-secondary" data-prop="other" data-count="23" data-products="mobile-web-client|kaneai|hyperexecute|packages|other" data-source="design">
+<tr class="design-token" data-name="--lt-bg-brand-secondary" data-prop="other" data-count="23" data-products="mobile-web-client|kaneai|hyperexecute|packages|lt-components" data-source="design">
 <td><div class=name>--lt-bg-brand-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#c24e00'></span><span class=hex>#c24e00</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#db6d28'></span><span class=hex>#db6d28</span></div></td>
 <td class=count>23</td>
 <td class=props><span class='other'>other:7</span><span class='stroke'>stroke:6</span><span class='text'>text:5</span><span class='fill'>fill:3</span><span class='bg'>bg:2</span></td>
-<td class=products><span>packages (8)</span><span>hyperexecute (6)</span><span>kaneai (5)</span><span>mobile-web-client (3)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-disabled" data-prop="fill" data-count="22" data-products="mobile-web-client|kaneai|other" data-source="design">
+<td class=products><span>packages (8)</span><span>hyperexecute (6)</span><span>kaneai (5)</span><span>mobile-web-client (3)</span><span>lt-components (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-component-button-secondary" data-prop="bg" data-count="23" data-products="smartui|nuisance-sdk|lt-common-header|lwc-2.0" data-source="design">
+<td><div class=name>--lt-component-button-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f6f8fa'></span><span class=hex>#f6f8fa</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#212830'></span><span class=hex>#212830</span></div></td>
+<td class=count>23</td>
+<td class=props><span class='bg'>bg:22</span><span class='other'>other:1</span></td>
+<td class=products><span>lt-common-header (14)</span><span>nuisance-sdk (7)</span><span>smartui (1)</span><span>lwc-2.0 (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-icon-disabled" data-prop="fill" data-count="22" data-products="mobile-web-client|kaneai|lt-components" data-source="design">
 <td><div class=name>--lt-icon-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8c959f'></span><span class=hex>#8c959f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#6e7681'></span><span class=hex>#6e7681</span></div></td>
 <td class=count>22</td>
 <td class=props><span class='fill'>fill:18</span><span class='stroke'>stroke:2</span><span class='text'>text:1</span><span class='other'>other:1</span></td>
-<td class=products><span>kaneai (15)</span><span>mobile-web-client (5)</span><span>other (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-brand-hover" data-prop="bg" data-count="18" data-products="mobile-web-client|kaneai|hyperexecute|other" data-source="design">
+<td class=products><span>kaneai (15)</span><span>mobile-web-client (5)</span><span>lt-components (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-warning" data-prop="border" data-count="19" data-products="mobile-web-client|kaneai|magic-leap-dashboard|packages|smartui" data-source="design">
+<td><div class=name>--lt-border-warning <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#9a6700'></span><span class=hex>#9a6700</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#9e6a03'></span><span class=hex>#9e6a03</span></div></td>
+<td class=count>19</td>
+<td class=props><span class='border'>border:17</span><span class='other'>other:2</span></td>
+<td class=products><span>kaneai (10)</span><span>packages (4)</span><span>mobile-web-client (2)</span><span>magic-leap-dashboard (2)</span><span>smartui (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-brand-hover" data-prop="bg" data-count="18" data-products="mobile-web-client|kaneai|hyperexecute|lt-components" data-source="design">
 <td><div class=name>--lt-bg-brand-hover <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#c95100'></span><span class=hex>#c95100</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ff8f4d'></span><span class=hex>#ff8f4d</span></div></td>
 <td class=count>18</td>
 <td class=props><span class='bg'>bg:9</span><span class='fill'>fill:5</span><span class='text'>text:2</span><span class='border'>border:1</span><span class='other'>other:1</span></td>
-<td class=products><span>mobile-web-client (10)</span><span>kaneai (6)</span><span>hyperexecute (1)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-warning" data-prop="border" data-count="18" data-products="mobile-web-client|kaneai|magic-leap-dashboard|packages" data-source="design">
-<td><div class=name>--lt-border-warning <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#9a6700'></span><span class=hex>#9a6700</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#9e6a03'></span><span class=hex>#9e6a03</span></div></td>
+<td class=products><span>mobile-web-client (10)</span><span>kaneai (6)</span><span>hyperexecute (1)</span><span>lt-components (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-icon-transparent" data-prop="fill" data-count="18" data-products="mobile-web-client|hyperexecute|smartui" data-source="design">
+<td><div class=name>--lt-icon-transparent <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#ffffff'></span><span class=hex>#ffffff</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f0f6fc'></span><span class=hex>#f0f6fc</span></div></td>
 <td class=count>18</td>
-<td class=props><span class='border'>border:16</span><span class='other'>other:2</span></td>
-<td class=products><span>kaneai (10)</span><span>packages (4)</span><span>mobile-web-client (2)</span><span>magic-leap-dashboard (2)</span></td></tr>
+<td class=props><span class='fill'>fill:16</span><span class='stroke'>stroke:2</span></td>
+<td class=products><span>hyperexecute (10)</span><span>mobile-web-client (5)</span><span>smartui (3)</span></td></tr>
+<tr class="design-token" data-name="--lt-text-brand-primary" data-prop="text" data-count="17" data-products="mobile-web-client|kaneai|hyperexecute|packages|a11y-client-sdk" data-source="design">
+<td><div class=name>--lt-text-brand-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#ed5f00'></span><span class=hex>#ed5f00</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f7813f'></span><span class=hex>#f7813f</span></div></td>
+<td class=count>17</td>
+<td class=props><span class='text'>text:9</span><span class='bg'>bg:4</span><span class='border'>border:2</span><span class='other'>other:2</span></td>
+<td class=products><span>hyperexecute (6)</span><span>packages (5)</span><span>mobile-web-client (3)</span><span>kaneai (2)</span><span>a11y-client-sdk (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-orange-muted" data-prop="bg" data-count="16" data-products="mobile-web-client|kaneai|packages" data-source="design">
 <td><div class=name>--lt-bg-orange-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#fff1e5'></span><span class=hex>#fff1e5</span></div></td>
@@ -430,20 +465,13 @@
 <td class=count>16</td>
 <td class=props><span class='bg'>bg:13</span><span class='other'>other:2</span><span class='border'>border:1</span></td>
 <td class=products><span>kaneai (9)</span><span>packages (5)</span><span>mobile-web-client (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-text-brand-primary" data-prop="text" data-count="16" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
-<td><div class=name>--lt-text-brand-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#ed5f00'></span><span class=hex>#ed5f00</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f7813f'></span><span class=hex>#f7813f</span></div></td>
-<td class=count>16</td>
-<td class=props><span class='text'>text:9</span><span class='bg'>bg:3</span><span class='border'>border:2</span><span class='other'>other:2</span></td>
-<td class=products><span>hyperexecute (6)</span><span>packages (5)</span><span>mobile-web-client (3)</span><span>kaneai (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-invisible-hover" data-prop="bg" data-count="15" data-products="mobile-web-client|kaneai|hyperexecute" data-source="design">
-<td><div class=name>--lt-bg-invisible-hover <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#d0d7de33'></span><span class=hex>#d0d7de33</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#656c7633'></span><span class=hex>#656c7633</span></div></td>
+<tr class="design-token" data-name="--lt-bg-purple-muted" data-prop="bg" data-count="15" data-products="mobile-web-client|kaneai|hyperexecute|smartui" data-source="design">
+<td><div class=name>--lt-bg-purple-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#fbefff'></span><span class=hex>#fbefff</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#ab7df826'></span><span class=hex>#ab7df826</span></div></td>
 <td class=count>15</td>
-<td class=props><span class='bg'>bg:11</span><span class='other'>other:3</span><span class='text'>text:1</span></td>
-<td class=products><span>kaneai (7)</span><span>mobile-web-client (4)</span><span>hyperexecute (4)</span></td></tr>
+<td class=props><span class='bg'>bg:12</span><span class='other'>other:3</span></td>
+<td class=products><span>kaneai (11)</span><span>smartui (2)</span><span>mobile-web-client (1)</span><span>hyperexecute (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-border-warning-muted" data-prop="other" data-count="15" data-products="mobile-web-client|kaneai|hyperexecute|magic-leap-dashboard|packages" data-source="design">
 <td><div class=name>--lt-border-warning-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#d4a72c66'></span><span class=hex>#d4a72c66</span></div></td>
@@ -451,13 +479,6 @@
 <td class=count>15</td>
 <td class=props><span class='other'>other:10</span><span class='border'>border:5</span></td>
 <td class=products><span>hyperexecute (4)</span><span>packages (4)</span><span>kaneai (3)</span><span>mobile-web-client (2)</span><span>magic-leap-dashboard (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-transparent" data-prop="fill" data-count="15" data-products="mobile-web-client|hyperexecute" data-source="design">
-<td><div class=name>--lt-icon-transparent <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#ffffff'></span><span class=hex>#ffffff</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f0f6fc'></span><span class=hex>#f0f6fc</span></div></td>
-<td class=count>15</td>
-<td class=props><span class='fill'>fill:13</span><span class='stroke'>stroke:2</span></td>
-<td class=products><span>hyperexecute (10)</span><span>mobile-web-client (5)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-error-hover" data-prop="other" data-count="14" data-products="mobile-web-client|kaneai|hyperexecute|packages" data-source="design">
 <td><div class=name>--lt-bg-error-hover <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#a40e26'></span><span class=hex>#a40e26</span></div></td>
@@ -465,34 +486,41 @@
 <td class=count>14</td>
 <td class=props><span class='other'>other:6</span><span class='stroke'>stroke:4</span><span class='fill'>fill:3</span><span class='text'>text:1</span></td>
 <td class=products><span>packages (6)</span><span>kaneai (5)</span><span>hyperexecute (2)</span><span>mobile-web-client (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-primary-disabled" data-prop="other" data-count="13" data-products="mobile-web-client|kaneai|packages|other" data-source="design">
+<tr class="design-token" data-name="--lt-bg-primary-disabled" data-prop="other" data-count="13" data-products="mobile-web-client|kaneai|packages|lt-components" data-source="design">
 <td><div class=name>--lt-bg-primary-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#95d8a6'></span><span class=hex>#95d8a6</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#105823'></span><span class=hex>#105823</span></div></td>
 <td class=count>13</td>
 <td class=props><span class='other'>other:8</span><span class='bg'>bg:4</span><span class='border'>border:1</span></td>
-<td class=products><span>packages (4)</span><span>mobile-web-client (3)</span><span>kaneai (3)</span><span>other (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-purple-muted" data-prop="bg" data-count="13" data-products="mobile-web-client|kaneai|hyperexecute" data-source="design">
-<td><div class=name>--lt-bg-purple-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#fbefff'></span><span class=hex>#fbefff</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#ab7df826'></span><span class=hex>#ab7df826</span></div></td>
+<td class=products><span>packages (4)</span><span>mobile-web-client (3)</span><span>kaneai (3)</span><span>lt-components (3)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-primary-pressed" data-prop="bg" data-count="13" data-products="mobile-web-client|magic-leap-dashboard|packages|smartui" data-source="design">
+<td><div class=name>--lt-bg-primary-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#197935'></span><span class=hex>#197935</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#2e9a40'></span><span class=hex>#2e9a40</span></div></td>
 <td class=count>13</td>
-<td class=props><span class='bg'>bg:12</span><span class='other'>other:1</span></td>
-<td class=products><span>kaneai (11)</span><span>mobile-web-client (1)</span><span>hyperexecute (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-purple-muted" data-prop="border" data-count="12" data-products="kaneai" data-source="design">
+<td class=props><span class='bg'>bg:10</span><span class='other'>other:3</span></td>
+<td class=products><span>smartui (9)</span><span>packages (2)</span><span>mobile-web-client (1)</span><span>magic-leap-dashboard (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-purple-muted" data-prop="border" data-count="13" data-products="kaneai|lt-common-header" data-source="design">
 <td><div class=name>--lt-border-purple-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#c297ff66'></span><span class=hex>#c297ff66</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ab7df866'></span><span class=hex>#ab7df866</span></div></td>
-<td class=count>12</td>
-<td class=props><span class='border'>border:5</span><span class='bg'>bg:4</span><span class='other'>other:3</span></td>
-<td class=products><span>kaneai (12)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-success" data-prop="border" data-count="11" data-products="kaneai|hyperexecute" data-source="design">
+<td class=count>13</td>
+<td class=props><span class='border'>border:5</span><span class='bg'>bg:5</span><span class='other'>other:3</span></td>
+<td class=products><span>kaneai (12)</span><span>lt-common-header (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-success" data-prop="border" data-count="12" data-products="kaneai|hyperexecute|smartui" data-source="design">
 <td><div class=name>--lt-border-success <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1a7f37'></span><span class=hex>#1a7f37</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#238636'></span><span class=hex>#238636</span></div></td>
+<td class=count>12</td>
+<td class=props><span class='border'>border:10</span><span class='other'>other:2</span></td>
+<td class=products><span>kaneai (8)</span><span>hyperexecute (3)</span><span>smartui (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-border-transparent" data-prop="border" data-count="11" data-products="mobile-web-client|kaneai|smartui|nuisance-sdk" data-source="design">
+<td><div class=name>--lt-border-transparent <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#1f232826'></span><span class=hex>#1f232826</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#f0f6fc1f'></span><span class=hex>#f0f6fc1f</span></div></td>
 <td class=count>11</td>
-<td class=props><span class='border'>border:9</span><span class='other'>other:2</span></td>
-<td class=products><span>kaneai (8)</span><span>hyperexecute (3)</span></td></tr>
+<td class=props><span class='border'>border:8</span><span class='other'>other:3</span></td>
+<td class=products><span>nuisance-sdk (5)</span><span>mobile-web-client (3)</span><span>kaneai (2)</span><span>smartui (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-text-magenta" data-prop="other" data-count="10" data-products="kaneai" data-source="design">
 <td><div class=name>--lt-text-magenta <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#bf3989'></span><span class=hex>#bf3989</span></div></td>
@@ -500,6 +528,20 @@
 <td class=count>10</td>
 <td class=props><span class='other'>other:5</span><span class='text'>text:4</span><span class='bg'>bg:1</span></td>
 <td class=products><span>kaneai (10)</span></td></tr>
+<tr class="design-token" data-name="--lt-component-dialog-bg" data-prop="bg" data-count="9" data-products="lt-common-header" data-source="design">
+<td><div class=name>--lt-component-dialog-bg <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#ffffff'></span><span class=hex>#ffffff</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#161b22'></span><span class=hex>#161b22</span></div></td>
+<td class=count>9</td>
+<td class=props><span class='bg'>bg:9</span></td>
+<td class=products><span>lt-common-header (9)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-disabled" data-prop="other" data-count="8" data-products="kaneai|hyperexecute|packages|smartui" data-source="design">
+<td><div class=name>--lt-bg-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#8c959f'></span><span class=hex>#8c959f</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#21262d'></span><span class=hex>#21262d</span></div></td>
+<td class=count>8</td>
+<td class=props><span class='other'>other:6</span><span class='text'>text:1</span><span class='bg'>bg:1</span></td>
+<td class=products><span>kaneai (3)</span><span>hyperexecute (3)</span><span>packages (1)</span><span>smartui (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-magenta-muted" data-prop="bg" data-count="8" data-products="mobile-web-client|kaneai|packages" data-source="design">
 <td><div class=name>--lt-bg-magenta-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#ffeff7'></span><span class=hex>#ffeff7</span></div></td>
@@ -514,13 +556,6 @@
 <td class=count>8</td>
 <td class=props><span class='border'>border:6</span><span class='other'>other:2</span></td>
 <td class=products><span>kaneai (8)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-disabled" data-prop="other" data-count="7" data-products="kaneai|hyperexecute|packages" data-source="design">
-<td><div class=name>--lt-bg-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#8c959f'></span><span class=hex>#8c959f</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#21262d'></span><span class=hex>#21262d</span></div></td>
-<td class=count>7</td>
-<td class=props><span class='other'>other:5</span><span class='text'>text:1</span><span class='bg'>bg:1</span></td>
-<td class=products><span>kaneai (3)</span><span>hyperexecute (3)</span><span>packages (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-purple" data-prop="other" data-count="7" data-products="mobile-web-client|kaneai|packages" data-source="design">
 <td><div class=name>--lt-bg-purple <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8250df'></span><span class=hex>#8250df</span></div></td>
@@ -528,20 +563,20 @@
 <td class=count>7</td>
 <td class=props><span class='other'>other:7</span></td>
 <td class=products><span>kaneai (4)</span><span>packages (2)</span><span>mobile-web-client (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-inverse" data-prop="border" data-count="7" data-products="mobile-web-client" data-source="design">
-<td><div class=name>--lt-border-inverse <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#24292f'></span><span class=hex>#24292f</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f0f6fc'></span><span class=hex>#f0f6fc</span></div></td>
-<td class=count>7</td>
-<td class=props><span class='border'>border:7</span></td>
-<td class=products><span>mobile-web-client (7)</span></td></tr>
-<tr class="design-token" data-name="--lt-shadow-resting-xsmall" data-prop="other" data-count="7" data-products="other" data-source="design">
+<tr class="design-token" data-name="--lt-shadow-resting-xsmall" data-prop="other" data-count="7" data-products="lt-components" data-source="design">
 <td><div class=name>--lt-shadow-resting-xsmall <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1f23281a'></span><span class=hex>#1f23281a</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#010409cc'></span><span class=hex>#010409cc</span></div></td>
 <td class=count>7</td>
 <td class=props><span class='other'>other:4</span><span class='shadow'>shadow:3</span></td>
-<td class=products><span>other (7)</span></td></tr>
+<td class=products><span>lt-components (7)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-magenta" data-prop="other" data-count="6" data-products="kaneai|smartui" data-source="design">
+<td><div class=name>--lt-bg-magenta <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#bf3989'></span><span class=hex>#bf3989</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#bf4b8a'></span><span class=hex>#bf4b8a</span></div></td>
+<td class=count>6</td>
+<td class=props><span class='other'>other:3</span><span class='bg'>bg:3</span></td>
+<td class=products><span>kaneai (5)</span><span>smartui (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-border-orange-muted" data-prop="other" data-count="6" data-products="hyperexecute|packages" data-source="design">
 <td><div class=name>--lt-border-orange-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#fb8f4466'></span><span class=hex>#fb8f4466</span></div></td>
@@ -549,13 +584,27 @@
 <td class=count>6</td>
 <td class=props><span class='other'>other:6</span></td>
 <td class=products><span>hyperexecute (5)</span><span>packages (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-magenta" data-prop="other" data-count="5" data-products="kaneai" data-source="design">
-<td><div class=name>--lt-bg-magenta <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#bf3989'></span><span class=hex>#bf3989</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#bf4b8a'></span><span class=hex>#bf4b8a</span></div></td>
+<tr class="design-token" data-name="--lt-component-button-secondary-pressed" data-prop="bg" data-count="6" data-products="mobile-web-client|nuisance-sdk|lt-common-header" data-source="design">
+<td><div class=name>--lt-component-button-secondary-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#e7ebef'></span><span class=hex>#e7ebef</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#2a313c'></span><span class=hex>#2a313c</span></div></td>
+<td class=count>6</td>
+<td class=props><span class='bg'>bg:6</span></td>
+<td class=products><span>nuisance-sdk (3)</span><span>lt-common-header (2)</span><span>mobile-web-client (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-shadow-floating-small-3" data-prop="shadow" data-count="6" data-products="smartui" data-source="design">
+<td><div class=name>--lt-shadow-floating-small-3 <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#424a531f'></span><span class=hex>#424a531f</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#01040966'></span><span class=hex>#01040966</span></div></td>
+<td class=count>6</td>
+<td class=props><span class='shadow'>shadow:5</span><span class='other'>other:1</span></td>
+<td class=products><span>smartui (6)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-primary-hover" data-prop="bg" data-count="5" data-products="kaneai|smartui" data-source="design">
+<td><div class=name>--lt-bg-primary-hover <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#1c8139'></span><span class=hex>#1c8139</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#29903b'></span><span class=hex>#29903b</span></div></td>
 <td class=count>5</td>
-<td class=props><span class='other'>other:3</span><span class='bg'>bg:2</span></td>
-<td class=products><span>kaneai (5)</span></td></tr>
+<td class=props><span class='bg'>bg:4</span><span class='other'>other:1</span></td>
+<td class=products><span>kaneai (4)</span><span>smartui (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-border-success-muted" data-prop="other" data-count="5" data-products="hyperexecute" data-source="design">
 <td><div class=name>--lt-border-success-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#4ac26b66'></span><span class=hex>#4ac26b66</span></div></td>
@@ -563,34 +612,13 @@
 <td class=count>5</td>
 <td class=props><span class='other'>other:4</span><span class='border'>border:1</span></td>
 <td class=products><span>hyperexecute (5)</span></td></tr>
-<tr class="design-token" data-name="--lt-border-transparent" data-prop="border" data-count="5" data-products="mobile-web-client|kaneai" data-source="design">
-<td><div class=name>--lt-border-transparent <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#1f232826'></span><span class=hex>#1f232826</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f0f6fc1f'></span><span class=hex>#f0f6fc1f</span></div></td>
-<td class=count>5</td>
-<td class=props><span class='border'>border:3</span><span class='other'>other:2</span></td>
-<td class=products><span>mobile-web-client (3)</span><span>kaneai (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-brand-muted" data-prop="other" data-count="4" data-products="kaneai|packages|other" data-source="design">
+<tr class="design-token" data-name="--lt-bg-brand-muted" data-prop="other" data-count="4" data-products="kaneai|packages|lt-components" data-source="design">
 <td><div class=name>--lt-bg-brand-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#e49e71'></span><span class=hex>#e49e71</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#3b2618'></span><span class=hex>#3b2618</span></div></td>
 <td class=count>4</td>
 <td class=props><span class='other'>other:2</span><span class='bg'>bg:1</span><span class='border'>border:1</span></td>
-<td class=products><span>kaneai (2)</span><span>packages (1)</span><span>other (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-primary-hover" data-prop="bg" data-count="4" data-products="kaneai" data-source="design">
-<td><div class=name>--lt-bg-primary-hover <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#1c8139'></span><span class=hex>#1c8139</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#29903b'></span><span class=hex>#29903b</span></div></td>
-<td class=count>4</td>
-<td class=props><span class='bg'>bg:3</span><span class='other'>other:1</span></td>
-<td class=products><span>kaneai (4)</span></td></tr>
-<tr class="design-token" data-name="--lt-bg-primary-pressed" data-prop="bg" data-count="4" data-products="mobile-web-client|magic-leap-dashboard|packages" data-source="design">
-<td><div class=name>--lt-bg-primary-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#197935'></span><span class=hex>#197935</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#2e9a40'></span><span class=hex>#2e9a40</span></div></td>
-<td class=count>4</td>
-<td class=props><span class='bg'>bg:2</span><span class='other'>other:2</span></td>
-<td class=products><span>packages (2)</span><span>mobile-web-client (1)</span><span>magic-leap-dashboard (1)</span></td></tr>
+<td class=products><span>kaneai (2)</span><span>packages (1)</span><span>lt-components (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-secondary-muted" data-prop="other" data-count="3" data-products="hyperexecute" data-source="design">
 <td><div class=name>--lt-bg-secondary-muted <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#afb8c133'></span><span class=hex>#afb8c133</span></div></td>
@@ -598,13 +626,20 @@
 <td class=count>3</td>
 <td class=props><span class='other'>other:2</span><span class='text'>text:1</span></td>
 <td class=products><span>hyperexecute (3)</span></td></tr>
-<tr class="design-token" data-name="--lt-shadow-resting-medium" data-prop="shadow" data-count="3" data-products="other" data-source="design">
+<tr class="design-token" data-name="--lt-shadow-resting-medium" data-prop="shadow" data-count="3" data-products="lt-components" data-source="design">
 <td><div class=name>--lt-shadow-resting-medium <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#25292e1f'></span><span class=hex>#25292e1f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#010409cc'></span><span class=hex>#010409cc</span></div></td>
 <td class=count>3</td>
 <td class=props><span class='shadow'>shadow:3</span></td>
-<td class=products><span>other (3)</span></td></tr>
+<td class=products><span>lt-components (3)</span></td></tr>
+<tr class="design-token" data-name="--lt-bg-invisible-pressed" data-prop="bg" data-count="2" data-products="extension|smartui" data-source="design">
+<td><div class=name>--lt-bg-invisible-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#d0d7de66'></span><span class=hex>#d0d7de66</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#656c7640'></span><span class=hex>#656c7640</span></div></td>
+<td class=count>2</td>
+<td class=props><span class='bg'>bg:2</span></td>
+<td class=products><span>extension (1)</span><span>smartui (1)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-orange" data-prop="other" data-count="2" data-products="kaneai" data-source="design">
 <td><div class=name>--lt-bg-orange <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#bc4c00'></span><span class=hex>#bc4c00</span></div></td>
@@ -612,13 +647,13 @@
 <td class=count>2</td>
 <td class=props><span class='other'>other:2</span></td>
 <td class=products><span>kaneai (2)</span></td></tr>
-<tr class="design-token" data-name="--lt-icon-secondary" data-prop="fill" data-count="2" data-products="other" data-source="design">
+<tr class="design-token" data-name="--lt-icon-secondary" data-prop="fill" data-count="2" data-products="lt-components" data-source="design">
 <td><div class=name>--lt-icon-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#d0d7de'></span><span class=hex>#d0d7de</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#3d444d'></span><span class=hex>#3d444d</span></div></td>
 <td class=count>2</td>
 <td class=props><span class='fill'>fill:2</span></td>
-<td class=products><span>other (2)</span></td></tr>
+<td class=products><span>lt-components (2)</span></td></tr>
 <tr class="design-token" data-name="--lt-shadow-component-dark-pressed" data-prop="other" data-count="2" data-products="hyperexecute" data-source="design">
 <td><div class=name>--lt-shadow-component-dark-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#002d114d'></span><span class=hex>#002d114d</span></div></td>
@@ -626,6 +661,13 @@
 <td class=count>2</td>
 <td class=props><span class='other'>other:1</span><span class='text'>text:1</span></td>
 <td class=products><span>hyperexecute (2)</span></td></tr>
+<tr class="design-token" data-name="--lt-shadow-component-knob" data-prop="bg" data-count="2" data-products="a11y-client-sdk" data-source="design">
+<td><div class=name>--lt-shadow-component-knob <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#8c959f26'></span><span class=hex>#8c959f26</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#01040999'></span><span class=hex>#01040999</span></div></td>
+<td class=count>2</td>
+<td class=props><span class='bg'>bg:2</span></td>
+<td class=products><span>a11y-client-sdk (2)</span></td></tr>
 <tr class="design-token" data-name="--lt-bg-warning" data-prop="other" data-count="1" data-products="kaneai" data-source="design">
 <td><div class=name>--lt-bg-warning <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#9a6700'></span><span class=hex>#9a6700</span></div></td>
@@ -633,31 +675,24 @@
 <td class=count>1</td>
 <td class=props><span class='other'>other:1</span></td>
 <td class=products><span>kaneai (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-component-button-secondary-pressed" data-prop="bg" data-count="1" data-products="mobile-web-client" data-source="design">
-<td><div class=name>--lt-component-button-secondary-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#e7ebef'></span><span class=hex>#e7ebef</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#2a313c'></span><span class=hex>#2a313c</span></div></td>
-<td class=count>1</td>
-<td class=props><span class='bg'>bg:1</span></td>
-<td class=products><span>mobile-web-client (1)</span></td></tr>
-<tr class="design-token" data-name="--lt-overlay-primary" data-prop="bg" data-count="1" data-products="other" data-source="design">
+<tr class="design-token" data-name="--lt-overlay-primary" data-prop="bg" data-count="1" data-products="lt-components" data-source="design">
 <td><div class=name>--lt-overlay-primary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8c959f33'></span><span class=hex>#8c959f33</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#01040966'></span><span class=hex>#01040966</span></div></td>
 <td class=count>1</td>
 <td class=props><span class='bg'>bg:1</span></td>
-<td class=products><span>other (1)</span></td></tr>
+<td class=products><span>lt-components (1)</span></td></tr>
+<tr class="design-token" data-name="--lt-shadow-component-rest" data-prop="shadow" data-count="1" data-products="lt-common-header" data-source="design">
+<td><div class=name>--lt-shadow-component-rest <span class="design-badge" title="Official design system token">★ Design</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#1f23280a'></span><span class=hex>#1f23280a</span></div></td>
+<td><div class='hex-cell'><span class=swatch style='background:#0104093d'></span><span class=hex>#0104093d</span></div></td>
+<td class=count>1</td>
+<td class=props><span class='shadow'>shadow:1</span></td>
+<td class=products><span>lt-common-header (1)</span></td></tr>
 <tr class="row-unused design-token" data-name="--lt-bg-error-pressed" data-prop="" data-count="0" data-products="" data-source="design">
 <td><div class=name>--lt-bg-error-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#8b0820'></span><span class=hex>#8b0820</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#d03533'></span><span class=hex>#d03533</span></div></td>
-<td class=count>0</td>
-<td class=props><span style="color:#999">—</span></td>
-<td class=products><span style="color:#999">unused</span></td></tr>
-<tr class="row-unused design-token" data-name="--lt-bg-invisible-pressed" data-prop="" data-count="0" data-products="" data-source="design">
-<td><div class=name>--lt-bg-invisible-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#d0d7de66'></span><span class=hex>#d0d7de66</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#656c7640'></span><span class=hex>#656c7640</span></div></td>
 <td class=count>0</td>
 <td class=props><span style="color:#999">—</span></td>
 <td class=products><span style="color:#999">unused</span></td></tr>
@@ -707,20 +742,6 @@
 <td><div class=name>--lt-component-button-invisible-disabled <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#eaeef2b2'></span><span class=hex>#eaeef2b2</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#00000000'></span><span class=hex>#00000000</span></div></td>
-<td class=count>0</td>
-<td class=props><span style="color:#999">—</span></td>
-<td class=products><span style="color:#999">unused</span></td></tr>
-<tr class="row-unused design-token" data-name="--lt-component-button-secondary" data-prop="" data-count="0" data-products="" data-source="design">
-<td><div class=name>--lt-component-button-secondary <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#f6f8fa'></span><span class=hex>#f6f8fa</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#212830'></span><span class=hex>#212830</span></div></td>
-<td class=count>0</td>
-<td class=props><span style="color:#999">—</span></td>
-<td class=products><span style="color:#999">unused</span></td></tr>
-<tr class="row-unused design-token" data-name="--lt-component-dialog-bg" data-prop="" data-count="0" data-products="" data-source="design">
-<td><div class=name>--lt-component-dialog-bg <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#ffffff'></span><span class=hex>#ffffff</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#161b22'></span><span class=hex>#161b22</span></div></td>
 <td class=count>0</td>
 <td class=props><span style="color:#999">—</span></td>
 <td class=products><span style="color:#999">unused</span></td></tr>
@@ -808,13 +829,6 @@
 <td class=count>0</td>
 <td class=props><span style="color:#999">—</span></td>
 <td class=products><span style="color:#999">unused</span></td></tr>
-<tr class="row-unused design-token" data-name="--lt-shadow-component-knob" data-prop="" data-count="0" data-products="" data-source="design">
-<td><div class=name>--lt-shadow-component-knob <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#8c959f26'></span><span class=hex>#8c959f26</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#01040999'></span><span class=hex>#01040999</span></div></td>
-<td class=count>0</td>
-<td class=props><span style="color:#999">—</span></td>
-<td class=products><span style="color:#999">unused</span></td></tr>
 <tr class="row-unused design-token" data-name="--lt-shadow-component-light-pressed" data-prop="" data-count="0" data-products="" data-source="design">
 <td><div class=name>--lt-shadow-component-light-pressed <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#1f23280a'></span><span class=hex>#1f23280a</span></div></td>
@@ -829,13 +843,6 @@
 <td class=count>0</td>
 <td class=props><span style="color:#999">—</span></td>
 <td class=products><span style="color:#999">unused</span></td></tr>
-<tr class="row-unused design-token" data-name="--lt-shadow-component-rest" data-prop="" data-count="0" data-products="" data-source="design">
-<td><div class=name>--lt-shadow-component-rest <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#1f23280a'></span><span class=hex>#1f23280a</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#0104093d'></span><span class=hex>#0104093d</span></div></td>
-<td class=count>0</td>
-<td class=props><span style="color:#999">—</span></td>
-<td class=products><span style="color:#999">unused</span></td></tr>
 <tr class="row-unused design-token" data-name="--lt-shadow-floating-large-2" data-prop="" data-count="0" data-products="" data-source="design">
 <td><div class=name>--lt-shadow-floating-large-2 <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#424a533d'></span><span class=hex>#424a533d</span></div></td>
@@ -846,13 +853,6 @@
 <tr class="row-unused design-token" data-name="--lt-shadow-floating-medium-2-5" data-prop="" data-count="0" data-products="" data-source="design">
 <td><div class=name>--lt-shadow-floating-medium-2-5 <span class="design-badge" title="Official design system token">★ Design</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#424a5314'></span><span class=hex>#424a5314</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#01040966'></span><span class=hex>#01040966</span></div></td>
-<td class=count>0</td>
-<td class=props><span style="color:#999">—</span></td>
-<td class=products><span style="color:#999">unused</span></td></tr>
-<tr class="row-unused design-token" data-name="--lt-shadow-floating-small-3" data-prop="" data-count="0" data-products="" data-source="design">
-<td><div class=name>--lt-shadow-floating-small-3 <span class="design-badge" title="Official design system token">★ Design</span></div></td>
-<td><div class='hex-cell'><span class=swatch style='background:#424a531f'></span><span class=hex>#424a531f</span></div></td>
 <td><div class='hex-cell'><span class=swatch style='background:#01040966'></span><span class=hex>#01040966</span></div></td>
 <td class=count>0</td>
 <td class=props><span style="color:#999">—</span></td>
@@ -902,7 +902,7 @@
 </tbody></table>
 <script>
 const rows = document.querySelectorAll('#tbl tbody tr');
-const state = { q: '', prop: 'all', product: 'all', source: 'all', ctype: 'all' };
+const state = { q: '', prop: 'all', product: 'all', source: 'all' };
 const filterResultStats = document.getElementById('filter-result-stats');
 const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
@@ -929,15 +929,10 @@ function applyFilters() {
     if (show && state.source !== 'all') {
       if (r.dataset.source !== state.source) show = false;
     }
-    if (show && state.ctype !== 'all') {
-      const isC = r.dataset.name.startsWith('--lt-c-');
-      if (state.ctype === 'c' && !isC) show = false;
-      if (state.ctype === 'named' && isC) show = false;
-    }
     r.style.display = show ? '' : 'none';
     if (show) { visible++; visibleRefs += parseInt(r.dataset.count || '0', 10); }
   });
-  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all' || state.ctype !== 'all';
+  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all';
   if (isFiltered) {
     filterResultStats.style.display = 'flex';
     filteredCountEl.textContent = visible.toLocaleString();
@@ -966,12 +961,6 @@ document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach
   b.addEventListener('click', () => {
     document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); state.source = b.dataset.source; applyFilters();
-  });
-});
-document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(x => x.classList.remove('active'));
-    b.classList.add('active'); state.ctype = b.dataset.ctype; applyFilters();
   });
 });
 document.querySelectorAll('th[data-sort]').forEach(th => {

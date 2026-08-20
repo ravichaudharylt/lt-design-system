@@ -39,7 +39,13 @@ with open(TOKENS_CSS) as fh:
 
 def product_of(f):
     if 'tokens.css' in f: return 'internal (tokens.css)'
-    if '/lt-components/' in f: return 'lt-components'
+    if '/lt-components-dark-mode/' in f or '/lt-components/' in f: return 'lt-components'
+    if '/accessibility-testing-chrome-extension-dark-mode/' in f: return 'extension'
+    if '/dotlapse-frontend-dark-mode/' in f: return 'smartui'
+    if '/nuisance-sdk-dark-mode/' in f: return 'nuisance-sdk'
+    if '/accessibility-client-sdk-dark-mode/' in f: return 'a11y-client-sdk'
+    if '/lt-common-header-dark-mode/' in f: return 'lt-common-header'
+    if '/LWC-2.0-dark-mode/' in f: return 'lwc-2.0'
     if '/kaneai-test-management-client/' in f: return 'kaneai'
     if '/hyperexecute/' in f: return 'hyperexecute'
     if '/mobile-web-client/' in f: return 'mobile-web-client'
@@ -167,7 +173,15 @@ def _lt_prop(cls):
 # 2. Scan source files for var(--X) and class usage
 USAGE = collections.defaultdict(lambda: {'total': 0, 'products': collections.Counter(), 'props': collections.Counter()})
 sources = []
-for root in [f"{WP}/apps", f"{WP}/packages", f"{LTC}/src"]:
+DM = '/Users/ravichaudhary/Desktop/LambdaTest/DarkMode'
+SCAN_ROOTS = [f"{WP}/apps", f"{WP}/packages", f"{LTC}/src",
+    f"{DM}/accessibility-testing-chrome-extension-dark-mode/src",
+    f"{DM}/dotlapse-frontend-dark-mode/src",
+    f"{DM}/nuisance-sdk-dark-mode/src",
+    f"{DM}/accessibility-client-sdk-dark-mode/src",
+    f"{DM}/lt-common-header-dark-mode/src",
+    f"{DM}/LWC-2.0-dark-mode/src"]
+for root in SCAN_ROOTS:
     for dirpath, dirnames, files in os.walk(root):
         if any(p in dirpath for p in ['/node_modules/','/lib/','/dist/','/build/','/stories/']):
             dirnames[:] = []; continue
@@ -268,7 +282,7 @@ html = f"""<!DOCTYPE html>
   LambdaTest Design Token Sheet
     <a href="mapped.html" style="font-size:12px; font-weight:600; padding:6px 14px; border-radius:6px; background:linear-gradient(135deg,#cf222e,#8b0820); color:white; text-decoration:none; letter-spacing:0.3px;">Orphan replacements →</a>
 </h1>
-<div class="meta">Generated {now} &middot; <strong>Post-Phase-3 migration</strong> &middot; light + dark scheme &middot; usage across lt-components + lt-web-platform</div>
+<div class="meta">Generated {now} &middot; <strong>Post-Phase-3 migration</strong> &middot; light + dark scheme &middot; usage across all 8 dark-mode repos (lt-web-platform, lt-components, extension, SmartUI, LWC-2.0, nuisance-sdk, a11y-client-sdk, lt-common-header)</div>
 <div class="stats">
   <span class="stat-pill total"><span class="num" id="total-count">{TOTAL}</span><span>total tokens</span></span>
   <span class="stat-pill total" style="background:#f5fbff;color:#054078;border:1px solid #b6e3ff"><span class="num">{DESIGN_COUNT}</span><span>★ official design tokens</span></span>
@@ -292,12 +306,6 @@ html = f"""<!DOCTYPE html>
   <button data-source="design">★ Official design system</button>
   <button data-source="non-design">Legacy / orphan</button>
 </div>
-<div class="filter-row filter-buttons" data-group="ctype">
-  <span class="filter-label">Token type</span>
-  <button data-ctype="all" class="active">All</button>
-  <button data-ctype="c">--lt-c-* (value-encoded)</button>
-  <button data-ctype="named">Named (semantic)</button>
-</div>
 <div class="filter-row filter-buttons" data-group="product">
   <span class="filter-label">Product</span>
   <button data-product="all" class="active">All</button>
@@ -307,6 +315,12 @@ html = f"""<!DOCTYPE html>
   <button data-product="mobile-web-client">mobile-web-client</button>
   <button data-product="magic-leap-dashboard">magic-leap-dashboard</button>
   <button data-product="packages">packages</button>
+  <button data-product="extension">extension</button>
+  <button data-product="smartui">smartui</button>
+  <button data-product="lwc-2.0">lwc-2.0</button>
+  <button data-product="nuisance-sdk">nuisance-sdk</button>
+  <button data-product="a11y-client-sdk">a11y-client-sdk</button>
+  <button data-product="lt-common-header">lt-common-header</button>
   <button data-product="internal">internal (tokens.css)</button>
 </div>
 <div id="filter-result-stats" style="display:none;align-items:center;gap:10px;margin:6px 0 14px;padding:10px 14px;background:#fff8c5;border:1px solid #f1d878;border-radius:8px;flex-wrap:wrap">
@@ -361,7 +375,7 @@ for name in sorted_tokens:
 html += """</tbody></table>
 <script>
 const rows = document.querySelectorAll('#tbl tbody tr');
-const state = { q: '', prop: 'all', product: 'all', source: 'all', ctype: 'all' };
+const state = { q: '', prop: 'all', product: 'all', source: 'all' };
 const filterResultStats = document.getElementById('filter-result-stats');
 const filteredCountEl = document.getElementById('filtered-count');
 const filteredPctEl = document.getElementById('filtered-pct');
@@ -388,15 +402,10 @@ function applyFilters() {
     if (show && state.source !== 'all') {
       if (r.dataset.source !== state.source) show = false;
     }
-    if (show && state.ctype !== 'all') {
-      const isC = r.dataset.name.startsWith('--lt-c-');
-      if (state.ctype === 'c' && !isC) show = false;
-      if (state.ctype === 'named' && isC) show = false;
-    }
     r.style.display = show ? '' : 'none';
     if (show) { visible++; visibleRefs += parseInt(r.dataset.count || '0', 10); }
   });
-  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all' || state.ctype !== 'all';
+  const isFiltered = state.q || state.prop !== 'all' || state.product !== 'all' || state.source !== 'all';
   if (isFiltered) {
     filterResultStats.style.display = 'flex';
     filteredCountEl.textContent = visible.toLocaleString();
@@ -425,12 +434,6 @@ document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach
   b.addEventListener('click', () => {
     document.querySelectorAll('.filter-buttons[data-group="source"] button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); state.source = b.dataset.source; applyFilters();
-  });
-});
-document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('.filter-buttons[data-group="ctype"] button').forEach(x => x.classList.remove('active'));
-    b.classList.add('active'); state.ctype = b.dataset.ctype; applyFilters();
   });
 });
 document.querySelectorAll('th[data-sort]').forEach(th => {

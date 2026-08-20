@@ -16,6 +16,12 @@ Published pages are `index.html` (token sheet) and `mapped.html` (migration audi
 log, manually maintained) — the other report pages were retired at the audit's
 terminal state (all 326 orphans resolved).
 
+`index.html` usage counts and the Product filter cover all 8 dark-mode repos under
+`DarkMode/`: lt-web-platform (per-app buckets + packages), lt-components, extension
+(accessibility-testing-chrome-extension), smartui (dotlapse-frontend), lwc-2.0,
+nuisance-sdk, a11y-client-sdk (accessibility-client-sdk), lt-common-header. The
+"Token type" filter was removed at terminal state (no --lt-c-* tokens remain).
+
 ## Analysis / cleanup tools
 
 | Script | Purpose |
